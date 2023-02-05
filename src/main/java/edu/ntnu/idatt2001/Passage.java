@@ -77,7 +77,7 @@ public class Passage {
     result = prime * result + ((content == null) ? 0 : content.hashCode());
     result = prime * result + ((links == null) ? 0 : links.hashCode());
     return result;
-  }
+  } 
 
   @Override
   public boolean equals(Object obj) {
@@ -114,6 +114,4 @@ public class Passage {
     }
     return true;
   }
-
-  
 }

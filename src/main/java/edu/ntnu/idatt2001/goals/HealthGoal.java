@@ -1,4 +1,7 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.goals;
+
+import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.goals.Goal;
 
 /**
  * Checks to see if the player has enough health to complete the goal.

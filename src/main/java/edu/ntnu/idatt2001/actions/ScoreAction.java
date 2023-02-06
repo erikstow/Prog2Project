@@ -1,4 +1,6 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.actions;
+
+import edu.ntnu.idatt2001.Player;
 
 /**
  * Adds to the score of a player.

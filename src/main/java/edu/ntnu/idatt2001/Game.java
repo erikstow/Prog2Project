@@ -12,7 +12,7 @@ public class Game {
   private final List<Goal> goals;
 
   /**
-   *
+   * Constructor to Game class.
    *
    * @param player the player in the game
    * @param story the story the game follows

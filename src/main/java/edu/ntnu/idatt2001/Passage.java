@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /** 
@@ -10,7 +11,7 @@ public class Passage {
   
   private final String title;
   private final String content;
-  private List<Link> links;
+  private final List<Link> links;
   
   /** Constructor for Passage.
    * @param title The title of the passage, must be unique.
@@ -19,6 +20,7 @@ public class Passage {
   public Passage(String title, String content) {
     this.title = title;
     this.content = content;
+    this.links = new ArrayList<>();
   }
 
   public String getTitle() {

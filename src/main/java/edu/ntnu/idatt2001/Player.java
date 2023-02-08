@@ -13,8 +13,8 @@ public class Player {
   private int health;
   private int score;
   private int gold;
-  private List<String> inventory;
-  
+  private final List<String> inventory;
+   
   
   /** Constructor for Player.
    * @param name The name of the player.

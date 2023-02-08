@@ -37,31 +37,22 @@ public class Passage {
    * @param link The link to be added
    * @return True if the link was added, false if it already existed
    */
-  public boolean addLinks(Link link) { //TODO(Erik) Possibly add deepcopying?
+  public boolean addLinks(Link link) { 
     boolean success = false;
     
-    if (links.contains(link)) {
-      return success;
-
-    } else {
+    if (!links.contains(link)) {
       this.links.add(link);
       success = true;
-      return success;
     }
+    return success;
   }
 
   /** Method to check if list has any links.
+   *
    * @return True if list has any links, false if its empty.
    */
   public boolean hasLinks() {
-    boolean hasLinks = true;
-      
-    if (links.isEmpty()) {
-      hasLinks = false;
-      return hasLinks;
-    } else {
-      return hasLinks;
-    }
+    return !links.isEmpty();
   }
 
   @Override

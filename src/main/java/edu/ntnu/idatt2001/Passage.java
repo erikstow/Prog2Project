@@ -21,16 +21,6 @@ public class Passage {
     this.content = content;
   }
 
-  
-  /** Copy constructor for Passage.
-   * @param passage The passage to be copied.
-   */
-  public Passage(Passage passage) {
-    this.title = passage.getTitle();
-    this.content = passage.getContent();
-  }
-
-
   public String getTitle() {
     return title;
   }

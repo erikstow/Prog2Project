@@ -1,8 +1,7 @@
 package edu.ntnu.idatt2001;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 /** 
@@ -14,27 +13,35 @@ public class Story {
   private Map<Link, Passage> passages;
   private final Passage openingPassage;
   
+  /** A Story is a collection of passages.
+   * @param title Title of the story. 
+   * @param openingPassage OpeningPassage of the story.
+   */
   public Story(String title, Passage openingPassage) {
     this.title = title;
     this.openingPassage = openingPassage;
+    this.passages = new HashMap<>();
   }
 
   public String getTitle() {
     return title;
   }
 
-  public Collection<Passage> getPassages() {
-    
-    List<Passage> passageList = new ArrayList<>();
-    passages.forEach((key, value) -> passageList.add(Passage(value)));
-    
-    return passageList;
-  }
-
   public Passage getOpeningPassage() {
     return openingPassage;
   }
 
+  public Collection<Passage> getPassages() {
+    return passages.values();
+  }
+
+  public Passage getPassage(Link link) {
+    return passages.get(link);
+  }
   
+  public void addPassage(Passage passage) {
+    Link newLink = new Link(passage.getTitle(), passage.getTitle());
+    passages.put(newLink, passage);
+  }
 }
 

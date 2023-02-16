@@ -24,6 +24,9 @@ public class Link {
    * @param reference unique identifier to a passage. Usually the title of the passage.
    */
   public Link(String text, String reference) {
+    if (text == null || reference == null || text.isBlank() || reference.isBlank() ) {
+      throw new IllegalArgumentException("Text and refference cannot be empty");
+    }
     this.text = text;
     this.reference = reference;
     this.actions = new ArrayList<>();

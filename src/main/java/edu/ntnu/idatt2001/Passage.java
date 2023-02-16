@@ -19,6 +19,9 @@ public class Passage {
    * @param content The content of the passage.
    */
   public Passage(String title, String content) {
+    if (title == null || content == null) {
+      throw new IllegalArgumentException("Title cannot be null or empty");
+    }
     this.title = title;
     this.content = content;
     this.links = new ArrayList<>();

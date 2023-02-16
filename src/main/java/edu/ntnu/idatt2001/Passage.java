@@ -41,7 +41,8 @@ public class Passage {
 
   /** Method to add a link to the list of links.
    *
-   * @param link The link to be added
+   * @param link The link to be added.
+   *
    * @return True if the link was added, false if it already existed
    */
   public boolean addLink(Link link) {

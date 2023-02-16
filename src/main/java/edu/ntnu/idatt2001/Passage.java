@@ -14,6 +14,7 @@ public class Passage {
   private final List<Link> links;
   
   /** Constructor for Passage.
+   *
    * @param title The title of the passage, must be unique.
    * @param content The content of the passage.
    */
@@ -35,13 +36,14 @@ public class Passage {
     return links;
   }
 
-  /** Method to add a link to the list of links. 
+  /** Method to add a link to the list of links.
+   *
    * @param link The link to be added
    * @return True if the link was added, false if it already existed
    */
-  public boolean addLinks(Link link) { 
+  public boolean addLink(Link link) {
     boolean success = false;
-    
+
     if (!links.contains(link)) {
       this.links.add(link);
       success = true;
@@ -99,12 +101,9 @@ public class Passage {
       return false;
     }
     if (links == null) {
-      if (other.links != null) {
-        return false;
-      }
-    } else if (!links.equals(other.links)) {
-      return false;
+      return other.links == null;
+    } else {
+      return links.equals(other.links);
     }
-    return true;
   }
 }

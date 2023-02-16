@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Link {
   private final String text;
   private final String reference;
-  private final ArrayList<Action> actions;
+  private final List<Action> actions;
 
   /**
    * Constructing a Link with a descriptive text and reference to a passage,
@@ -37,7 +37,7 @@ public class Link {
   }
 
   public List<Action> getActions() {
-    return new ArrayList<>(this.actions);
+    return this.actions;
   }
 
   public String getText() {

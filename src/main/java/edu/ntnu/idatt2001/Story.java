@@ -10,17 +10,18 @@ import java.util.Map;
  */ 
 public class Story {
   private final String title;
-  private Map<Link, Passage> passages;
+  private final Map<Link, Passage> passages;
   private final Passage openingPassage;
   
   /** A Story is a collection of passages.
-   * @param title Title of the story. 
+   * @param title Title of the story.
    * @param openingPassage OpeningPassage of the story.
    */
   public Story(String title, Passage openingPassage) {
     this.title = title;
     this.openingPassage = openingPassage;
     this.passages = new HashMap<>();
+    addPassage(openingPassage);
   }
 
   public String getTitle() {
@@ -38,10 +39,9 @@ public class Story {
   public Passage getPassage(Link link) {
     return passages.get(link);
   }
-  
+
   public void addPassage(Passage passage) {
     Link newLink = new Link(passage.getTitle(), passage.getTitle());
     passages.put(newLink, passage);
   }
 }
-

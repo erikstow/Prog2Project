@@ -17,33 +17,34 @@ public class Player {
 
 
   /** Constructor for Player.
+   *
    * @param name The name of the player.
-   * @param health The health of the player.
-   * @param score The score of the player.
-   * @param gold The gold of the player.
+   * @param health The health of the player, must non-negative.
+   * @param score The score of the player, must non-negative.
+   * @param gold The gold of the player, must non-negative.
    */
   public Player(String name, int health, int score, int gold) {
+    if (name == null || health < 0 || score < 0 || gold < 0) {
+      throw new IllegalArgumentException("Name cannot be null or empty, health, score and gold cannot be negative");
+    }
     this.name = name;
     this.health = health;
     this.score = score;
     this.gold = gold;
     this.inventory = new ArrayList<>();
-  }
+    }
 
   public String getName() {
     return name;
   }
 
-
   public int getHealth() {
     return health;
   }
 
-
   public int getScore() {
     return score;
   }
-
 
   public int getGold() {
     return gold;
@@ -54,6 +55,7 @@ public class Player {
   }
 
   /** Method to add health to the player.
+   *
    * @param health The amount of health to be added.
    */
   public void addHealth(int health) {
@@ -61,6 +63,7 @@ public class Player {
   }
 
   /** Method to add score to the player.
+   *
    * @param points The amount of score to be added.
    */
   public void addScore(int points) {
@@ -68,6 +71,7 @@ public class Player {
   }
 
   /** Method to add gold to the player.
+   *
    * @param gold The amount of gold to be added.
    */
   public void addGold(int gold) {
@@ -75,9 +79,13 @@ public class Player {
   }
 
   /** Method to add an item to the inventory.
+   *
    * @param item The item to be added.
    */
   public void addToInventory(String item) {
+    if (item == null) {
+      throw new IllegalArgumentException("Item cannot be null");
+    }
     inventory.add(item);
   }
 }

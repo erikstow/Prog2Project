@@ -14,8 +14,8 @@ public class Player {
   private int score;
   private int gold;
   private final List<String> inventory;
-   
-  
+
+
   /** Constructor for Player.
    * @param name The name of the player.
    * @param health The health of the player.
@@ -27,7 +27,7 @@ public class Player {
     this.health = health;
     this.score = score;
     this.gold = gold;
-    inventory = new ArrayList<>();//TODO(Erik) Arraylist maybe not optimal?
+    this.inventory = new ArrayList<>();
   }
 
   public String getName() {

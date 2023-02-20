@@ -23,7 +23,7 @@ public class Link {
    *             Visible to the player.
    * @param reference unique identifier to a passage. Usually the title of the passage.
    */
-  public Link(String text, String reference) {
+  public Link(String text, String reference) throws IllegalArgumentException {
     if (text == null || reference == null) {
       throw new IllegalArgumentException("Text and refference cannot be empty");
     }

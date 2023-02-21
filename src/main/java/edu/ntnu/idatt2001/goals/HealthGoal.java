@@ -19,6 +19,6 @@ public class HealthGoal implements Goal {
 
   @Override
   public boolean isFulfilled(Player player) {
-    return player.getHealth() > this.minimumHealth;
+    return player.getHealth() >= this.minimumHealth;
   }
 }

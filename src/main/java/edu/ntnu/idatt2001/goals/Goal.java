@@ -2,8 +2,8 @@ package edu.ntnu.idatt2001.goals;
 
 import edu.ntnu.idatt2001.Player;
 
-/**
- * Interface for classes that check if the player has fulfills certain contitions.
+/** The interface Goal.
+ * A goal that can be fulfilled by a player.
  */
 public interface Goal {
   boolean isFulfilled(Player player);

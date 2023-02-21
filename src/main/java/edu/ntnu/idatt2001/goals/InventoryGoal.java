@@ -5,13 +5,16 @@ import edu.ntnu.idatt2001.Player;
 import java.util.HashSet;
 import java.util.List;
 
-/**
- * Checks if player has all required items in their inventory
- * to complete the goal.
- */
+/** The class InventoryGoal.
+ *  A goal that can be fulfilled by a player.
+ *  The goal is fulfilled when the player has all the items specified in the constructor.
+ */ 
 public class InventoryGoal implements Goal {
   private final List<String> mandatoryItems;
 
+  /** The constructor for the InventoryGoal class.
+   * @param mandatoryItems The items that the player must have to fulfill the goal.
+   */
   public InventoryGoal(List<String> mandatoryItems) {
     this.mandatoryItems = mandatoryItems;
   }

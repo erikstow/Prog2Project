@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /** 
  * A story is a collection of passages. It contains the title of the story,
@@ -18,10 +19,10 @@ public class Story {
    * @param title Title of the story.
    * @param openingPassage OpeningPassage of the story.
    */
-  public Story(String title, Passage openingPassage) {
-    if (title == null || openingPassage == null) {
-      throw new IllegalArgumentException("Title and opening passage cannot be null");
-    }
+  public Story(String title, Passage openingPassage) throws NullPointerException {
+    Objects.requireNonNull(title, "Title cannot be null");
+    Objects.requireNonNull(openingPassage, "Opening passage cannot be null");
+   
     this.title = title;
     this.openingPassage = openingPassage;
     this.passages = new HashMap<>();
@@ -50,10 +51,9 @@ public class Story {
    *
    * @return The passage.
    */
-  public Passage getPassage(Link link) {
-    if (link == null) {
-      throw new IllegalArgumentException("Link cannot be null");
-    }
+  public Passage getPassage(Link link) throws NullPointerException {
+    Objects.requireNonNull(link, "Link cannot be null");
+    
     return passages.get(link);
   }
 
@@ -61,10 +61,9 @@ public class Story {
    *
    * @param passage The passage to be added.
    */
-  public void addPassage(Passage passage) {
-    if (passage == null) {
-      throw new IllegalArgumentException("Passage cannot be null");
-    }
+  public void addPassage(Passage passage) throws NullPointerException {
+    Objects.requireNonNull(passage, "Passage cannot be null");
+
     Link newLink = new Link(passage.getTitle(), passage.getTitle());
     passages.put(newLink, passage);
   }

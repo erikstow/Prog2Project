@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A player is a character in the game. It contains the name of the player, 
@@ -23,16 +24,20 @@ public class Player {
    * @param score The score of the player, must non-negative.
    * @param gold The gold of the player, must non-negative.
    */
-  public Player(String name, int health, int score, int gold) {
-    if (name == null || health < 0 || score < 0 || gold < 0) {
-      throw new IllegalArgumentException("Name cannot be null or empty, health, score and gold cannot be negative");
+  public Player(String name, int health, int score, int gold) 
+      throws NullPointerException, IllegalArgumentException {
+    Objects.requireNonNull(name, "Name cannot be null");
+    
+    if (health <= 0 || score < 0 || gold < 0) {
+      throw new IllegalArgumentException(
+        "Health must be positiv, score and gold cannot be negative");
     }
     this.name = name;
     this.health = health;
     this.score = score;
     this.gold = gold;
     this.inventory = new ArrayList<>();
-    }
+  }
 
   public String getName() {
     return name;
@@ -82,10 +87,9 @@ public class Player {
    *
    * @param item The item to be added.
    */
-  public void addToInventory(String item) {
-    if (item == null) {
-      throw new IllegalArgumentException("Item cannot be null");
-    }
+  public void addToInventory(String item) throws NullPointerException {
+    Objects.requireNonNull(item, "Item cannot be null");
+    
     inventory.add(item);
   }
 }

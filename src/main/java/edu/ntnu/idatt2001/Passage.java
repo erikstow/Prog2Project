@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /** 
  * A passage is a part of a story. It contains the content of
@@ -18,10 +19,10 @@ public class Passage {
    * @param title The title of the passage, must be unique.
    * @param content The content of the passage.
    */
-  public Passage(String title, String content) {
-    if (title == null || content == null) {
-      throw new IllegalArgumentException("Title cannot be null or empty");
-    }
+  public Passage(String title, String content) throws NullPointerException {
+    Objects.requireNonNull(title, "Title cannot be null");
+    Objects.requireNonNull(content, "Content cannot be null");
+    
     this.title = title;
     this.content = content;
     this.links = new ArrayList<>();
@@ -45,9 +46,10 @@ public class Passage {
    *
    * @return True if the link was added, false if it already existed
    */
-  public boolean addLink(Link link) {
+  public boolean addLink(Link link) throws NullPointerException {
+    Objects.requireNonNull(link, "Link cannot be null");
+    
     boolean success = false;
-
     if (!links.contains(link)) {
       this.links.add(link);
       success = true;

@@ -23,10 +23,10 @@ public class Link {
    *             Visible to the player.
    * @param reference unique identifier to a passage. Usually the title of the passage.
    */
-  public Link(String text, String reference) throws IllegalArgumentException {
-    if (text == null || reference == null) {
-      throw new IllegalArgumentException("Text and refference cannot be empty");
-    }
+  public Link(String text, String reference) throws NullPointerException {
+    Objects.requireNonNull(text,"Text cannot be empty");
+    Objects.requireNonNull(reference,"Reference cannot be empty");
+    
     this.text = text;
     this.reference = reference;
     this.actions = new ArrayList<>();
@@ -44,7 +44,11 @@ public class Link {
     return text;
   }
 
-  public void addAction(Action action) {
+  /** Adds an action to the list of actions.
+   * @param action the action to be added.
+   */
+  public void addAction(Action action) throws NullPointerException {
+    Objects.requireNonNull(action,"Action cannot be null");
     this.actions.add(action);
   }
 

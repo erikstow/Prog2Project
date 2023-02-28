@@ -83,12 +83,12 @@ class PassageTest {
   class ExceptionHandling {
     @Test
     void createPassageWithNullTitle() {
-      assertThrows(IllegalArgumentException.class, () -> new Passage(null, "test"));
+      assertThrows(NullPointerException.class, () -> new Passage(null, "test"));
     }
 
     @Test
     void createPassageWithNullContent() {
-      assertThrows(IllegalArgumentException.class, () -> new Passage("Test", null));
+      assertThrows(NullPointerException.class, () -> new Passage("Test", null));
     }
 
     @Test

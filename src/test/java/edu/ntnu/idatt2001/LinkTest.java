@@ -67,12 +67,12 @@ class LinkTest {
   class LinkExceptionHandling {
     @Test
     void createLinkWithNullText() {
-      assertThrows(IllegalArgumentException.class, () -> new Link(null, "Test"));
+      assertThrows(NullPointerException.class, () -> new Link(null, "Test"));
     }
 
     @Test
     void createLinkWithNullReference() {
-      assertThrows(IllegalArgumentException.class, () -> new Link("Test", null));
+      assertThrows(NullPointerException.class, () -> new Link("Test", null));
     }
   }
 }

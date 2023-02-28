@@ -17,8 +17,12 @@ public class InventoryAction implements Action {
    * 
    * @param item The item to add to the player's inventory.
    */
-  public InventoryAction(String item) throws NullPointerException {
+  public InventoryAction(String item) throws NullPointerException, IllegalArgumentException {
     Objects.requireNonNull(item, "Item cannot be null");
+    
+    if (item.isBlank()) {
+      throw new IllegalArgumentException("Item cannot be blank");
+    }
 
     this.item = item;
   }

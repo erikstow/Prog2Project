@@ -8,7 +8,8 @@ import java.util.Objects;
 
 /**
  * A link makes it possible to move from one passage to another. Links bind the different
- * parts of a story.
+ * parts/passages of a story together. A link has a descriptive text, a reference to a passage,
+ * and a list of actions.
  */
 public class Link {
   private final String text;
@@ -17,10 +18,10 @@ public class Link {
 
   /**
    * Constructing a Link with a descriptive text and reference to a passage,
-   * with an empty action list.
+   * with an empty action list. Text is the text that is displayed to the user.
    *
    * @param text text indicating a choice or action in a story.
-   *             Visible to the player.
+   *             
    * @param reference unique identifier to a passage. Usually the title of the passage.
    */
   public Link(String text, String reference) throws NullPointerException {
@@ -32,19 +33,36 @@ public class Link {
     this.actions = new ArrayList<>();
   }
 
+  /**
+   * Method that returns the reference.
+   *
+   * @return the reference.
+   */
   public String getReference() {
     return reference;
   }
 
+  /**
+   * Method that returns the list of actions.
+   *
+   * @return the list of actions.
+   */
   public List<Action> getActions() {
     return this.actions;
   }
 
+  /**
+   * Method that returns the text of the link.
+   *
+   * @return the text of the link.
+   */
   public String getText() {
     return text;
   }
 
-  /** Adds an action to the list of actions.
+  /** 
+   * Method that adds an action to the list of actions.
+   *
    * @param action the action to be added.
    */
   public void addAction(Action action) throws NullPointerException {

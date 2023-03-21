@@ -14,7 +14,8 @@ public class Passage {
   private final String content;
   private final List<Link> links;
   
-  /** Constructor for Passage.
+  /**
+   * Constructor for Passage.
    *
    * @param title The title of the passage, must be unique.
    * @param content The content of the passage.
@@ -28,19 +29,35 @@ public class Passage {
     this.links = new ArrayList<>();
   }
 
+  /**
+   * Method to get the title of the passage.
+   *
+   * @return The title of the passage.
+   */
   public String getTitle() {
     return title;
   }
 
+  /**
+   * Method to get the content of the passage.
+   *
+   * @return The content of the passage.
+   */
   public String getContent() {
     return content;
   }
 
+  /**
+   * Method to get the list of links.
+   *
+   * @return The list of links.
+   */
   public List<Link> getLinks() {
     return links;
   }
 
-  /** Method to add a link to the list of links.
+  /** 
+   * Method to add a link to the list of links.
    *
    * @param link The link to be added.
    *
@@ -57,7 +74,8 @@ public class Passage {
     return success;
   }
 
-  /** Method to check if list has any links.
+  /**
+   * Method to check if list has any links.
    *
    * @return True if list has any links, false if its empty.
    */

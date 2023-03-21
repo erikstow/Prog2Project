@@ -13,8 +13,8 @@ public class InventoryAction implements Action {
   private final String item;
 
   /**
-   *The constructor for the InventoryAction class.
-   * 
+   * The constructor for the InventoryAction class.
+   *
    * @param item The item to add to the player's inventory.
    */
   public InventoryAction(String item) throws NullPointerException, IllegalArgumentException {
@@ -28,8 +28,8 @@ public class InventoryAction implements Action {
   }
 
   /**
-   *Method to Add an item to the player's inventory.
-   * 
+   * Method to Add an item to the player's inventory.
+   *
    * @param player The player to perform the action on.
    */
   @Override

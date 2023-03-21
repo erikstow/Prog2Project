@@ -12,8 +12,8 @@ public class ScoreAction implements Action {
   private final int points;
 
   /** 
-   *The constructor for the ScoreAction class.
-   * 
+   * The constructor for the ScoreAction class.
+   *
    * @param points The amount of score to add to the player.
    */
   public ScoreAction(int points) {
@@ -21,8 +21,8 @@ public class ScoreAction implements Action {
   }
 
   /**
-   *Method to add score to the player.
-   * 
+   * Method to add score to the player.
+   *
    * @param player The player to perform the action on.
    */
   @Override

@@ -39,27 +39,53 @@ public class Player {
     this.inventory = new ArrayList<>();
   }
 
+  /**
+   * Method to get the name of the player.
+   *
+   * @return The name of the player.
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Method to get the health of the player.
+   *
+   * @return The health of the player.
+   */
   public int getHealth() {
     return health;
   }
 
+  /**
+   * Method to get the score of the player.
+   *
+   * @return The score of the player.
+   */
   public int getScore() {
     return score;
   }
 
+  /**
+   * Method to get the gold of the player.
+   *
+   * @return The gold of the player.
+   */
   public int getGold() {
     return gold;
   }
 
+  /**
+   * Method to get the inventory of the player.
+   * 
+   * @return The inventory of the player.
+   */
   public List<String> getInventory() {
     return inventory;
   }
 
-  /** Method to add health to the player.
+  /** 
+   * Method to add health to the player.
    *
    * @param health The amount of health to be added.
    */
@@ -67,7 +93,8 @@ public class Player {
     this.health += health;
   }
 
-  /** Method to add score to the player.
+  /**
+   * Method to add score to the player.
    *
    * @param points The amount of score to be added.
    */
@@ -75,7 +102,8 @@ public class Player {
     this.score += points;
   }
 
-  /** Method to add gold to the player.
+  /**
+   * Method to add gold to the player.
    *
    * @param gold The amount of gold to be added.
    */
@@ -83,7 +111,8 @@ public class Player {
     this.gold += gold;
   }
 
-  /** Method to add an item to the inventory.
+  /**
+   * Method to add an item to the inventory.
    *
    * @param item The item to be added.
    */

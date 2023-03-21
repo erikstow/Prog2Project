@@ -6,16 +6,16 @@ import java.util.Objects;
 
 /** 
  * The class HealthGoal.
- *  A goal that can be fulfilled by a player.
- *  The goal is fulfilled when the player has more health than 
- *  the minimum health specified in the constructor.
+ * A goal that can be fulfilled by a player.
+ * The goal is fulfilled when the player has more health than 
+ * the minimum health specified in the constructor.
  */
 public class HealthGoal implements Goal {
   private final int minimumHealth;
 
   /** 
    * The constructor for the HealthGoal class.
-   * 
+   *
    * @param minimumHealth The minimum amount of health the player must have to fulfill the goal.
    */
   public HealthGoal(int minimumHealth) {

@@ -8,13 +8,14 @@ import java.util.Objects;
 /** 
  * A story is a collection of passages. It contains the title of the story,
  * a map of passages, with links as keys, and the opening passage for the given story.
- */ 
+ */
 public class Story {
   private final String title;
   private final Map<Link, Passage> passages;
   private final Passage openingPassage;
   
-  /** A Story is a collection of passages.
+  /**
+   *A Story is a collection of passages.
    *
    * @param title Title of the story.
    * @param openingPassage OpeningPassage of the story.
@@ -29,15 +30,26 @@ public class Story {
     this.addPassage(openingPassage);
   }
 
+  /**
+   * Method to get the title of the story.
+   *
+   * @return The title of the story.
+   */
   public String getTitle() {
     return title;
   }
 
+  /**
+   * Method to get the opening passage of the story.
+   *
+   * @return The opening passage of the story.
+   */
   public Passage getOpeningPassage() {
     return openingPassage;
   }
 
-  /**  Method to get all passages in the story.
+  /**
+   * Method to get all passages in the story.
    *
    * @return A collection of all passages.
    */
@@ -45,7 +57,8 @@ public class Story {
     return passages.values();
   }
 
-  /** Method to get a passage from the story.
+  /**
+   * Method to get a passage from the story.
    *
    * @param link The link to the passage.
    *
@@ -53,11 +66,11 @@ public class Story {
    */
   public Passage getPassage(Link link) throws NullPointerException {
     Objects.requireNonNull(link, "Link cannot be null");
-    
-    return passages.get(link);
+    return passages.get(new Link(link.getReference(), link.getReference()));
   }
 
-  /** Method to add a passage to the story.
+  /**
+   * Method to add a passage to the story.
    *
    * @param passage The passage to be added.
    */

@@ -14,7 +14,7 @@ public class ScoreGoal implements Goal {
 
   /** 
    * The constructor for the ScoreGoal class.
-   * 
+   *
    * @param minimumPoints The minimum amount of score the player must have to fulfill the goal.
    */
   public ScoreGoal(int minimumPoints) {

@@ -7,7 +7,8 @@ import java.util.Objects;
 
 /**
  * Game is a facade for a Paths game. The class links a player to a story and has methods to start
- * and navigate the game.
+ * and navigate the game. The class also contains a list of goals that the player must acomplish to
+ * win the game.
  */
 public class Game {
   private final Player player;
@@ -30,14 +31,29 @@ public class Game {
     this.goals = goals;
   }
 
+  /**
+   * Method to get the player.
+   * 
+   * @return The player.
+   */
   public Player getPlayer() {
     return player;
   }
 
+  /**
+   * Method to get the story.
+   *
+   * @return The story.
+   */
   public Story getStory() {
     return story;
   }
 
+  /**
+   * Method to get the goals.
+   *
+   * @return The goals.
+   */
   public List<Goal> getGoals() {
     return goals;
   }

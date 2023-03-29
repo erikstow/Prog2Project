@@ -20,7 +20,12 @@ class GameTest {
   Game game;
   @BeforeEach
   void setUp() {
-    player = new Player("PlayerName", 10, 10, 10);
+    player = new Player.PlayerBuilder("PlayerName")
+      .health(10)
+      .gold(10)
+      .score(10)
+      .build();
+      
     openingPassage = new Passage("PassageTitle", "PassageTitle");
     story = new Story("StoryTitle", openingPassage);
     goals = new ArrayList<>();

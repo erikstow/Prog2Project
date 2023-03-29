@@ -1,9 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /** 
  * A story is a collection of passages. It contains the title of the story,
@@ -79,5 +76,67 @@ public class Story {
 
     Link newLink = new Link(passage.getTitle(), passage.getTitle());
     passages.put(newLink, passage);
+  }
+
+  /**
+   * Returns a list of all broken links. A link is broken if it is in a passage, but
+   * doesn't lead to an exsisting passage.
+   *
+   * @return list of broken links
+   */
+  public List<Link> getBrokenLinks() {
+    return this.getPassages().stream()
+      .flatMap(p -> p.getLinks().stream())
+      .filter(link -> this.getPassage(link) == null)
+      .toList();
+  }
+
+  /**
+   * Removes a passage given a link if no other passages leads to it.
+   *
+   * @param link link to the passage to be deleted
+   */
+  public void removePassage(Link link) {
+    Objects.requireNonNull(link);
+
+    Passage passage = this.getPassage(link);
+    if (passage == null) {
+      return;
+    }
+
+    if (this.getPassages().stream()
+        .flatMap(p -> p.getLinks().stream())
+        .noneMatch(l -> l.getReference().equals(passage.getTitle()))) {
+      this.passages.remove(new Link(passage.getTitle(), passage.getTitle()));
+    }
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    Story story = (Story) o;
+    return Objects.equals(title, story.title) && Objects.equals(passages, story.passages) && Objects.equals(openingPassage, story.openingPassage);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(title, passages, openingPassage);
+  }
+
+  /**
+   * Returns a string compatible with the file format for storing a story.
+   *
+   * @return story in string form
+   */
+  public String getAsString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(this.getTitle()).append('\n');
+    sb.append('\n');
+    for (Passage passage : passages.values()) {
+      sb.append(passage.getAsString());
+      sb.append('\n');
+    }
+    return sb.toString();
   }
 }

@@ -12,41 +12,44 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class PlayerTest {
   Player player;
+  Player.PlayerBuilder playerBuilder;
 
   @BeforeEach
   void setUp() {
-    player = new Player("Name", 10, 10, 10);
+    player = new Player.PlayerBuilder("Torgeir").build();
+    playerBuilder = new Player.PlayerBuilder("Torgeir");
+    
   }
 
   @Nested
   class PlayerGetters {
     @Test
     void getName() {
-      assertEquals("Name", player.getName());
+      assertEquals("Torgeir", player.getName());
     }
 
     @Test
     void getHealth() {
-      assertEquals(10, player.getHealth());
+      assertEquals(100, player.getHealth());
     }
 
     @Test
     void getScore() {
-      assertEquals(10, player.getScore());
+      assertEquals(0, player.getScore());
     }
 
     @Test
     void getGold() {
-      assertEquals(10, player.getGold());
+      assertEquals(0, player.getGold());
     }
 
     @DisplayName("Get inventory with two items in inventory")
     @Test
     void getInventoryWithInventory() {
-      String item1 = "Iten1";
-      String item2 = "Iten2";
-      String item3 = "Iten3";
-      String item4 = "Iten4";
+      String item1 = "Item1";
+      String item2 = "Item2";
+      String item3 = "Item3";
+      String item4 = "Item4";
 
       List<String> inv = new ArrayList<>();
       inv.add(item1);
@@ -63,25 +66,24 @@ class PlayerTest {
     }
   }
 
-
   @Nested
   class PlayerAdders {
     @Test
     void addHealth() {
       player.addHealth(1);
-      assertEquals(11, player.getHealth());
+      assertEquals(101, player.getHealth());
     }
 
     @Test
     void addScore() {
       player.addScore(1);
-      assertEquals(11, player.getScore());
+      assertEquals(1, player.getScore());
     }
 
     @Test
     void addGold() {
       player.addGold(1);
-      assertEquals(11, player.getGold());
+      assertEquals(1, player.getGold());
     }
 
     @Test
@@ -91,32 +93,41 @@ class PlayerTest {
     }
   }
 
-  @DisplayName("Exception handling for Player class")
+@DisplayName("Exception handling for player class")
   @Nested
   class ExceptionHandling {
+    @Test 
+    void addToInventoryWithNull() {
+      assertThrows(NullPointerException.class, () -> player.addToInventory(null));
+    }
+  }
+  
+  @DisplayName("Exception handling for playerBuilder class")
+  @Nested
+  class ExceptionHandlingBuilder {
     @Test
     void createPlayerWithNullName() {
-      assertThrows(NullPointerException.class, () -> new Player(null, 1,1,1));
+      assertThrows(NullPointerException.class, () -> new Player.PlayerBuilder(null));
     }
 
     @Test
     void createPlayerWithNegativeHealth() {
-      assertThrows(IllegalArgumentException.class, () -> new Player("h", -1, 1, 1));
+      assertThrows(IllegalArgumentException.class, () -> playerBuilder.health(-1));
     }
 
     @Test
     void createPlayerWithNegativeScore() {
-      assertThrows(IllegalArgumentException.class, () -> new Player("y", 1, -1, 1));
+
+      assertThrows(IllegalArgumentException.class, () -> playerBuilder.score(-1));
     }
 
     @Test
     void createPlayerWithNegativeGold() {
-      assertThrows(IllegalArgumentException.class, () -> new Player("y", 1, 1, -1));
+      assertThrows(IllegalArgumentException.class, () -> playerBuilder.gold(-1));
     }
     @Test
-    void addToInventoryWithNull() {
-      assertThrows(NullPointerException.class, () -> player.addToInventory(null));
+    void buildPlayerWithNullInventory() {
+      assertThrows(NullPointerException.class, () -> playerBuilder.inventory(null));
     }
-
   }
 }

@@ -16,7 +16,11 @@ class GoldGoalTest {
    */
   @BeforeEach
   void setUp() {
-    player = new Player("Name", 10, 10, 10);
+    player = new Player.PlayerBuilder("Name")
+      .health(10)
+      .score(10)
+      .gold(10)
+      .build();
   }
 
   /**

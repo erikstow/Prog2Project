@@ -1,15 +1,17 @@
 package edu.ntnu.idatt2001.goals;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.game.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ScoreGoalTest {
 
   Player player;
+
   @BeforeEach
   void setUp() {
     player = new Player.PlayerBuilder("Name")

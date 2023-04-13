@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.actions;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.game.Player;
 
 /** 
  * The interface Action.
@@ -9,4 +9,5 @@ import edu.ntnu.idatt2001.Player;
  */ 
 public interface Action {
   void execute(Player player) throws NullPointerException;
+  String getAsString();
 }

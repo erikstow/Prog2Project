@@ -1,12 +1,13 @@
 package edu.ntnu.idatt2001.actions;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.game.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;  
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * The class HealthActionTest.

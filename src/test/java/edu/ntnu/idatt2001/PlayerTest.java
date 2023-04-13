@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.game.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

@@ -1,7 +1,6 @@
 package edu.ntnu.idatt2001.goals;
 
-import edu.ntnu.idatt2001.Player;
-
+import edu.ntnu.idatt2001.game.Player;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;

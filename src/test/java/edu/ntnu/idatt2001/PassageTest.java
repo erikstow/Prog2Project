@@ -1,6 +1,9 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.game.Link;
+import edu.ntnu.idatt2001.game.Passage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
@@ -87,6 +90,7 @@ class PassageTest {
     }
 
     @Test
+    @DisplayName("Create passage with null content")
     void createPassageWithNullContent() {
       assertThrows(NullPointerException.class, () -> new Passage("Test", null));
     }

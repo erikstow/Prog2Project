@@ -1,6 +1,6 @@
-package edu.ntnu.idatt2001.goals;
+package edu.ntnu.idatt2001.models.goals;
 
-import edu.ntnu.idatt2001.game.Player;
+import edu.ntnu.idatt2001.models.game.Player;
 import java.util.Objects;
 
 /** 

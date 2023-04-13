@@ -1,8 +1,8 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.models;
 
-import edu.ntnu.idatt2001.game.Link;
-import edu.ntnu.idatt2001.game.Passage;
-import edu.ntnu.idatt2001.game.Story;
+import edu.ntnu.idatt2001.models.game.Link;
+import edu.ntnu.idatt2001.models.game.Passage;
+import edu.ntnu.idatt2001.models.game.Story;
 import org.junit.jupiter.api.*;
 
 import java.util.Collection;

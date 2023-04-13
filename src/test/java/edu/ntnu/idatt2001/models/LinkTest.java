@@ -1,9 +1,9 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.models;
 
-import edu.ntnu.idatt2001.actions.Action;
-import edu.ntnu.idatt2001.actions.GoldAction;
-import edu.ntnu.idatt2001.actions.ScoreAction;
-import edu.ntnu.idatt2001.game.Link;
+import edu.ntnu.idatt2001.models.actions.Action;
+import edu.ntnu.idatt2001.models.actions.GoldAction;
+import edu.ntnu.idatt2001.models.actions.ScoreAction;
+import edu.ntnu.idatt2001.models.game.Link;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,9 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.models;
 
-import edu.ntnu.idatt2001.game.*;
-import edu.ntnu.idatt2001.goals.Goal;
-import edu.ntnu.idatt2001.goals.HealthGoal;
-import edu.ntnu.idatt2001.goals.ScoreGoal;
+import edu.ntnu.idatt2001.models.game.*;
+import edu.ntnu.idatt2001.models.goals.Goal;
+import edu.ntnu.idatt2001.models.goals.HealthGoal;
+import edu.ntnu.idatt2001.models.goals.ScoreGoal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

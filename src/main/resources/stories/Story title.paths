@@ -1,0 +1,14 @@
+Story title
+
+::Passage title
+Passage content
+[Link text](Link Reference)
+!GoldAction:50
+
+::Second passage title
+Second passage content
+[First link text](First reference)
+!ScoreAction:50
+!InventoryAction:Sword
+[Second link text](Second reference)
+

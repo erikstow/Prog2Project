@@ -1,9 +1,10 @@
 package edu.ntnu.idatt2001.filehandling;
 
-import edu.ntnu.idatt2001.game.Link;
-import edu.ntnu.idatt2001.game.Passage;
-import edu.ntnu.idatt2001.game.Story;
-import edu.ntnu.idatt2001.actions.Action;
+import edu.ntnu.idatt2001.models.actions.ActionFactory;
+import edu.ntnu.idatt2001.models.game.Link;
+import edu.ntnu.idatt2001.models.game.Passage;
+import edu.ntnu.idatt2001.models.game.Story;
+import edu.ntnu.idatt2001.models.actions.Action;
 
 import java.io.File;
 import java.io.IOException;
@@ -100,7 +101,7 @@ public class StoryReader {
   public static void main(String[] args) {
     Story story = null;
     try {
-      story = read("Story title.paths");
+      story = read("stories/Story title.paths");
     } catch (IOException e) {
       e.printStackTrace();
     }

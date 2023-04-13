@@ -1,6 +1,4 @@
-package edu.ntnu.idatt2001.filehandling;
-
-import edu.ntnu.idatt2001.actions.*;
+package edu.ntnu.idatt2001.models.actions;
 
 public class ActionFactory {
   public enum ActionType {

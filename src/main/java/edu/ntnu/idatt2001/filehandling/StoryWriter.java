@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.filehandling;
 
-import edu.ntnu.idatt2001.game.Story;
+import edu.ntnu.idatt2001.models.game.Story;
 
 import java.io.FileWriter;
 import java.io.IOException;

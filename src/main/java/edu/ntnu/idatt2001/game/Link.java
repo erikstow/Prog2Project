@@ -1,7 +1,6 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.game;
 
 import edu.ntnu.idatt2001.actions.Action;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -25,9 +24,9 @@ public class Link {
    * @param reference unique identifier to a passage. Usually the title of the passage.
    */
   public Link(String text, String reference) throws NullPointerException {
-    Objects.requireNonNull(text,"Text cannot be empty");
-    Objects.requireNonNull(reference,"Reference cannot be empty");
-    
+    Objects.requireNonNull(text, "Text cannot be empty");
+    Objects.requireNonNull(reference, "Reference cannot be empty");
+
     this.text = text;
     this.reference = reference;
     this.actions = new ArrayList<>();
@@ -66,8 +65,21 @@ public class Link {
    * @param action the action to be added.
    */
   public void addAction(Action action) throws NullPointerException {
-    Objects.requireNonNull(action,"Action cannot be null");
+    Objects.requireNonNull(action, "Action cannot be null");
     this.actions.add(action);
+  }
+
+  public String getAsString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("[")
+      .append(getText())
+      .append("](")
+      .append(getReference())
+      .append(")\n");
+    for (Action action : this.actions) {
+      sb.append(action.getAsString());
+    }
+    return sb.toString();
   }
 
   @Override

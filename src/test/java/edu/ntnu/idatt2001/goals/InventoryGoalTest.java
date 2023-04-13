@@ -1,17 +1,20 @@
 package edu.ntnu.idatt2001.goals;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.game.Player;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class InventoryGoalTest {
   Player player;
+
   @BeforeEach
   void setUp() {
     player = new Player.PlayerBuilder("Name")
@@ -21,8 +24,10 @@ class InventoryGoalTest {
       .build();
   }
 
+  @DisplayName("Inventory goal is fulfilled")
   @Nested
   class GoalFulfilled {
+    @DisplayName("Player has more items in inventory than necessary")
     @Test
     void inventoryGoalFulfilledWithGreaterInventory() {
       List<String> inventory = new ArrayList<>();

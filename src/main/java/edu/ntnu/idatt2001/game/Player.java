@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -165,7 +165,7 @@ public class Player {
 
   /**
    * Method to get the inventory of the player.
-   * 
+   *
    * @return The inventory of the player.
    */
   public List<String> getInventory() {

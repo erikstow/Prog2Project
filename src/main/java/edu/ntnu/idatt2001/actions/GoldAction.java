@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.actions;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.game.Player;
 import java.util.Objects;
 
 
@@ -30,5 +30,9 @@ public class GoldAction implements Action {
   public void execute(Player player) throws NullPointerException {
     Objects.requireNonNull(player, "Player cannot be null");
     player.addGold(this.gold);
+  }
+
+  public String getAsString() {
+    return "!GoldAction:" + this.gold + "\n";
   }
 }

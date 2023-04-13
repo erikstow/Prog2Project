@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.actions;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.game.Player;
 import java.util.Objects;
 
 
@@ -37,5 +37,9 @@ public class InventoryAction implements Action {
     Objects.requireNonNull(player, "Player cannot be null");
 
     player.addToInventory(this.item);
+  }
+
+  public String getAsString() {
+    return "!InventoryAction:" + this.item + "\n";
   }
 }

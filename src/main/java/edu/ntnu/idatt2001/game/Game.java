@@ -1,7 +1,6 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.game;
 
 import edu.ntnu.idatt2001.goals.Goal;
-
 import java.util.List;
 import java.util.Objects;
 
@@ -15,17 +14,18 @@ public class Game {
   private final Story story;
   private final List<Goal> goals;
 
-  /**Constructor to Game class.
+  /**
+   * Constructor to Game class.
    *
    * @param player the player in the game
-   * @param story the story the game follows
-   * @param goals list of goals to be acomplished in the game
+   * @param story  the story the game follows
+   * @param goals  list of goals to be acomplished in the game
    */
   public Game(Player player, Story story, List<Goal> goals) throws NullPointerException {
     Objects.requireNonNull(player, "Player cannot be null");
     Objects.requireNonNull(story, "Story cannot be null");
     Objects.requireNonNull(goals, "Goals cannot be null");
-    
+
     this.player = player;
     this.story = story;
     this.goals = goals;
@@ -33,7 +33,7 @@ public class Game {
 
   /**
    * Method to get the player.
-   * 
+   *
    * @return The player.
    */
   public Player getPlayer() {
@@ -58,18 +58,19 @@ public class Game {
     return goals;
   }
 
-  /** Method to start the game.
-   * 
+  /**
+   * Method to start the game.
+   *
    * @return The opening passage.
    */
   public Passage begin() {
     return this.story.getOpeningPassage();
   }
 
-  /** Method to navigate the game.
+  /**
+   * Method to navigate the game.
    *
    * @param link The link to the corresponding passage.
-   *
    * @return The passage.
    */
   public Passage go(Link link) throws NullPointerException {

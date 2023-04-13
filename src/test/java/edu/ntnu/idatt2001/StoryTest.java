@@ -1,5 +1,8 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.game.Link;
+import edu.ntnu.idatt2001.game.Passage;
+import edu.ntnu.idatt2001.game.Story;
 import org.junit.jupiter.api.*;
 
 import java.util.Collection;

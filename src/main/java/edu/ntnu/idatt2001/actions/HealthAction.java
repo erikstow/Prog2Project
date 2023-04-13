@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.actions;
 
-import edu.ntnu.idatt2001.Player;
+import edu.ntnu.idatt2001.game.Player;
 import java.util.Objects;
 
 /** 
@@ -30,5 +30,9 @@ public class HealthAction implements Action {
     Objects.requireNonNull(player, "Player cannot be null");
 
     player.addHealth(this.health);
+  }
+
+  public String getAsString() {
+    return "!HealthAction:" + this.health + "\n";
   }
 }

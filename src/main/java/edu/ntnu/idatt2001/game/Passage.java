@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.game;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,13 +88,24 @@ public class Passage {
     return "Passage [title=" + title + ", content=" + content + ", links=" + links + "]";
   }
 
+  public String getAsString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("::").append(this.getTitle()).append('\n');
+    sb.append(this.getContent()).append('\n');
+    for (Link link : getLinks()) {
+      sb.append(link.getAsString());
+    }
+
+    return sb.toString();
+  }
+
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
-    result = prime * result + ((title == null) ? 0 : title.hashCode());
-    result = prime * result + ((content == null) ? 0 : content.hashCode());
-    result = prime * result + ((links == null) ? 0 : links.hashCode());
+    result = prime * result + title.hashCode();
+    result = prime * result + content.hashCode();
+    result = prime * result + links.hashCode();
     return result;
   } 
 
@@ -110,24 +121,12 @@ public class Passage {
       return false;
     }
     Passage other = (Passage) obj;
-    if (title == null) {
-      if (other.title != null) {
-        return false;
-      }
-    } else if (!title.equals(other.title)) {
+    if (!title.equals(other.title)) {
       return false;
     }
-    if (content == null) {
-      if (other.content != null) {
-        return false;
-      }
-    } else if (!content.equals(other.content)) {
+    if (!content.equals(other.content)) {
       return false;
     }
-    if (links == null) {
-      return other.links == null;
-    } else {
-      return links.equals(other.links);
-    }
+    return links.equals(other.links);
   }
 }

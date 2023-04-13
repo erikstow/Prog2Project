@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001;
 
+import edu.ntnu.idatt2001.game.*;
 import edu.ntnu.idatt2001.goals.Goal;
 import edu.ntnu.idatt2001.goals.HealthGoal;
 import edu.ntnu.idatt2001.goals.ScoreGoal;
@@ -10,7 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GameTest {
   Player player;
@@ -18,6 +20,7 @@ class GameTest {
   Passage openingPassage;
   List<Goal> goals;
   Game game;
+
   @BeforeEach
   void setUp() {
     player = new Player.PlayerBuilder("PlayerName")

@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001;
+package edu.ntnu.idatt2001.game;
 
 import java.util.*;
 
@@ -87,6 +87,7 @@ public class Story {
   public List<Link> getBrokenLinks() {
     return this.getPassages().stream()
       .flatMap(p -> p.getLinks().stream())
+      //.filter(passages::containsKey)
       .filter(link -> this.getPassage(link) == null)
       .toList();
   }

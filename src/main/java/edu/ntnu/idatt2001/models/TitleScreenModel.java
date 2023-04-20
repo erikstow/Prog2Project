@@ -21,7 +21,7 @@ public class TitleScreenModel {
     this.startAllowed.set(startAllowed);
   }
 
-  public BooleanProperty StartAllowedPorperty() {
+  public BooleanProperty startAllowedPorperty() {
     return startAllowed;
   }
 }

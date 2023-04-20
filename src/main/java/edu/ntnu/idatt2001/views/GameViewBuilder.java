@@ -5,12 +5,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.util.Builder;
 
-public class GameView extends BorderPane {
+public class GameViewBuilder implements Builder<Region> {
+  private final Runnable settingsAction;
+  private final Region titleView;
 
-  public GameView(Runnable settingsAction) {
-    setTop(createMenuBar(settingsAction));
-    setBottom(createLabel("All Rights Reserved."));
+  public GameViewBuilder(Runnable settingsAction, Region titleView) {
+    this.settingsAction = settingsAction;
+    this.titleView = titleView;
   }
 
   private HBox createMenuBar(Runnable action) {
@@ -28,6 +32,15 @@ public class GameView extends BorderPane {
 
   private Label createLabel(String text) {
     return new Label(text);
+  }
+
+  public Region build() {
+    BorderPane results = new BorderPane();
+    results.setTop(createMenuBar(settingsAction));
+    results.setBottom(createLabel("All Rights Reserved."));
+    results.setCenter(titleView);
+
+    return results;
   }
 }
 

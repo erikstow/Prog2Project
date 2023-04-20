@@ -8,6 +8,11 @@ public class GameModel {
   private final StringProperty storyName = new SimpleStringProperty();
   private Game game;
 
+  public void setStoryName(String name) {
+    storyName.set(name);
+  }
+
+  public String getStoryName() {
+    return storyName.get();
+  }
 }
-
-

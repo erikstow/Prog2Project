@@ -45,9 +45,6 @@
                     <mainClass>edu.ntnu.idatt2001.Main</mainClass>
                 </configuration>
                 <version>0.0.8</version>
-                <configuration>
-                    <mainClass>edu.ntnu.idatt2001.Main</mainClass>
-                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

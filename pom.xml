@@ -41,6 +41,9 @@
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>edu.ntnu.idatt2001.Main</mainClass>
+                </configuration>
                 <version>0.0.8</version>
                 <configuration>
                     <mainClass>edu.ntnu.idatt2001.Main</mainClass>
@@ -51,6 +54,7 @@
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.4.1</version>
             </plugin>
+
         </plugins>
     </build>
 </project>

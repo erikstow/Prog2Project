@@ -1,6 +1,8 @@
 package edu.ntnu.idatt2001.views;
 
+import edu.ntnu.idatt2001.models.GameModel;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -10,38 +12,33 @@ import javafx.util.Builder;
 
 public class GameViewBuilder implements Builder<Region> {
   private final Runnable settingsAction;
-  private final Region titleView;
+  private final GameModel gameModel;
 
-  public GameViewBuilder(Runnable settingsAction, Region titleView) {
+  public GameViewBuilder(Runnable settingsAction, GameModel gameModel) {
     this.settingsAction = settingsAction;
-    this.titleView = titleView;
+    this.gameModel = gameModel;
   }
 
-  private HBox createMenuBar(Runnable action) {
-    HBox results = new HBox();
-    results.getChildren().add(createButton(action, "Settings"));
+  private Node createMenuBar(Runnable action) {
+    HBox results = new HBox(createButton(action, "Settings"));
     results.alignmentProperty().set(Pos.TOP_RIGHT);
-   return results;
+    return results;
   }
 
-  private Button createButton(Runnable action, String label) {
+  private Node createButton(Runnable action, String label) {
     Button results = new Button(label);
     results.setOnAction(event -> action.run());
     return results;
   }
 
-  private Label createLabel(String text) {
-    return new Label(text);
-  }
-
   public Region build() {
     BorderPane results = new BorderPane();
     results.setTop(createMenuBar(settingsAction));
-    results.setBottom(createLabel("All Rights Reserved."));
-    results.setCenter(titleView);
+    results.setBottom(new Label("All Rights Reserved."));
+    results.setCenter(gameModel.getCurrentScreen());
+    gameModel.currentScreenProperty()
+        .addListener((observable, oldValue, newValue) -> results.setCenter(newValue));
 
     return results;
   }
 }
-
-

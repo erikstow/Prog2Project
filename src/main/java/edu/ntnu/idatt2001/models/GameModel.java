@@ -1,18 +1,23 @@
 package edu.ntnu.idatt2001.models;
 
 import edu.ntnu.idatt2001.models.game.Game;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.layout.Region;
 
 public class GameModel {
-  private final StringProperty storyName = new SimpleStringProperty();
   private Game game;
+  private final ObjectProperty<Region> currentScreen = new SimpleObjectProperty<>();
 
-  public void setStoryName(String name) {
-    storyName.set(name);
+  public ObjectProperty<Region> currentScreenProperty() {
+    return currentScreen;
   }
 
-  public String getStoryName() {
-    return storyName.get();
+  public Region getCurrentScreen() {
+    return currentScreen.get();
+  }
+
+  public void setCurrentScreen(Region screen) {
+    currentScreen.set(screen);
   }
 }

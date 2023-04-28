@@ -24,8 +24,4 @@ public abstract class ObservableController implements ControllerNotifier{
       observer.onUpdate(event);
     }
   }
-
-  public List<ControllerObserver> getObservers() {
-    return observers;
-  }
 }

@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.controllers.GameController;
+import edu.ntnu.idatt2001.controller.GameController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

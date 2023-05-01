@@ -1,8 +1,8 @@
 package edu.ntnu.idatt2001.goals;
 
-import edu.ntnu.idatt2001.models.game.Player;
-import edu.ntnu.idatt2001.models.goals.Goal;
-import edu.ntnu.idatt2001.models.goals.GoldGoal;
+import edu.ntnu.idatt2001.model.game.Player;
+import edu.ntnu.idatt2001.model.goals.Goal;
+import edu.ntnu.idatt2001.model.goals.GoldGoal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

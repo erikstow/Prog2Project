@@ -2,13 +2,17 @@ Story title
 
 ::Passage title
 Passage content
-[Link text](Link Reference)
+[Link text](Second passage title)
 !GoldAction:50
 
 ::Second passage title
 Second passage content
-[First link text](First reference)
+[First link text](Third passage title)
 !ScoreAction:50
 !InventoryAction:Sword
 [Second link text](Second reference)
 
+::Third passage title
+Third passage content
+[First link](Passage title)
+!HealthAction:-50

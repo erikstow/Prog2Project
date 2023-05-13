@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001;
 
-import edu.ntnu.idatt2001.controller.GameController;
+import edu.ntnu.idatt2001.controller.ApplicationController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,7 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-      Scene scene = new Scene(new GameController().getView(), 500, 200);
+      Scene scene = new Scene(new ApplicationController().getView(), 500, 200);
       primaryStage.setScene(scene);
       primaryStage.show();
     }

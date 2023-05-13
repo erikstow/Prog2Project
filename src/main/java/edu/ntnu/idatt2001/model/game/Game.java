@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.model.game;
 
+import edu.ntnu.idatt2001.model.actions.Action;
 import edu.ntnu.idatt2001.model.goals.Goal;
 import java.util.List;
 import java.util.Objects;
@@ -75,7 +76,12 @@ public class Game {
    */
   public Passage go(Link link) throws NullPointerException {
     Objects.requireNonNull(link, "Link cannot be null");
-  // Actions
-    return story.getPassage(link);
+    Passage passage = story.getPassage(link);
+    if (passage != null) {
+      for (Action action : link.getActions()) {
+        action.execute(player);
+      }
+    }
+    return passage;
   }
 }

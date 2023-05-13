@@ -135,9 +135,13 @@ public class Story {
     StringBuilder sb = new StringBuilder();
     sb.append(this.getTitle()).append('\n');
     sb.append('\n');
+    sb.append(openingPassage.getAsString());
+    sb.append('\n');
     for (Passage passage : passages.values()) {
-      sb.append(passage.getAsString());
-      sb.append('\n');
+      if (!passage.equals(openingPassage)) {
+        sb.append(passage.getAsString());
+        sb.append('\n');
+      }
     }
     return sb.toString();
   }

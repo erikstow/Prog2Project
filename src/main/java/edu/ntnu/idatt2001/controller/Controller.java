@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class ObservableController implements ControllerNotifier{
+public abstract class Controller implements ControllerNotifier, ControllerObserver {
   private final List<ControllerObserver> observers = new ArrayList<>();
 
   @Override

@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.view;
 
+import edu.ntnu.idatt2001.model.game.Link;
 import edu.ntnu.idatt2001.model.gui.TitleScreenModel;
 import java.util.List;
 import javafx.scene.Node;
@@ -28,7 +29,8 @@ public class TitleScreenBuilder implements Builder<Region> {
     Label title = new Label("Paths of Glory");
     Node storySelect = createComboBox("Choose Story", storyTitles);
     Node startButton = createButton("Start", actionHandler);
-    results.getChildren().addAll(title, storySelect, startButton);
+    Node info = createInfoBox();
+    results.getChildren().addAll(title, storySelect, startButton, info);
     return results;
   }
 
@@ -46,6 +48,36 @@ public class TitleScreenBuilder implements Builder<Region> {
     results.setText(text);
     results.disableProperty().bind(model.startAllowedPorperty().not());
     results.setOnAction(event -> action.run());
+    return results;
+  }
+
+  private Node createInfoBox() {
+    VBox results = new VBox();
+
+    // model.storyNameProperty().addListener((observable, oldValue, newValue) -> );
+
+    Label filePathLabel = new Label();
+    filePathLabel.textProperty().bind(model.filePathProperty());
+
+    VBox brokenLinksBox = new VBox();
+
+    model.brokenLinksProperty().addListener((observable, oldValue, newValue) -> {
+      brokenLinksBox.getChildren().clear();
+      brokenLinksBox.getChildren().add(formatBrokenLinksBox());
+    });
+
+    results.getChildren().add(filePathLabel);
+    results.getChildren().add(brokenLinksBox);
+    return results;
+  }
+
+  private Node formatBrokenLinksBox() {
+    VBox results = new VBox();
+    for (Link link : model.getBrokenLinks()) {
+      Label label = new Label(link.getAsString());
+      results.getChildren().add(label);
+    }
+
     return results;
   }
 }

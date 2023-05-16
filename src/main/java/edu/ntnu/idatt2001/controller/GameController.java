@@ -31,6 +31,45 @@ public class GameController extends Controller implements ControllerObserver {
       } else if (due.getKey().equals("player") && due.getValue() instanceof Player player) {
         updatePlayer(player);
       }
+    String type = event.getClass().getSimpleName();
+    switch (type) {
+      case "ScreenChangeEvent" -> handleScreenChangeEvent((ScreenChangeEvent) event);
+      case "DataUpdateEvent" -> handleDataUpdateEvent((DataUpdateEvent) event);
+      case "ErrorEvent" -> handleErrorEvent((ErrorEvent) event);
+
+      default -> {
+        ErrorEvent error = new ErrorEvent(this,
+            new IllegalArgumentException("Can't handle Event of type :" + type));
+        handleErrorEvent(error);
+      }
+    }
+  }
+
+  private void handleErrorEvent(ErrorEvent event) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("Error of type " + event.getException().getClass().getSimpleName()
+        +
+        " in " + event.getSource().getClass().getSimpleName());
+    alert.setContentText(event.getException().getMessage());
+
+    alert.showAndWait();
+  }
+
+  private void handleScreenChangeEvent(ScreenChangeEvent event) {
+    String sourceName = event.getSource().getClass().getSimpleName();
+    String identifier = event.getIdentifier();
+
+    switch (sourceName) {
+      case "TitleScreenController" -> {
+        switch (identifier) {
+          case "start" -> changeScreen(ScreenType.CREATION_SCREEN);
+          default -> handleErrorEvent(new ErrorEvent(this,
+              new IllegalArgumentException("Unknown identifier: " + identifier)));
+        }
+      }
+      default -> handleErrorEvent(new ErrorEvent(this,
+          new IllegalArgumentException("Unknown sourceName: " + sourceName)));
     }
   }
 

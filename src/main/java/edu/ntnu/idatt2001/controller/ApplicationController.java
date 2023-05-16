@@ -20,6 +20,7 @@ public class ApplicationController
   private final ApplicationModel model;
   private final TitleScreenController titleScreenController;
   private final GameController gameController;
+  private final CharacterScreenController characterScreenController;
   private Game game;
   private Story story;
   private Player startingPlayer;
@@ -28,6 +29,7 @@ public class ApplicationController
   public ApplicationController() {
     titleScreenController = new TitleScreenController();
     gameController = new GameController();
+    characterScreenController = new CharacterScreenController();
     initObservers();
 
     model = new ApplicationModel();
@@ -52,7 +54,7 @@ public class ApplicationController
   private void changeScreen(ScreenType screen) {
     switch (screen) {
       case TITLE_SCREEN -> model.setCurrentScreen(titleScreenController.getView());
-      case CREATION_SCREEN -> model.setCurrentScreen(new VBox());
+      case CREATION_SCREEN -> model.setCurrentScreen(characterScreenController.getView());
       case SETTINGS_SCREEN -> model.setCurrentScreen(new Region());
       case PASSAGE_SCREEN -> model.setCurrentScreen(gameController.getView());
     }
@@ -86,7 +88,7 @@ public class ApplicationController
         story = (Story) event.getValue();
         game = new Game(startingPlayer, story, new ArrayList<>());
         update(new DataUpdateEvent(this, "passage", game.begin()), GameController.class::isInstance);
-        changeScreen(ScreenType.PASSAGE_SCREEN);
+        changeScreen(ScreenType.CREATION_SCREEN);
       }
       case "linkToNextPassage" -> {
         Link link = (Link) event.getValue();

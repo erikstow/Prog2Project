@@ -41,8 +41,6 @@ public class TitleScreenController
   }
 
   private void startGame() {
-    update(new ErrorEvent(this, new IllegalArgumentException("Illegal argument")));
-
     Story story = null;
     try {
       story = StoryReader.read(STORIES_PATH + model.getStoryName() + FILE_EXTENSION);

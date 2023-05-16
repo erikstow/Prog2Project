@@ -3,7 +3,6 @@ package edu.ntnu.idatt2001.controller;
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.events.ErrorEvent;
-import edu.ntnu.idatt2001.model.events.ScreenChangeEvent;
 import edu.ntnu.idatt2001.model.game.Story;
 import edu.ntnu.idatt2001.model.gui.TitleScreenModel;
 import edu.ntnu.idatt2001.util.filehandling.text.StoryReader;
@@ -43,8 +42,7 @@ public class TitleScreenController
 
   private void startGame() {
     update(new ErrorEvent(this, new IllegalArgumentException("Illegal argument")));
-    update(new DataUpdateEvent(this, "storyTitle", model.getStoryName()));
-    update(new ScreenChangeEvent(this, "start"));
+
     Story story = null;
     try {
       story = StoryReader.read(STORIES_PATH + model.getStoryName() + FILE_EXTENSION);

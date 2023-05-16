@@ -2,17 +2,20 @@ package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
+import edu.ntnu.idatt2001.model.events.ErrorEvent;
 import edu.ntnu.idatt2001.model.game.*;
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
 import edu.ntnu.idatt2001.model.gui.ScreenType;
 import edu.ntnu.idatt2001.view.ApplicationScreenBuilder;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
 import java.util.ArrayList;
 
 public class ApplicationController
-    extends Controller
-    implements ControllerObserver {
+  extends Controller
+  implements ControllerObserver {
   private final Region view;
   private final ApplicationModel model;
   private final TitleScreenController titleScreenController;
@@ -59,7 +62,20 @@ public class ApplicationController
   public void onUpdate(ControllerEvent event) {
     if (event instanceof DataUpdateEvent due) {
       handleDataUpdateEvent(due);
+    } else if (event instanceof ErrorEvent ee) {
+      handleErrorEvent(ee);
     }
+  }
+
+  private void handleErrorEvent(ErrorEvent event) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("Error of type " + event.getException().getClass().getSimpleName()
+      +
+      " in " + event.getSource().getClass().getSimpleName());
+    alert.setContentText(event.getException().getMessage());
+
+    alert.showAndWait();
   }
 
   private void handleDataUpdateEvent(DataUpdateEvent event) {

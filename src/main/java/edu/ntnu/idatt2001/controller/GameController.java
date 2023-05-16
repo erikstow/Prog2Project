@@ -16,11 +16,12 @@ public class GameController
   private final Region view;
   private final GameModel model;
   private final TitleScreenController titleScreenController;
+  private final CharacterScreenController characterScreenController;
 
   public GameController() {
     titleScreenController = new TitleScreenController();
     titleScreenController.addObserver(this);
-
+    characterScreenController = new CharacterScreenController();
     model = new GameModel();
     model.setCurrentScreen(titleScreenController.getView());
 
@@ -35,7 +36,7 @@ public class GameController
   private void changeScreen(ScreenType screen) {
     switch (screen) {
       case TITLE_SCREEN -> model.setCurrentScreen(titleScreenController.getView());
-      case CREATION_SCREEN -> model.setCurrentScreen(new VBox());
+      case CREATION_SCREEN -> model.setCurrentScreen(characterScreenController.getView());
       case SETTINGS_SCREEN -> model.setCurrentScreen(new Region());
       case GAME_SCREEN -> model.setCurrentScreen(new HBox());
     }

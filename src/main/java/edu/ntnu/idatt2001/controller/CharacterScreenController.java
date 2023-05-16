@@ -2,9 +2,9 @@ package edu.ntnu.idatt2001.controller;
 
 import java.util.ArrayList;
 
+import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.game.Player;
-import edu.ntnu.idatt2001.model.game.Player.PlayerBuilder;
 import edu.ntnu.idatt2001.model.gui.CharacterScreenModel;
 import edu.ntnu.idatt2001.model.gui.CharacterScreenType;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterDifficultyScreenBuilder;
@@ -14,7 +14,7 @@ import edu.ntnu.idatt2001.view.characterScreen.CharacterScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterSummaryScreenBuilder;
 import javafx.scene.layout.Region;
 
-public class CharacterScreenController extends ObservableController  {
+public class CharacterScreenController extends Controller  {
 
   private final Region infoView;
   private final Region difficultyView;
@@ -80,9 +80,19 @@ public class CharacterScreenController extends ObservableController  {
       case SUMMARY_SCREEN -> model.setCurrentScreen(summaryView);
     }
   }
+
+  public void onUpdate(DataUpdateEvent event) {
+    }
+  
   
   public Region getView() {
     return view;
+  }
+
+  @Override
+  public void onUpdate(ControllerEvent event) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'onUpdate'");
   }
 
 }

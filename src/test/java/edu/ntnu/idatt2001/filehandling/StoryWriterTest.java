@@ -26,6 +26,7 @@ class StoryWriterTest {
     link.addAction(gold);
 
     Passage secondPassage = new Passage("Second passage title", "Second passage content");
+    Passage thirdPassage = new Passage("Third passage title", "Third passage content");
     Link firstLink = new Link("First link text", "First reference");
     Link secondLink = new Link("Second link text", "Second reference");
     secondPassage.addLink(firstLink);
@@ -37,6 +38,7 @@ class StoryWriterTest {
 
     Story story = new Story("Story title", passage);
     story.addPassage(secondPassage);
+    story.addPassage(thirdPassage);
 
     StoryWriter.writeToFile(story);
 

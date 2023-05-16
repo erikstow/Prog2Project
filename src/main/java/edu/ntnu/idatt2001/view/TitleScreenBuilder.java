@@ -43,10 +43,8 @@ public class TitleScreenBuilder implements Builder<Region> {
 
   private Node createButton(String text, Runnable action) {
     Button results = new Button();
-    results.disableProperty().set(true);
-    model.startAllowedPorperty().addListener((observable, oldValue, newValue) ->
-        results.disableProperty().set(!newValue));
     results.setText(text);
+    results.disableProperty().bind(model.startAllowedPorperty().not());
     results.setOnAction(event -> action.run());
     return results;
   }

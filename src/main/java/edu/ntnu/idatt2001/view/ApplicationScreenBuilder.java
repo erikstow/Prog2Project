@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.view;
 
-import edu.ntnu.idatt2001.model.gui.GameModel;
+import edu.ntnu.idatt2001.model.gui.ApplicationModel;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -10,11 +10,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Builder;
 
-public class GameBuilder implements Builder<Region> {
+public class ApplicationScreenBuilder implements Builder<Region> {
   private final Runnable settingsAction;
-  private final GameModel gameModel;
+  private final ApplicationModel gameModel;
 
-  public GameBuilder(Runnable settingsAction, GameModel gameModel) {
+  public ApplicationScreenBuilder(Runnable settingsAction, ApplicationModel gameModel) {
     this.settingsAction = settingsAction;
     this.gameModel = gameModel;
   }

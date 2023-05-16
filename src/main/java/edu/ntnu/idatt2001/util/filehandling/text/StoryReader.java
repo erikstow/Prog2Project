@@ -14,11 +14,11 @@ import java.util.regex.Pattern;
 
 
 public class StoryReader {
+  private static final Pattern PASSAGE_PATTERN = Pattern.compile("::.*");
+  private static final Pattern LINK_PATTERN = Pattern.compile("\\[.*");
   private static final Pattern LINK_TEXT_PATTERN = Pattern.compile("\\[(.*?)]");
   private static final Pattern LINK_REFERENCE_PATTERN = Pattern.compile("\\((.*?)\\)");
-  private static final Pattern LINK_PATTERN = Pattern.compile("\\[.*");
   private static final Pattern ACTION_PATTERN = Pattern.compile("!.*");
-  private static final Pattern PASSAGE_PATTERN = Pattern.compile("::.*");
   private static final String ACTION_DELIMITER = ":";
 
   private StoryReader() {
@@ -27,6 +27,7 @@ public class StoryReader {
 
   public static Story read(String path) throws IOException{
     Story story;
+
     try ( Scanner scanner = new Scanner(new File(path))) {
       String storyTitle = scanner.nextLine();
       scanner.nextLine();
@@ -39,6 +40,9 @@ public class StoryReader {
       while (scanner.hasNext(PASSAGE_PATTERN)) {
         Passage passage = readPassage(scanner);
         story.addPassage(passage);
+        if (scanner.hasNext()) {
+          scanner.nextLine();
+        }
       }
     }
 
@@ -50,7 +54,7 @@ public class StoryReader {
     title = title.substring(2);
     String content = scanner.nextLine();
     Passage passage = new Passage(title, content);
-    // Check for links
+
     while(scanner.hasNext(LINK_PATTERN)) {
       Link link = readLink(scanner);
       passage.addLink(link);
@@ -89,8 +93,9 @@ public class StoryReader {
     line = line.substring(1);
     String[] actionComponents = line.split(ACTION_DELIMITER);
     ActionFactory.ActionType actionType = parseActionType(actionComponents[0]);
+    String actionValue = actionComponents[1];
 
-    return ActionFactory.get(actionType, actionComponents[1]);
+    return ActionFactory.get(actionType, actionValue);
   }
 
   private static ActionFactory.ActionType parseActionType(String action) {

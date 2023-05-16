@@ -2,10 +2,12 @@ package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
+import edu.ntnu.idatt2001.model.events.ErrorEvent;
 import edu.ntnu.idatt2001.model.events.ScreenChangeEvent;
 import edu.ntnu.idatt2001.model.gui.GameModel;
 import edu.ntnu.idatt2001.model.gui.ScreenType;
 import edu.ntnu.idatt2001.view.GameBuilder;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -43,11 +45,29 @@ public class GameController
 
   @Override
   public void onUpdate(ControllerEvent event) {
-    if (event instanceof ScreenChangeEvent sce) {
-      handleScreenChangeEvent(sce);
-    } else if (event instanceof DataUpdateEvent due) {
-      handleDataUpdateEvent(due);
+    String type = event.getClass().getSimpleName();
+    switch (type) {
+      case "ScreenChangeEvent" -> handleScreenChangeEvent((ScreenChangeEvent) event);
+      case "DataUpdateEvent" -> handleDataUpdateEvent((DataUpdateEvent) event);
+      case "ErrorEvent" -> handleErrorEvent((ErrorEvent) event);
+
+      default -> {
+        ErrorEvent error = new ErrorEvent(this,
+            new IllegalArgumentException("Can't handle Event of type :" + type));
+        handleErrorEvent(error);
+      }
     }
+  }
+
+  private void handleErrorEvent(ErrorEvent event) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Error");
+    alert.setHeaderText("Error of type " + event.getException().getClass().getSimpleName()
+        +
+        " in " + event.getSource().getClass().getSimpleName());
+    alert.setContentText(event.getException().getMessage());
+
+    alert.showAndWait();
   }
 
   private void handleScreenChangeEvent(ScreenChangeEvent event) {
@@ -55,14 +75,15 @@ public class GameController
     String identifier = event.getIdentifier();
 
     switch (sourceName) {
-      case "TitleScreenController":
+      case "TitleScreenController" -> {
         switch (identifier) {
           case "start" -> changeScreen(ScreenType.CREATION_SCREEN);
-          default -> throw new IllegalArgumentException("Unknown identifier: " + identifier);
+          default -> handleErrorEvent(new ErrorEvent(this,
+              new IllegalArgumentException("Unknown identifier: " + identifier)));
         }
-        break;
-      default:
-        throw new IllegalArgumentException("Unknown sourceName: " + sourceName);
+      }
+      default -> handleErrorEvent(new ErrorEvent(this,
+          new IllegalArgumentException("Unknown sourceName: " + sourceName)));
     }
   }
 
@@ -71,7 +92,8 @@ public class GameController
 
     switch (key) {
       case "storyTitle" -> System.out.println(event.getValue());
-      default -> throw new IllegalArgumentException("Unknown key: " + key);
+      default -> handleErrorEvent(new ErrorEvent(this,
+          new IllegalArgumentException("Unknown key: " + key)));
     }
   }
 

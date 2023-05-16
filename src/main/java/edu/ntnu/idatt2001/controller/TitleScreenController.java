@@ -1,6 +1,7 @@
 package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
+import edu.ntnu.idatt2001.model.events.ErrorEvent;
 import edu.ntnu.idatt2001.model.events.ScreenChangeEvent;
 import edu.ntnu.idatt2001.model.gui.TitleScreenModel;
 import edu.ntnu.idatt2001.view.TitleScreenBuilder;
@@ -30,6 +31,7 @@ public class TitleScreenController
   }
 
   private void startGame() {
+    update(new ErrorEvent(this, new IllegalArgumentException("Illegal argument")));
     update(new DataUpdateEvent(this, "storyTitle", model.getStoryName()));
     update(new ScreenChangeEvent(this, "start"));
   }

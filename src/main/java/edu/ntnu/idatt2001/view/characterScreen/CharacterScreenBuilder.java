@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.view.characterScreen;
 
-import edu.ntnu.idatt2001.model.gui.CharacterScreenModel;
+import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -39,9 +39,16 @@ public class CharacterScreenBuilder implements Builder<Region> {
       results.setCenter(newValue);
     });
     results.setCenter(model.getCurrentScreen());
-    results.setBottom(Widgets.createButtonBar(
-        "", Widgets.createButton("Back", backAction, ""), 
-        Widgets.createButton("Next", nextAction, "")));
+    results.setBottom(createNextBackButtonBar());
+    return results;
+  }
+
+  private Node createNextBackButtonBar() {
+    ButtonBar results = new ButtonBar();
+    Button next = Widgets.createButton("Next", nextAction, "");
+    next.disableProperty().bind(model.nextAllowed().not());
+    Button back = Widgets.createButton("Back", backAction, "");
+    results.getButtons().addAll(back, next);
     return results;
   }
 }

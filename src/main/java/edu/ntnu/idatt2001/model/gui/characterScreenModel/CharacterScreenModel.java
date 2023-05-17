@@ -1,29 +1,37 @@
-package edu.ntnu.idatt2001.model.gui;
+package edu.ntnu.idatt2001.model.gui.characterScreenModel;
 
 import edu.ntnu.idatt2001.model.goals.Goal;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
 import javafx.scene.layout.Region;
 
 public class CharacterScreenModel {
   
   private final StringProperty name = new SimpleStringProperty();
   private final StringProperty appearence = new SimpleStringProperty();
-  private final ListProperty<Goal> goals = new SimpleListProperty<>();
+  private final ListProperty<Goal> goals = new SimpleListProperty<>(FXCollections.observableArrayList());
   private final IntegerProperty difficulty = new SimpleIntegerProperty();
   private final IntegerProperty health = new SimpleIntegerProperty();
   private final IntegerProperty gold = new SimpleIntegerProperty();
   private final IntegerProperty score = new SimpleIntegerProperty();
-  private final ListProperty<String> inventory = new SimpleListProperty<>();
+  private final ListProperty<String> inventory = new SimpleListProperty<>(FXCollections.observableArrayList());
+  private final StringProperty goalType = new SimpleStringProperty();
+  private final StringProperty goalValue = new SimpleStringProperty();
   private final ObjectProperty<Region> currentScreen = new SimpleObjectProperty<>();
-
+  private final BooleanProperty nextAllowed = new SimpleBooleanProperty(true);
 
   public StringProperty name() {
     return name;
@@ -43,6 +51,10 @@ public class CharacterScreenModel {
 
   public List<Goal> getGoals() {
     return goals.get();
+  }
+
+  public void addGoal(Goal goal) {
+    goals.add(goal);
   }
 
   public IntegerProperty difficulty() {
@@ -117,4 +129,31 @@ public class CharacterScreenModel {
     this.appearence.set(appearence);
   }
   
+  public StringProperty goalType() {
+    return goalType;
+  }
+
+  public String getGoalType() {
+    return goalType.get();
+  }
+
+  public StringProperty goalValue() {
+    return goalValue;
+  }
+
+  public String getGoalValue() {
+    return goalValue.get();
+  }
+
+  public BooleanProperty nextAllowed() {
+    return nextAllowed;
+  } 
+
+  public boolean getNextAllowed() {
+    return nextAllowed.get();
+  }
+
+  public void setNextAllowed(boolean nextAllowed) {
+    this.nextAllowed.set(nextAllowed);
+  }
 }

@@ -34,4 +34,9 @@ public class ScoreGoal implements Goal {
     
     return player.getScore() >= this.minimumPoints;
   }
+
+  @Override
+  public String toString() {
+    return "ScoreGoal{" + "minimumPoints=" + minimumPoints + '}';
+  }
 }

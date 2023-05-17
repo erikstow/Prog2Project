@@ -33,4 +33,9 @@ public class GoldGoal implements Goal {
     Objects.requireNonNull(player, "Player cannot be null");
     return player.getGold() >= minimumGold;
   }
+
+  @Override
+  public String toString() {
+    return "GoldGoal{" + "minimumGold=" + minimumGold + '}';
+  }
 }

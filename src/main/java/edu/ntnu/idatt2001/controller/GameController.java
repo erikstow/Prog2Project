@@ -21,7 +21,7 @@ public class GameController extends Controller implements ControllerObserver {
   }
 
   private void linkClicked(Link link) {
-    update(new DataUpdateEvent(this, "linkToNextPassage", link));
+    update(new DataUpdateEvent("linkToNextPassage", link));
   }
 
   public void onUpdate(ControllerEvent event) {

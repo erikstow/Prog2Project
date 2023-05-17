@@ -52,7 +52,8 @@ public class CharacterScreenController extends Controller  {
     }
   }
 
-  public void next() {  
+  public void next() {
+    update(new DataUpdateEvent("error", new IllegalArgumentException("sdkljf")));
     if (model.getCurrentScreen() == infoView) {
       this.changeScreen(CharacterScreenType.DIFFICULTY_SCREEN);
     } else if (model.getCurrentScreen() == difficultyView) {
@@ -66,8 +67,9 @@ public class CharacterScreenController extends Controller  {
   
   private void start() {
     Player player = new Player.PlayerBuilder("Erik").build();
-    DataUpdateEvent createdPlayer = new DataUpdateEvent(this, "createdPlayer", player);
-    DataUpdateEvent chosenGoals = new DataUpdateEvent(this, "chosenGoals", model.getGoals());
+
+    DataUpdateEvent createdPlayer = new DataUpdateEvent("createdPlayer", player);
+    DataUpdateEvent chosenGoals = new DataUpdateEvent("chosenGoals", model.getGoals());
     update(createdPlayer);
     update(chosenGoals);
   }

@@ -33,4 +33,9 @@ public class HealthGoal implements Goal {
     Objects.requireNonNull(player, "Player cannot be null");
     return player.getHealth() >= this.minimumHealth;
   }
+
+  @Override
+  public String toString() {
+    return "HealthGoal{" + "minimumHealth=" + minimumHealth + '}';
+  }
 }

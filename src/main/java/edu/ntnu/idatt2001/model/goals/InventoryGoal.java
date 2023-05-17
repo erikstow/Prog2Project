@@ -35,4 +35,9 @@ public class InventoryGoal implements Goal {
     Objects.requireNonNull(player, "Player cannot be null");
     return new HashSet<>(player.getInventory()).containsAll(mandatoryItems);
   }
+
+  @Override
+  public String toString() {
+    return "InventoryGoal{" + "mandatoryItems=" + mandatoryItems + '}';
+  }
 }

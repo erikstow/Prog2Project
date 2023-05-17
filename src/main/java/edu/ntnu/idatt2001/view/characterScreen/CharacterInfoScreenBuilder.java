@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.view.characterScreen;
 
-import edu.ntnu.idatt2001.model.gui.CharacterScreenModel;
+import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
 import javafx.beans.property.StringProperty;
 import javafx.scene.Node;

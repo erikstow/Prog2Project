@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.game.Player;
-import edu.ntnu.idatt2001.model.gui.CharacterScreenModel;
-import edu.ntnu.idatt2001.model.gui.CharacterScreenType;
+import edu.ntnu.idatt2001.model.goals.Goal;
+import edu.ntnu.idatt2001.model.goals.GoalFactory;
+import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
+import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenType;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterDifficultyScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterGoalsScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterInfoScreenBuilder;
@@ -28,21 +30,22 @@ public class CharacterScreenController extends Controller  {
     model = new CharacterScreenModel();
     infoView = new CharacterInfoScreenBuilder(model).build();
     difficultyView = new CharacterDifficultyScreenBuilder(model).build();
-    goalsView = new CharacterGoalsScreenBuilder(model).build();
+    goalsView = new CharacterGoalsScreenBuilder(model, this::addGoal, this::undoGoal).build();
     summaryView = new CharacterSummaryScreenBuilder(model).build();
     model.setCurrentScreen(infoView);
     view = new CharacterScreenBuilder(model, this::back, this::next).build();
     model.difficulty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null) {
-        model.sethealth(15);
-        model.setScore(0);
-        model.setGold(0);
+        model.sethealth(30 / model.getDifficulty());
+        model.setScore(0 / model.getDifficulty());
+        model.setGold(300 / model.getDifficulty());
         model.setInventory(new ArrayList<>());
       }
     });
+    model.currentScreen().addListener((observable, oldValue, newValue) -> isStartAllowed());
   }
 
-  public void back() {
+  private void back() {
     if (model.getCurrentScreen() == difficultyView) {
       this.changeScreen(CharacterScreenType.INFO_SCREEN);
     } else if (model.getCurrentScreen() == goalsView) {
@@ -52,7 +55,7 @@ public class CharacterScreenController extends Controller  {
     }
   }
 
-  public void next() {  
+  private void next() {  
     if (model.getCurrentScreen() == infoView) {
       this.changeScreen(CharacterScreenType.DIFFICULTY_SCREEN);
     } else if (model.getCurrentScreen() == difficultyView) {
@@ -72,6 +75,19 @@ public class CharacterScreenController extends Controller  {
     update(chosenGoals);
   }
 
+  private void addGoal() {
+    Goal goal = GoalFactory.get(
+        GoalFactory.GoalType.valueOf(model.getGoalType().toUpperCase() + "GOAL"),
+         model.getGoalValue());
+    model.goals().get().add(goal);
+  }
+
+  private void undoGoal() {
+    if (!model.goals().get().isEmpty()) {
+      model.goals().get().remove(model.goals().get().size() - 1);
+    }
+  }
+
   private void changeScreen(CharacterScreenType screen) {
     switch (screen) {
       case INFO_SCREEN -> model.setCurrentScreen(infoView);
@@ -80,11 +96,7 @@ public class CharacterScreenController extends Controller  {
       case SUMMARY_SCREEN -> model.setCurrentScreen(summaryView);
     }
   }
-
-  public void onUpdate(DataUpdateEvent event) {
-    }
-  
-  
+    
   public Region getView() {
     return view;
   }
@@ -95,4 +107,12 @@ public class CharacterScreenController extends Controller  {
     throw new UnsupportedOperationException("Unimplemented method 'onUpdate'");
   }
 
-}
+  private void isStartAllowed() {
+    if (model.getCurrentScreen() == summaryView && (model.getDifficulty() == 0 || model.getName().isEmpty())) {
+        model.setNextAllowed(false);
+      } 
+      else {model.setNextAllowed(true);}
+    }
+  
+  }
+

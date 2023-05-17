@@ -2,7 +2,6 @@ package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
-import edu.ntnu.idatt2001.model.events.ErrorEvent;
 import edu.ntnu.idatt2001.model.game.Story;
 import edu.ntnu.idatt2001.model.gui.TitleScreenModel;
 import edu.ntnu.idatt2001.util.filehandling.text.StoryReader;
@@ -12,6 +11,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
+import javafx.collections.FXCollections;
 import javafx.scene.layout.Region;
 
 public class TitleScreenController
@@ -20,13 +20,35 @@ public class TitleScreenController
   private final TitleScreenModel model;
   private static final String STORIES_PATH = "src/main/resources/stories/";
   private static final String FILE_EXTENSION = ".paths";
+  private Story story;
 
   public TitleScreenController() {
     List<String> storyNameList = getStoryList();
     model = new TitleScreenModel();
     view = new TitleScreenBuilder(model, storyNameList, this::startGame).build();
-    model.storyNameProperty().addListener((observable, oldValue, newValue) ->
-        model.setStartAllowed(!newValue.isEmpty()));
+    model.storyNameProperty().addListener((observable, oldValue, newValue) -> {
+      try {
+        readStory();
+        displayStoryInformation();
+        model.setStartAllowed(!newValue.isEmpty());
+      } catch (IOException e) {
+        update(new DataUpdateEvent("error", e));
+      }
+    });
+  }
+
+  private void readStory() throws IOException {
+    story = StoryReader.read(STORIES_PATH + model.getStoryName() + FILE_EXTENSION);
+  }
+
+  private void displayStoryInformation() {
+    model.setBrokenLinks(FXCollections.observableList(story.getBrokenLinks()));
+    model.setFilePath(getAbsoluteStoryFilePath());
+  }
+
+  private String getAbsoluteStoryFilePath() {
+    File f = new File(STORIES_PATH + model.getStoryName() + FILE_EXTENSION);
+    return f.getAbsolutePath();
   }
 
   private List<String> getStoryList() {
@@ -41,14 +63,7 @@ public class TitleScreenController
   }
 
   private void startGame() {
-    Story story = null;
-    try {
-      story = StoryReader.read(STORIES_PATH + model.getStoryName() + FILE_EXTENSION);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    update(new DataUpdateEvent(this, "story", story));
+    update(new DataUpdateEvent("story", story));
   }
 
   @Override

@@ -3,6 +3,8 @@ package edu.ntnu.idatt2001.view;
 import edu.ntnu.idatt2001.model.game.Link;
 import edu.ntnu.idatt2001.model.gui.TitleScreenModel;
 import java.util.List;
+
+import edu.ntnu.idatt2001.util.widgets.Widgets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -28,7 +30,10 @@ public class TitleScreenBuilder implements Builder<Region> {
     VBox results = new VBox();
     Label title = new Label("Paths of Glory");
     Node storySelect = createComboBox("Choose Story", storyTitles);
-    Node startButton = createButton("Start", actionHandler);
+
+    Button startButton = Widgets.createButton("Start", actionHandler, "");
+    startButton.disableProperty().bind(model.startAllowedPorperty().not());
+
     Node info = createInfoBox();
     results.getChildren().addAll(title, storySelect, startButton, info);
     return results;
@@ -43,18 +48,8 @@ public class TitleScreenBuilder implements Builder<Region> {
     return results;
   }
 
-  private Node createButton(String text, Runnable action) {
-    Button results = new Button();
-    results.setText(text);
-    results.disableProperty().bind(model.startAllowedPorperty().not());
-    results.setOnAction(event -> action.run());
-    return results;
-  }
-
   private Node createInfoBox() {
     VBox results = new VBox();
-
-    // model.storyNameProperty().addListener((observable, oldValue, newValue) -> );
 
     Label filePathLabel = new Label();
     filePathLabel.textProperty().bind(model.filePathProperty());

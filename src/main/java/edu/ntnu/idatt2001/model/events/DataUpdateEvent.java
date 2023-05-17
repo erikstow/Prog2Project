@@ -2,12 +2,11 @@ package edu.ntnu.idatt2001.model.events;
 
 import edu.ntnu.idatt2001.controller.ControllerNotifier;
 
-public class DataUpdateEvent extends ControllerEvent {
+public class DataUpdateEvent implements ControllerEvent {
   private final String key;
   private final Object value;
 
-  public DataUpdateEvent(ControllerNotifier source, String key, Object value) {
-    super(source);
+  public DataUpdateEvent(String key, Object value) {
     this.key = key;
     this.value = value;
   }

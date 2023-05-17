@@ -31,6 +31,14 @@ public class Player {
     this.inventory = new ArrayList<>(builder.inventory);
   }
 
+  public Player(Player player) {
+    this.name = player.getName();
+    this.gold = player.getGold();
+    this.health = player.getHealth();
+    this.score = player.getScore();
+    this.inventory = player.getInventory();
+  }
+
   /**
    * A builder class for the player class.
    */

@@ -2,7 +2,6 @@ package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
-import edu.ntnu.idatt2001.model.events.ErrorEvent;
 import edu.ntnu.idatt2001.model.game.Story;
 import edu.ntnu.idatt2001.model.gui.TitleScreenModel;
 import edu.ntnu.idatt2001.util.filehandling.text.StoryReader;
@@ -33,7 +32,7 @@ public class TitleScreenController
         displayStoryInformation();
         model.setStartAllowed(!newValue.isEmpty());
       } catch (IOException e) {
-        update(new ErrorEvent(this, e));
+        update(new DataUpdateEvent("error", e));
       }
     });
   }
@@ -64,7 +63,7 @@ public class TitleScreenController
   }
 
   private void startGame() {
-    update(new DataUpdateEvent(this, "story", story));
+    update(new DataUpdateEvent("story", story));
   }
 
   @Override

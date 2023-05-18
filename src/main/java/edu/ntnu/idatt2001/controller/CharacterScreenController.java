@@ -18,15 +18,19 @@ import javafx.scene.layout.Region;
 
 public class CharacterScreenController extends Controller  {
 
-  private final Region infoView;
-  private final Region difficultyView;
-  private final Region goalsView;
-  private final Region summaryView;
-  private final Region view;
-  private final CharacterScreenModel model;
+  private Region infoView;
+  private Region difficultyView;
+  private Region goalsView;
+  private Region summaryView;
+  private Region view;
+  private CharacterScreenModel model;
   
 
   public CharacterScreenController() {
+    initModelAndView();
+  }
+
+  private void initModelAndView() {
     model = new CharacterScreenModel();
     infoView = new CharacterInfoScreenBuilder(model).build();
     difficultyView = new CharacterDifficultyScreenBuilder(model).build();
@@ -82,10 +86,14 @@ public class CharacterScreenController extends Controller  {
   }
 
   private void addGoal() {
-    Goal goal = GoalFactory.get(
+    try {
+      Goal goal = GoalFactory.get(
         GoalFactory.GoalType.valueOf(model.getGoalType().toUpperCase() + "GOAL"),
-         model.getGoalValue());
-    model.goals().get().add(goal);
+        model.getGoalValue());
+      model.goals().get().add(goal);
+    } catch (NumberFormatException | NullPointerException e) {
+      update(new DataUpdateEvent("error", e));
+    }
   }
 
   private void undoGoal() {
@@ -110,7 +118,7 @@ public class CharacterScreenController extends Controller  {
   @Override
   public void onUpdate(ControllerEvent event) {
     if (event.getKey().equals("reset")) {
-      System.out.println("soie");
+      initModelAndView();
     }
   }
 

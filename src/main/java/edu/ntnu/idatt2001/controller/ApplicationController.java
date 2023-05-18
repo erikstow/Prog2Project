@@ -55,6 +55,7 @@ public class ApplicationController extends Controller {
     addObserver(gameController);
     addObserver(characterScreenController);
     addObserver(settingsController);
+    addObserver(titleScreenController);
   }
 
   private void settingsAction() {

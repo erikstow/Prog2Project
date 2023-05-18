@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.model.gui.SettingsModel;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
+import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Builder;
@@ -20,10 +21,13 @@ public class SettingsScreenBuilder implements Builder<Region> {
   }
 
   public Region build() {
+    Button restartButton = Widgets.createButton("Restart game", restart, "");
+    restartButton.disableProperty().bind(model.restartAllowedProperty().not());
+
     return new VBox(
       Widgets.createButton("Resume game", resume, ""),
       Widgets.createButton("Return to title screen", title, ""),
-      Widgets.createButton("Restart game", restart, "")
+      restartButton
     );
   }
 }

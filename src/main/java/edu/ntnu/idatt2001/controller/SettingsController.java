@@ -29,7 +29,12 @@ public class SettingsController extends Controller {
 
   @Override
   public void onUpdate(ControllerEvent event) {
-    //
+    String key = event.getKey();
+    if (key.equals("reset")) {
+      model.setRestartAllowed(false);
+    } else if (key.equals("gameStarted")) {
+      model.setRestartAllowed(true);
+    }
   }
 
   public Region getView() {

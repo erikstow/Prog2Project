@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.model.gui.controlleractions;
 
 import edu.ntnu.idatt2001.controller.ApplicationController;
 import edu.ntnu.idatt2001.controller.GameController;
+import edu.ntnu.idatt2001.controller.SettingsController;
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.game.Game;
@@ -17,6 +18,6 @@ public class StartGamePressedAction implements ControllerAction {
     controller.update(new DataUpdateEvent("passage", model.getGame().begin()), GameController.class::isInstance);
     controller.update(new DataUpdateEvent("player", model.getGame().getPlayer()), GameController.class::isInstance);
     controller.changeScreen(ScreenType.PASSAGE_SCREEN);
-    System.out.println(model.getGoals());
+    controller.update(new DataUpdateEvent("gameStarted", null), SettingsController.class::isInstance);
   }
 }

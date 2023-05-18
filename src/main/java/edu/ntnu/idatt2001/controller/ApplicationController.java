@@ -53,6 +53,7 @@ public class ApplicationController extends Controller {
     characterScreenController.addObserver(this);
     addObserver(gameController);
     addObserver(characterScreenController);
+    addObserver(settingsController);
   }
 
   private void settingsAction() {

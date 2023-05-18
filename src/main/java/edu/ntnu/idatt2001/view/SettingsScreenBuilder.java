@@ -12,12 +12,14 @@ public class SettingsScreenBuilder implements Builder<Region> {
   private final Runnable resume;
   private final Runnable title;
   private final Runnable restart;
+  private final Runnable exit;
 
-  public SettingsScreenBuilder(SettingsModel model, Runnable resume, Runnable title, Runnable restart) {
+  public SettingsScreenBuilder(SettingsModel model, Runnable resume, Runnable title, Runnable restart, Runnable exit) {
     this.model = model;
     this.resume = resume;
     this.title = title;
     this.restart = restart;
+    this.exit = exit;
   }
 
   public Region build() {
@@ -27,6 +29,7 @@ public class SettingsScreenBuilder implements Builder<Region> {
     return new VBox(
       Widgets.createButton("Resume game", resume, ""),
       Widgets.createButton("Return to title screen", title, ""),
+      Widgets.createButton("Exit game", exit, ""),
       restartButton
     );
   }

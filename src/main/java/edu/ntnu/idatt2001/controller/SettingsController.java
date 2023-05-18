@@ -12,7 +12,11 @@ public class SettingsController extends Controller {
 
   SettingsController() {
     model = new SettingsModel();
-    this.view = new SettingsScreenBuilder(model, this::resume, this::exitToTitle, this::restartGame).build();
+    this.view = new SettingsScreenBuilder(model,
+      this::resume,
+      this::exitToTitle,
+      this::restartGame,
+      this::exitGame).build();
   }
 
   private void resume() {
@@ -25,6 +29,10 @@ public class SettingsController extends Controller {
 
   private void exitToTitle() {
     update(new DataUpdateEvent("returnToTitle", null));
+  }
+
+  private void exitGame() {
+    update(new DataUpdateEvent("exitGame", null));
   }
 
   @Override

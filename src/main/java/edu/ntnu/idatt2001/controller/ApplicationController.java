@@ -44,6 +44,7 @@ public class ApplicationController extends Controller {
     actions.put("createdPlayer", new SetCreatedPlayerAction());
     actions.put("chosenGoals", new SetChosenGoalsAction());
     actions.put("startGamePressed", new StartGamePressedAction());
+    actions.put("exitGame", new ExitGameAction());
   }
 
   private void initObservers() {

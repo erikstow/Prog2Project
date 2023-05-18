@@ -29,7 +29,7 @@ public class ApplicationController extends Controller {
     model = new ApplicationModel();
     model.setCurrentScreen(titleScreenController.getView());
 
-    view = new ApplicationScreenBuilder(this::settingsAction, model).build();
+    view = new ApplicationScreenBuilder(model, this::settingsAction, this::helpAction).build();
 
     initActions();
   }
@@ -56,8 +56,31 @@ public class ApplicationController extends Controller {
   }
 
   private void settingsAction() {
-    model.setPreviousScreen(model.getCurrentScreen());
-    changeScreen(ScreenType.SETTINGS_SCREEN);
+    if (model.getCurrentScreen() == settingsController.getView()) {
+      model.setCurrentScreen(model.getPreviousScreen());
+    } else {
+      model.setPreviousScreen(model.getCurrentScreen());
+      changeScreen(ScreenType.SETTINGS_SCREEN);
+    }
+  }
+
+  private void helpAction() {
+    ScreenType currentScreenType = null;
+    Region currentScreen = model.getCurrentScreen();
+    if (currentScreen == titleScreenController.getView()) {
+      currentScreenType = ScreenType.TITLE_SCREEN;
+    } else if (currentScreen == characterScreenController.getView()) {
+      currentScreenType = ScreenType.CREATION_SCREEN;
+    } else if (currentScreen == gameController.getView()) {
+      currentScreenType = ScreenType.PASSAGE_SCREEN;
+    } else if (currentScreen == settingsController.getView()) {
+      currentScreenType = ScreenType.SETTINGS_SCREEN;
+    }
+    try {
+      new HelpAction().execute(new DataUpdateEvent("currentScreenType", currentScreenType), this, model);
+    } catch (Exception e) {
+      onUpdate(new DataUpdateEvent("error", e));
+    }
   }
 
   public void changeScreen(ScreenType screen) {
@@ -74,7 +97,11 @@ public class ApplicationController extends Controller {
     String key = event.getKey();
     ControllerAction action = actions.get(key);
     if (action != null) {
-      action.execute(event, this, model);
+      try {
+        action.execute(event, this, model);
+      } catch (Exception e) {
+        onUpdate(new DataUpdateEvent("error", e));
+      }
     } else {
       onUpdate(new DataUpdateEvent("error", new IllegalArgumentException("Unknown key: " + key)));
     }

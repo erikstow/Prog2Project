@@ -1,0 +1,21 @@
+Welcome to the character creation!
+You can access the help screen by pressing <F1>
+
+First you must choose your name,
+and optionally describe your appearence in a single word.
+Then press next.
+
+Secondly you must choose your difficulty.
+This decides your starting health, gold, score and inventory.
+Then press next.
+
+Thirdly you must choose your goals for the game.
+Choose a goal type from the drop-down list.
+Type in a valid value for the goal, then press "add goal".
+You can undo adding goals by pressing "Undo last goal".
+Then press next.
+
+Lastly there is the summary screen.
+Here you can review your choices.
+If all mandatory information has been filled in, you can start the game.
+Press next.

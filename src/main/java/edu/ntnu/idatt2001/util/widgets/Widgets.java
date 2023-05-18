@@ -48,12 +48,14 @@ public class Widgets {
 
   public static ButtonBar createButtonBar(String styleClass, Button... buttons) {
     ButtonBar results = new ButtonBar();
+    results.getStyleClass().add(styleClass);
     results.getButtons().addAll(buttons);
     return results;
   }
 
   public static Button createButton(String text, Runnable action, String styleClass) {
     Button results = new Button(text);
+    results.getStyleClass().add(styleClass);
     results.setOnAction(event -> action.run());
     return results;
   }

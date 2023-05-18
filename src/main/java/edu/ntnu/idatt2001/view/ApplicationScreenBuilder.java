@@ -21,9 +21,12 @@ public class ApplicationScreenBuilder implements Builder<Region> {
 
   public Region build() {
     BorderPane results = new BorderPane();
-    results.setTop(Widgets.createButtonBar("", Widgets.createButton("Settings", settingsAction, "")));
-    results.setBottom(new Label("All Rights Reserved."));
+    results.getStylesheets().add("application.css");
+    results.getStyleClass().add("app-pane");
+    results.setTop(Widgets.createButtonBar("buttonbar-top", Widgets.createButton("", settingsAction, "top-button")));
+    results.setBottom(Widgets.createLabel("All Rights Reserved ©","bottom-text"));
     results.setCenter(gameModel.getCurrentScreen());
+    results.setAlignment(results.getTop(), Pos.TOP_RIGHT);
     gameModel.currentScreenProperty()
       .addListener((observable, oldValue, newValue) -> results.setCenter(newValue));
 

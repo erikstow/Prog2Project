@@ -1,0 +1,45 @@
+.title-pane {
+  -fx-spacing: 10px;
+  -fx-alignment: center;
+  -fx-padding: 20px;
+}
+
+.title-label {
+  -fx-font-family: "Arial Black";
+  -fx-font-size: 48px;
+  -fx-text-fill: #FFCC00; /* Adventurous ominous yellow */
+  -fx-font-weight: bold; /* Make the title bolder */
+  -fx-padding: 0 0 2px 0; /* Reduce bottom padding to bring the subtitle closer */
+}
+
+.subtitle-label {
+  -fx-font-family: "Arial Black";
+  -fx-font-size: 24px;
+  -fx-text-fill: #FFCC00; /* Adventurous ominous yellow */
+  -fx-font-weight: bold; /* Make the subtitle bolder */
+  -fx-padding: 0; /* Remove bottom padding for the subtitle */
+}
+
+.start-button {
+  -fx-background-color: #008000; /* Green color */
+  -fx-text-fill: white;
+  -fx-font-family: "Arial";
+  -fx-font-size: 18px;
+  -fx-padding: 10px 20px; /* Add padding to increase button size */
+  -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.7), 10, 0, 0, 0); /* Add red drop shadow effect */
+  -fx-border-width: 2.2px;
+}
+
+.start-button:hover {
+  -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.9), 10, 0, 0, 0); /* Intensify the red drop shadow effect on hover */
+  -fx-border-color: red; /* Add red border on hover */
+  -fx-border-width: 2px;
+}
+
+.story-select {
+  -fx-font-family: "Arial";
+  -fx-font-size: 20px;
+  -fx-background-color: #faf8f5; /* Bright blue color */
+  -fx-text-fill: white; /* White text color for high contrast */
+  -fx-padding: 5px; /* Add padding for spacing */
+}

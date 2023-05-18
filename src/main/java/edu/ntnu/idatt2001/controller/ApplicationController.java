@@ -2,7 +2,6 @@ package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
-import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
 import edu.ntnu.idatt2001.model.gui.ScreenType;
 import edu.ntnu.idatt2001.model.gui.controlleractions.*;
@@ -32,8 +31,6 @@ public class ApplicationController extends Controller {
 
     view = new ApplicationScreenBuilder(this::settingsAction, model).build();
 
-    // temp
-    model.setStartingPlayer(new Player.PlayerBuilder("name").build());
     initActions();
   }
 
@@ -44,6 +41,9 @@ public class ApplicationController extends Controller {
     actions.put("returnToTitle", new ReturnToTitleAction());
     actions.put("restartGame", new RestartGameAction());
     actions.put("error", new ErrorAction());
+    actions.put("createdPlayer", new SetCreatedPlayerAction());
+    actions.put("chosenGoals", new SetChosenGoalsAction());
+    actions.put("startGamePressed", new StartGamePressedAction());
   }
 
   private void initObservers() {
@@ -52,6 +52,7 @@ public class ApplicationController extends Controller {
     settingsController.addObserver(this);
     characterScreenController.addObserver(this);
     addObserver(gameController);
+    addObserver(characterScreenController);
   }
 
   private void settingsAction() {

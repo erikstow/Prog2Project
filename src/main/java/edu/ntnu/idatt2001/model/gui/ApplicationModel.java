@@ -3,9 +3,12 @@ package edu.ntnu.idatt2001.model.gui;
 import edu.ntnu.idatt2001.model.game.Game;
 import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.game.Story;
+import edu.ntnu.idatt2001.model.goals.Goal;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.Region;
+
+import java.util.List;
 
 public class ApplicationModel {
   private Game game;
@@ -13,7 +16,7 @@ public class ApplicationModel {
   private Region previousScreen = new Region();
   private Story story;
   private Player startingPlayer;
-
+  private List<Goal> goals;
   public ObjectProperty<Region> currentScreenProperty() {
     return currentScreen;
   }
@@ -56,6 +59,14 @@ public class ApplicationModel {
 
   public void setStartingPlayer(Player startingPlayer) {
     this.startingPlayer = startingPlayer;
+  }
+
+  public List<Goal> getGoals() {
+    return goals;
+  }
+
+  public void setGoals(List<Goal> goals) {
+    this.goals = goals;
   }
 }
 

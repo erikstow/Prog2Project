@@ -1,0 +1,11 @@
+Welcome to the settings screen!
+You can access this screen by pressing <Esc>
+You can access the help screen by pressing <F1>
+
+Here you have a few options:
+
+Resume game - Simply return to where you were.
+
+Return to title screen - Loose all progress and return to title screen
+
+Restart game - Loose all progress and start over with the same character.

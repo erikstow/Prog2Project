@@ -1,0 +1,7 @@
+Welcome to the game.
+You can access the help screen by pressing <F1>
+
+Here you can choose options in response to
+the text on the screen.
+
+Good luck!

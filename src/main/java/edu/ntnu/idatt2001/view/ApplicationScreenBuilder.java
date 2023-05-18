@@ -2,11 +2,9 @@ package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Builder;
 
@@ -21,6 +19,13 @@ public class ApplicationScreenBuilder implements Builder<Region> {
 
   public Region build() {
     BorderPane results = new BorderPane();
+
+    results.setOnKeyPressed(event -> {
+      if (event.getCode() == KeyCode.ESCAPE) {
+        settingsAction.run();
+      }
+    });
+
     results.setTop(Widgets.createButtonBar("", Widgets.createButton("Settings", settingsAction, "")));
     results.setBottom(new Label("All Rights Reserved."));
     results.setCenter(gameModel.getCurrentScreen());

@@ -68,12 +68,17 @@ public class CharacterScreenController extends Controller  {
   }
   
   private void start() {
-    Player player = new Player.PlayerBuilder("Erik").build();
+    Player player = new Player.PlayerBuilder(model.getName())
+      .gold(300 / model.getDifficulty())
+      .health(30 / model.getDifficulty())
+      .build();
 
     DataUpdateEvent createdPlayer = new DataUpdateEvent("createdPlayer", player);
     DataUpdateEvent chosenGoals = new DataUpdateEvent("chosenGoals", model.getGoals());
+    DataUpdateEvent startPressed = new DataUpdateEvent("startGamePressed", null);
     update(createdPlayer);
     update(chosenGoals);
+    update(startPressed);
   }
 
   private void addGoal() {
@@ -104,8 +109,9 @@ public class CharacterScreenController extends Controller  {
 
   @Override
   public void onUpdate(ControllerEvent event) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'onUpdate'");
+    if (event.getKey().equals("reset")) {
+      System.out.println("soie");
+    }
   }
 
   private void isStartAllowed() {
@@ -114,6 +120,4 @@ public class CharacterScreenController extends Controller  {
       } 
       else {model.setNextAllowed(true);}
     }
-  
   }
-

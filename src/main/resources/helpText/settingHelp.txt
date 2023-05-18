@@ -6,6 +6,8 @@ Here you have a few options:
 
 Resume game - Simply return to where you were.
 
+Exit game - Exits the game
+
 Return to title screen - Loose all progress and return to title screen
 
 Restart game - Loose all progress and start over with the same character.

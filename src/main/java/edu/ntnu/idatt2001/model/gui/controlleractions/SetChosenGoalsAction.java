@@ -4,6 +4,8 @@ import edu.ntnu.idatt2001.controller.ApplicationController;
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.goals.Goal;
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class SetChosenGoalsAction implements ControllerAction {
@@ -13,10 +15,13 @@ public class SetChosenGoalsAction implements ControllerAction {
   }
 
   private List<Goal> getGoalList(Object value) {
-    if (value instanceof List<?> list && (!list.isEmpty() && list.get(0) instanceof Goal)) {
+    if (value instanceof List<?> list) {
+      if (list.isEmpty()) {
+        return new ArrayList<>();
+      } else if (list.get(0) instanceof Goal) {
         return (List<Goal>) list;
-
+      }
     }
-    throw new IllegalArgumentException("Invalid value type for goals list");
+    throw new IllegalArgumentException("Invalid value type for goals list in: " + this.getClass().getSimpleName());
   }
 }

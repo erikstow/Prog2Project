@@ -36,7 +36,7 @@ public class Player {
     this.gold = player.getGold();
     this.health = player.getHealth();
     this.score = player.getScore();
-    this.inventory = player.getInventory();
+    this.inventory = new ArrayList<>(player.getInventory());
   }
 
   /**

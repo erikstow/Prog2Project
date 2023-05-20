@@ -17,6 +17,10 @@ public class GetNextPassageFromLink implements ControllerAction {
     Link link = (Link) event.getValue();
     Passage passage = model.getGame().go(link);
 
+    if (passage == null) {
+      throw new IllegalArgumentException("Can't follow a broken link: " + link.getText());
+    }
+
     if (model.getGame().getPlayer().getHealth() <= 0) {
       passage = generatePlayerDeadPassage(model.getGame().getPlayer(), model.getGoals());
     } else if (passage.getTitle().equals("End")) {

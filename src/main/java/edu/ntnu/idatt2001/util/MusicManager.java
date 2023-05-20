@@ -8,9 +8,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MusicManager {
-  private Map<String, MediaPlayer> tracks = new HashMap<>();
+  private final Map<String, MediaPlayer> tracks = new HashMap<>();
   private double volume = 1.0;
   private double unMutedVolume;
+  private final double mutedVolume = 0.0;
+  private boolean isMuted = false;
 
   public void loadTrack(String trackName, String filePath) {
     Media media = new Media(new File(filePath).toURI().toString());
@@ -53,11 +55,13 @@ public class MusicManager {
   }
 
   public void muteToggle() {
-    if (getVolume() == 0) {
+    if (isMuted) {
       setVolume(this.unMutedVolume);
+      isMuted = false;
     } else {
       unMutedVolume = getVolume();
-      setVolume(0);
+      setVolume(mutedVolume);
+      isMuted = true;
     }
   }
 

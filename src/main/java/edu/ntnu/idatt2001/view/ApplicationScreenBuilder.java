@@ -3,20 +3,26 @@ package edu.ntnu.idatt2001.view;
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.util.Builder;
 
 public class ApplicationScreenBuilder implements Builder<Region> {
   private final Runnable settingsAction;
   private final Runnable helpAction;
+  private final Runnable musicAction;
   private final ApplicationModel gameModel;
 
-  public ApplicationScreenBuilder(ApplicationModel gameModel, Runnable settingsAction, Runnable helpAction) {
+  public ApplicationScreenBuilder(ApplicationModel gameModel, Runnable settingsAction, Runnable helpAction, Runnable musicAction) {
     this.settingsAction = settingsAction;
     this.helpAction = helpAction;
+    this.musicAction = musicAction;
     this.gameModel = gameModel;
   }
 
@@ -33,10 +39,12 @@ public class ApplicationScreenBuilder implements Builder<Region> {
 
     results.getStylesheets().add("application.css");
     results.getStyleClass().add("app-pane");
-    results.setTop(Widgets.createButtonBar("buttonbar-top",
-        Widgets.createButton("", settingsAction, "top-button"),
-        Widgets.createButton("Help", helpAction, ""))
-      );
+    results.setTop(new HBox(
+        Widgets.createButton("", settingsAction, "button-settings"), 
+        Widgets.createButton("", helpAction, "button-help"),
+        createToggleButton("", musicAction, "button-music")
+        ));
+
     results.setBottom(Widgets.createLabel("All Rights Reserved ©","bottom-text"));
     results.setCenter(gameModel.getCurrentScreen());
     results.setAlignment(results.getTop(), Pos.TOP_RIGHT);
@@ -44,5 +52,12 @@ public class ApplicationScreenBuilder implements Builder<Region> {
       .addListener((observable, oldValue, newValue) -> results.setCenter(newValue));
 
     return results;
+  }
+
+  private Node createToggleButton(String text, Runnable action, String styleClass) {
+    ToggleButton button = new ToggleButton(text);
+    button.getStyleClass().add(styleClass);
+    button.setOnAction(event -> action.run());
+    return button;
   }
 }

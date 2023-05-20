@@ -5,14 +5,7 @@
   -fx-background-position: center center;
 }
 
-.buttonbar-top {
-  -fx-spacing: 10px;
-  -fx-padding: 10px;
-  -fx-alignment: CENTER_RIGHT;
-}
-
-.top-button {
-  -fx-background-image: url('settings-button-image.png');
+.button-settings, .button-help, .button-music {
   -fx-background-repeat: no-repeat;
   -fx-background-position: center;
   -fx-background-size: contain;
@@ -26,8 +19,34 @@
   -fx-border-radius: 50%; 
 }
 
-.top-button:hover {
-  -fx-opacity: 0.3;
+.button-settings:hover, .button-help:hover, .button-music:hover {
+  -fx-opacity: 0.6;
+  -fx-scale-x: 1.1;
+  -fx-scale-y: 1.1;
+  -fx-effect: dropshadow( three-pass-box , rgba(255,204,0,0.8) , 10, 0.0 , 0 , 1 );
+}
+
+.button-settings:pressed, .button-help:pressed, .button-music:pressed {
+  -fx-opacity: 0.8;
+  -fx-scale-x: 1.2;
+  -fx-scale-y: 1.2;
+  -fx-effect: dropshadow( three-pass-box , rgba(255,0,0,0.8) , 10, 0.0 , 0 , 1 );
+}
+
+.button-settings {
+  -fx-background-image: url('button-settings-image.png');
+}
+
+.button-help {
+  -fx-background-image: url('button-help-image.png');
+}
+
+.button-music:selected {
+  -fx-background-image: url('button-music-on.png');
+}
+
+.button-music {
+  -fx-background-image: url('button-music-off.png');
 }
 
 .bottom-text {
@@ -36,6 +55,8 @@
   -fx-text-fill: white;
   -fx-background-color: transparent;
 }
+
+
 
 
 

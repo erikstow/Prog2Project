@@ -41,7 +41,7 @@ public class TitleScreenBuilder implements Builder<Region> {
     Label subtitle = Widgets.createLabel("Into the Unknown", "subtitle-label");
     Node storySelect = createComboBox("Choose Story", storyTitles);
     storySelect.getStyleClass().add("story-select");
-    Button startButton = Widgets.createButton("Begin your journey...", actionHandler, "start-button");
+    Button startButton = Widgets.createButton("START", actionHandler, "start-button");
     startButton.disableProperty().bind(model.startAllowedPorperty().not());
     Node info = createInfoBox();
     results.getChildren().addAll(title, subtitle, storySelect, startButton, info);
@@ -59,13 +59,13 @@ public class TitleScreenBuilder implements Builder<Region> {
 
   private Node createInfoBox() {
     VBox results = new VBox();
-  
+    results.getStyleClass().add("info-box");
     Label filePathLabel = new Label();
     filePathLabel.textProperty().bind(model.filePathProperty());
+    filePathLabel.getStyleClass().add("file-path-label");
   
     VBox brokenLinksBox = new VBox();
-    brokenLinksBox.getStyleClass().add("info-box"); // Add the "info-box" style class
-  
+    brokenLinksBox.getStyleClass().add("broken-links-box");
     model.brokenLinksProperty().addListener((observable, oldValue, newValue) -> {
       brokenLinksBox.getChildren().clear();
       brokenLinksBox.getChildren().add(formatBrokenLinksBox());
@@ -76,32 +76,16 @@ public class TitleScreenBuilder implements Builder<Region> {
     VBox.setMargin(brokenLinksBox, new Insets(20, 0, 0, 0)); // Set a fixed margin for the brokenLinksBox
     return results;
   }
-  
-  // private Node createInfoBox() {
-  //   VBox results = new VBox();
 
-  //   Label filePathLabel = new Label();
-  //   filePathLabel.textProperty().bind(model.filePathProperty());
-
-  //   VBox brokenLinksBox = new VBox();
-
-  //   model.brokenLinksProperty().addListener((observable, oldValue, newValue) -> {
-  //     brokenLinksBox.getChildren().clear();
-  //     brokenLinksBox.getChildren().add(formatBrokenLinksBox());
-  //   });
-
-  //   results.getChildren().add(filePathLabel);
-  //   results.getChildren().add(brokenLinksBox);
-  //   return results;
-  // }
 
   private Node formatBrokenLinksBox() {
     VBox results = new VBox();
     for (Link link : model.getBrokenLinks()) {
       Label label = new Label(link.getAsString());
+      label.getStyleClass().add("broken-links-label");
       results.getChildren().add(label);
+      
     }
-
     return results;
   }
 }

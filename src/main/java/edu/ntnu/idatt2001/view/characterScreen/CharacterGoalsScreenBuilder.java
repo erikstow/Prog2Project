@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.view.characterScreen;
 import edu.ntnu.idatt2001.model.goals.Goal;
 import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -33,30 +34,35 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
   @Override
   public Region build() {
     BorderPane results = new BorderPane();
-    Label goals = Widgets.createLabel("Define your goals", "");
+    Label goals = Widgets.createLabel("Define your goals", "define-goals-label");
     results.setTop(goals);
-    results.setRight(createGoalsView());
+    results.setCenter(createGoalsView());
     results.setLeft(createGoalAdderBox());
+    results.getStylesheets().add("goalscreen.css");
+    results.setAlignment(goals, Pos.CENTER);
     return results;
   }
 
   private Node createGoalsView() {
     VBox results = new VBox();
-    Label goals = Widgets.createLabel("Your Goals", "");
     ListView<Goal> goalList = new ListView<>();
     goalList.setItems(model.goals());
+    goalList.getStyleClass().add("goals-list-view");
+    results.getStyleClass().add("goals-view-box");
     Button undoGoalButton = Widgets.createButton("Undo last Goal", undoGoal, "undo-goal-button");
-    results.getChildren().addAll(goals, goalList, undoGoalButton);
+    results.getChildren().addAll(goalList, undoGoalButton);
     return results;
   }
 
   private Node createGoalAdderBox() {
     VBox results = new VBox();
-    Label goalAddPrompt = Widgets.createLabel("Choose goals to add", "");
+    Label goalAddPrompt = Widgets.createLabel("Choose goals to add", "goal-add-prompt");
     TextField goalValue = new TextField();
     goalValue.textProperty().bindBidirectional(model.goalValue());
+    goalValue.getStyleClass().add("goal-value-text-field");
     ComboBox<String> goalType = new ComboBox<>();
     goalType.getItems().addAll("Health", "Gold", "Score", "Inventory");
+    goalType.getStyleClass().add("goal-type-combobox");
     goalType.valueProperty().bindBidirectional(model.goalType());
     goalType.valueProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue.equals("Health")) {
@@ -71,7 +77,40 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     });
     Button addGoalButton = Widgets.createButton("Add Goal", addGoal, "add-goal-button");
     results.getChildren().addAll(goalAddPrompt, goalType, goalValue, addGoalButton);
+    results.getStyleClass().add("goal-adder-box");
     return results;
   }
 }
+
+
+
+
+//   private Node createGoalAdderBox() {
+//     VBox results = new VBox();
+//     Label goalAddPrompt = Widgets.createLabel("Choose goals to add", "goal-add-prompt");
+//     TextField goalValue = new TextField();
+//     
+//     goalValue.textProperty().bindBidirectional(model.goalValue());
+//     ComboBox<String> goalType = new ComboBox<>();
+//     
+//     goalType.getItems().addAll("Health", "Gold", "Score", "Inventory");
+//     goalType.valueProperty().bindBidirectional(model.goalType());
+//     goalType.valueProperty().addListener((observable, oldValue, newValue) -> {
+//       if (newValue.equals("Health")) {
+//         goalValue.setPromptText("An integer...");
+//       } else if (newValue.equals("Gold")) {
+//         goalValue.setPromptText("An integer...");
+//       } else if (newValue.equals("Score")) {
+//         goalValue.setPromptText("An integer...");
+//       } else if (newValue.equals("Inventory")) {
+//         goalValue.setPromptText("Comma-separated list of items...");
+//       }
+//     });
+//     Button addGoalButton = Widgets.createButton("Add Goal", addGoal, "add-goal-button");
+//     results.getChildren().addAll(goalAddPrompt, goalType, goalValue, addGoalButton);
+//     
+//     return results;
+//   }
+// }
+
 

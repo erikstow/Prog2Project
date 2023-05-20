@@ -1,45 +1,69 @@
 .title-pane {
-  -fx-spacing: 10px;
+  -fx-spacing: 20px;
   -fx-alignment: center;
-  -fx-padding: 20px;
+  -fx-padding: 40px;
 }
 
 .title-label {
-  -fx-font-family: "Arial Black";
-  -fx-font-size: 48px;
-  -fx-text-fill: #FFCC00; /* Adventurous ominous yellow */
-  -fx-font-weight: bold; /* Make the title bolder */
-  -fx-padding: 0 0 2px 0; /* Reduce bottom padding to bring the subtitle closer */
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 72px; /* Even bigger font size */
+  -fx-text-fill: #FF0000; /* Scary red color */
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(three-pass-box, rgba(255,0,0,0.7), 10, 0.5, 0, 1); /* Red drop shadow */
 }
 
 .subtitle-label {
-  -fx-font-family: "Arial Black";
-  -fx-font-size: 24px;
-  -fx-text-fill: #FFCC00; /* Adventurous ominous yellow */
-  -fx-font-weight: bold; /* Make the subtitle bolder */
-  -fx-padding: 0; /* Remove bottom padding for the subtitle */
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 36px; /* Larger font size */
+  -fx-text-fill: #FFFFFF; /* White color for contrast */
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.7), 10, 0.5, 0, 1); /* White drop shadow */
+  -fx-padding: 0;
 }
 
 .start-button {
-  -fx-background-color: #008000; /* Green color */
+  -fx-background-color: #800000; /* Dark red color */
   -fx-text-fill: white;
-  -fx-font-family: "Arial";
-  -fx-font-size: 18px;
-  -fx-padding: 10px 20px; /* Add padding to increase button size */
-  -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.7), 10, 0, 0, 0); /* Add red drop shadow effect */
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-padding: 20px 40px; /* Larger padding */
+  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.7), 10, 0.5, 0, 1); /* White drop shadow */
   -fx-border-width: 2.2px;
+  -fx-border-color: #FFFFFF; /* White border */
 }
 
 .start-button:hover {
-  -fx-effect: dropshadow(gaussian, rgba(255, 0, 0, 0.9), 10, 0, 0, 0); /* Intensify the red drop shadow effect on hover */
-  -fx-border-color: red; /* Add red border on hover */
-  -fx-border-width: 2px;
+  -fx-background-color: #FF0000; /* Bright red color on hover */
+  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.9), 10, 0.5, 0, 1); /* More intense drop shadow */
 }
 
 .story-select {
-  -fx-font-family: "Arial";
-  -fx-font-size: 20px;
-  -fx-background-color: #faf8f5; /* Bright blue color */
-  -fx-text-fill: white; /* White text color for high contrast */
-  -fx-padding: 5px; /* Add padding for spacing */
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-background-color: #333; /* Dark gray background */
+  -fx-text-fill: #FAF0E6; /* Light text color */
+  -fx-padding: 10px; /* Larger padding */
 }
+
+.story-select .cell {
+  -fx-text-fill: #FAF0E6; /* Light text color */
+}
+
+.file-path-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px; /* Larger font size */
+  -fx-text-fill: #FFFFFF;
+  -fx-font-weight: bold;
+  -fx-padding: 0 0 10px 0; /* Bigger bottom padding */
+  -fx-alignment: center;
+}
+
+.broken-links-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px; /* Larger font size */
+  -fx-text-fill: #FF0000; /* Red color */
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(three-pass-box, rgba(255,0,0,0.7), 10, 0.5, 0, 1); /* Red drop shadow */
+  -fx-alignment: center;
+}
+

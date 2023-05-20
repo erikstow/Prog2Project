@@ -1,0 +1,90 @@
+/* goalscreen.css */
+
+.define-goals-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 36px;
+  -fx-text-fill: #b22222; /* Firebrick red */
+  -fx-font-weight: bold;
+  -fx-padding: 10px;
+  -fx-alignment: center;
+  -fx-effect: dropshadow(three-pass-box, rgba(178,34,34,0.7), 10, 0.5, 0, 1); /* Red drop shadow */
+}
+
+.your-goals-label,
+.goal-add-prompt {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 28px;
+  -fx-text-fill: #FAF0E6; /* Linen color */
+  -fx-font-weight: bold;
+}
+
+.button {
+  -fx-background-color: rgba(255, 204, 0, 0.6); 
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px;
+  -fx-text-fill: black;
+  -fx-padding: 10px;
+  -fx-border-radius: 5px;
+  -fx-border-color: #FAF0E6;
+  -fx-border-width: 2px;
+}
+
+.button:hover {
+  -fx-background-color: rgba(255, 204, 0, 0.8);
+}
+
+/* Styles for ListView, TextField and ComboBox */
+.goals-list-view,
+.goal-value-text-field,
+.goal-type-combobox {
+  -fx-background-color: transparent; 
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px;
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+  -fx-padding: 10px;
+  -fx-border-radius: 5px;
+  -fx-border-color: #FAF0E6;
+  -fx-border-width: 2px;
+}
+
+/* Styles for the cells within the list view */
+.goals-list-view .cell {
+  -fx-background-color: transparent;
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+}
+
+.goal-type-combobox {
+  -fx-background-color: transparent; 
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px;
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+  -fx-padding: 10px;
+  -fx-border-radius: 5px;
+  -fx-border-color: #FAF0E6;
+  -fx-border-width: 2px;
+}
+
+/* Style for ComboBox dropdown */
+.goal-type-combobox .list-view {
+  -fx-background-color: #333; /* Dark gray background */
+}
+
+/* Style for ComboBox items */
+.goal-type-combobox .list-view .list-cell {
+  -fx-background-color: #333; /* Dark gray background */
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+}
+
+.goal-type-combobox .cell {
+  -fx-background-color: transparent;
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+}
+
+/* Styles for VBox */
+.goals-view-box,
+.goal-adder-box {
+  -fx-spacing: 20px; /* Increase spacing between elements */
+  -fx-padding: 10px;
+}
+
+

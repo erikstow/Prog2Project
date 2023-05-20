@@ -29,7 +29,7 @@ public class ApplicationController extends Controller {
     model = new ApplicationModel();
     model.setCurrentScreen(titleScreenController.getView());
 
-    view = new ApplicationScreenBuilder(model, this::settingsAction, this::helpAction).build();
+    view = new ApplicationScreenBuilder(model, this::settingsAction, this::helpAction, this::musicAction).build();
 
     initActions();
   }
@@ -84,6 +84,11 @@ public class ApplicationController extends Controller {
     } catch (Exception e) {
       onUpdate(new DataUpdateEvent("error", e));
     }
+  }
+
+  private void musicAction() {
+    model.isMusicOnProperty().set(!model.isMusicOnProperty().get());
+    //TODO: add code to stop start music here
   }
 
   public void changeScreen(ScreenType screen) {

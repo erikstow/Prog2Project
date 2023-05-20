@@ -48,18 +48,20 @@ public class Widgets {
 
   public static ButtonBar createButtonBar(String styleClass, Button... buttons) {
     ButtonBar results = new ButtonBar();
+    results.getStyleClass().add(styleClass);
     results.getButtons().addAll(buttons);
     return results;
   }
 
   public static Button createButton(String text, Runnable action, String styleClass) {
     Button results = new Button(text);
+    results.getStyleClass().add(styleClass);
     results.setOnAction(event -> action.run());
     return results;
   }
 
-  public static Label createLabelWithBinding(Property property) {
-    Label label = Widgets.createLabel("0", "");
+  public static Label createLabelWithBinding(Property property, String styleClass) {
+    Label label = Widgets.createLabel("0", styleClass);
     property.addListener((observable, oldValue, newValue) -> {
       if (property instanceof ListProperty && ((List) newValue).isEmpty()) {
         label.setText("Empty");
@@ -70,8 +72,8 @@ public class Widgets {
     return label;
   }
 
-  public static Button createDifficultyButton(String label, int difficulty, CharacterScreenModel model) {
-    return Widgets.createButton(label, () -> model.setDifficulty(difficulty), "");
+  public static Button createDifficultyButton(String label, int difficulty, CharacterScreenModel model, String styleClass) {
+    return Widgets.createButton(label, () -> model.setDifficulty(difficulty), styleClass);
   }
 
 }

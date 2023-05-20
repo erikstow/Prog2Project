@@ -1,0 +1,77 @@
+/* difficultysection.css */
+
+.vbox {
+  -fx-spacing: 20px; /* Spacing between VBox children */
+  -fx-padding: 10px; /* Padding around the VBox */
+  -fx-alignment: center; /* Align children to the center */
+}
+
+.hbox {
+  -fx-spacing: 20px; /* Spacing between HBox children */
+  -fx-padding: 10px; /* Padding around the HBox */
+  -fx-alignment: center; /* Align children to the center */
+}
+
+/* Styling for the difficulty label */
+.choose-difficulty-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 28px; /* Larger font size */
+  -fx-text-fill: #FAF0E6; /* Light color for contrast */
+  -fx-font-weight: bold;
+}
+
+/* Styling for the difficulty buttons */
+.difficulty-button-easy {
+  -fx-background-color: #2e8b57; /* Sea Green color */
+}
+
+.difficulty-button-medium {
+  -fx-background-color: #ffd700; /* Gold color */
+}
+
+.difficulty-button-hard {
+  -fx-background-color: #b22222; /* FireBrick color */
+}
+
+/* Common styling for all difficulty buttons */
+.difficulty-button-easy, .difficulty-button-medium, .difficulty-button-hard {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-text-fill: #FAF0E6; /* Light color for contrast */
+  -fx-padding: 20px; /* Larger padding */
+  -fx-border-radius: 5px;
+  -fx-border-color: #FAF0E6; /* Light border color */
+  -fx-border-width: 2px;
+}
+
+.button:hover {
+  -fx-background-color: #777777; /* Brighter gray color when hovered */
+}
+
+/* Styling for the stats label */
+.stats-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-text-fill: #FFCC00; /* Adventurous ominous yellow color */
+  -fx-font-weight: bold;
+}
+
+/* Styling for the stats value */
+.stats-value {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-text-fill: #FAF0E6; /* Light color for contrast */
+  -fx-font-weight: bold;
+}
+
+/* Styling for the 'Your stats' label */
+.your-stats-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 36px; /* Larger font size */
+  -fx-text-fill: #FFCC00; /* Adventurous ominous yellow color */
+  -fx-font-weight: bold; /* Make the text bolder */
+  -fx-padding: 0 0 10px 0; /* Add a small bottom padding to separate from the stats below */
+  -fx-effect: dropshadow(three-pass-box, rgba(255,204,0,0.7), 10, 0.5, 0, 1); /* Yellow drop shadow */
+}
+
+

@@ -4,7 +4,9 @@ import edu.ntnu.idatt2001.model.game.Game;
 import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.game.Story;
 import edu.ntnu.idatt2001.model.goals.Goal;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.layout.Region;
 
@@ -17,6 +19,9 @@ public class ApplicationModel {
   private Story story;
   private Player startingPlayer;
   private List<Goal> goals;
+  private BooleanProperty isMusicOn = new SimpleBooleanProperty(true);
+
+
   public ObjectProperty<Region> currentScreenProperty() {
     return currentScreen;
   }
@@ -68,5 +73,10 @@ public class ApplicationModel {
   public void setGoals(List<Goal> goals) {
     this.goals = goals;
   }
-}
+
+  public BooleanProperty isMusicOnProperty() {
+    return isMusicOn;
+  } 
+  }
+
 

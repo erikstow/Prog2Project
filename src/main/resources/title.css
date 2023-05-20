@@ -1,0 +1,69 @@
+.title-pane {
+  -fx-spacing: 20px;
+  -fx-alignment: center;
+  -fx-padding: 40px;
+}
+
+.title-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 72px; /* Even bigger font size */
+  -fx-text-fill: #FF0000; /* Scary red color */
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(three-pass-box, rgba(255,0,0,0.7), 10, 0.5, 0, 1); /* Red drop shadow */
+}
+
+.subtitle-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 36px; /* Larger font size */
+  -fx-text-fill: #FFFFFF; /* White color for contrast */
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.7), 10, 0.5, 0, 1); /* White drop shadow */
+  -fx-padding: 0;
+}
+
+.start-button {
+  -fx-background-color: #800000; /* Dark red color */
+  -fx-text-fill: white;
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-padding: 20px 40px; /* Larger padding */
+  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.7), 10, 0.5, 0, 1); /* White drop shadow */
+  -fx-border-width: 2.2px;
+  -fx-border-color: #FFFFFF; /* White border */
+}
+
+.start-button:hover {
+  -fx-background-color: #FF0000; /* Bright red color on hover */
+  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.9), 10, 0.5, 0, 1); /* More intense drop shadow */
+}
+
+.story-select {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-background-color: #333; /* Dark gray background */
+  -fx-text-fill: #FAF0E6; /* Light text color */
+  -fx-padding: 10px; /* Larger padding */
+}
+
+.story-select .cell {
+  -fx-text-fill: #FAF0E6; /* Light text color */
+}
+
+.file-path-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px; /* Larger font size */
+  -fx-text-fill: #FFFFFF;
+  -fx-font-weight: bold;
+  -fx-padding: 0 0 10px 0; /* Bigger bottom padding */
+  -fx-alignment: center;
+}
+
+.broken-links-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px; /* Larger font size */
+  -fx-text-fill: #FF0000; /* Red color */
+  -fx-font-weight: bold;
+  -fx-effect: dropshadow(three-pass-box, rgba(255,0,0,0.7), 10, 0.5, 0, 1); /* Red drop shadow */
+  -fx-alignment: center;
+}
+

@@ -1,0 +1,52 @@
+/* summaryScreen.css */
+
+/* summaryScreen.css */
+
+.hbox {
+  -fx-spacing: 100px; /* Increased spacing between VBox children */
+  -fx-padding: 40px; /* Increased padding around the VBox */
+  -fx-border-width: 2px; /* Border width */
+  -fx-border-radius: 5px; /* Border radius */
+  -fx-alignment: center; /* Center alignment */
+}
+
+.vbox {
+  -fx-spacing: 20px; /* Increased spacing between VBox children */
+  -fx-padding: 20px; /* Increased padding around the VBox */
+  -fx-border-color: linen; /* Ominous yellow border color */
+  -fx-border-width: 2px; /* Border width */
+  -fx-border-radius: 5px; /* Border radius */
+  -fx-alignment: center; /* Center alignment */
+}
+
+.info-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 32px; /* Larger font size */
+  -fx-text-fill: linen; /* Ominous yellow text color */
+}
+
+.stats-label-box {
+  -fx-spacing: 20px; /* Increased spacing between stats labels */
+}
+
+.stats-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-text-fill: linen; /* Ominous yellow text color */
+}
+
+.stats-value {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px; /* Larger font size */
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+}
+
+.goals-list-view {
+  -fx-background-color: transparent;
+}
+
+.goals-list-view .list-cell {
+  -fx-background-color: transparent;
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+  -fx-text-font: 24px "Times New Roman";
+}

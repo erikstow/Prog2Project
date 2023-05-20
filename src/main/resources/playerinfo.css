@@ -1,0 +1,45 @@
+.character-info-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 24px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FFCC00; /* Adventurous ominous yellow */
+  -fx-padding: 15px 0; /* Increase vertical padding */
+}
+
+.character-info-text-field {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px;
+  -fx-background-color: #444; /* Dark background color */
+  -fx-text-fill: #FAF0E6; /* Light text color */
+  -fx-prompt-text-fill: #808080; /* Light gray prompt text color */
+  -fx-border-color: #FAF0E6; /* Border color same as text color */
+  -fx-border-width: 2px;
+  -fx-padding: 10px; /* Increase padding for text field content */
+  -fx-pref-height: 40px; /* Increase preferred height for text field */
+  -fx-max-width: 300px; /* Increase maximum width for text field */
+}
+
+.character-info-text-field:hover {
+  -fx-border-color: #FFCC00; /* Yellow border color on hover */
+}
+
+.character-info-text-field:focus {
+  -fx-border-color: #FF0000; /* Red border color when focused */
+}
+
+.character-info-text-field:disabled {
+  -fx-opacity: 0.5; /* Reduce opacity for disabled text fields */
+}
+
+.vbox {
+  -fx-alignment: center; /* Center align the content within the VBox */
+}
+
+.question-prompt {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px; /* Increase font size */
+  -fx-text-fill: #FAF0E6; /* Light gray text color */
+  -fx-padding: 15px 0; /* Increase vertical padding */
+}
+
+

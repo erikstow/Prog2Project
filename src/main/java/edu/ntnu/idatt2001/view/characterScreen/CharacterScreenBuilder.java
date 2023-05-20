@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.view.characterScreen;
 
 import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -23,32 +24,40 @@ public class CharacterScreenBuilder implements Builder<Region> {
 
   public CharacterScreenBuilder(
       CharacterScreenModel model, Runnable backAction, Runnable nextAction) {
-    
+
     this.model = model;
     this.backAction = backAction;
     this.nextAction = nextAction;
-   
+
   }
 
   @Override
   public Region build() {
     BorderPane results = new BorderPane();
-    Label title = new Label("Welcome to Story Name!"); //TODO: Get story name from file
-    results.setTop(title);
+    Label title = Widgets.createLabel("Welcome to Paths", "label-title"); // TODO: Get story name from file
+    Node buttonBarNode = createNextBackButtonBar();
     model.currentScreen().addListener((observable, oldValue, newValue) -> {
       results.setCenter(newValue);
     });
+    results.setTop(title);
     results.setCenter(model.getCurrentScreen());
-    results.setBottom(createNextBackButtonBar());
+    results.setBottom(buttonBarNode);
+
+    results.getStylesheets().add("characterscreen.css"); // Add this line to link the CSS file
+    results.setAlignment(title, Pos.CENTER);
+    results.setAlignment(buttonBarNode, Pos.CENTER);
+    results.setAlignment(model.getCurrentScreen(), Pos.CENTER);
     return results;
   }
 
   private Node createNextBackButtonBar() {
-    ButtonBar results = new ButtonBar();
-    Button next = Widgets.createButton("Next", nextAction, "");
+    HBox results = new HBox();
+    results.setAlignment(Pos.CENTER);
+    results.getStyleClass().add("character-screen-button-bar");
+    Button next = Widgets.createButton("Next", nextAction, "character-screen-button");
     next.disableProperty().bind(model.nextAllowed().not());
-    Button back = Widgets.createButton("Back", backAction, "");
-    results.getButtons().addAll(back, next);
+    Button back = Widgets.createButton("Back", backAction, "character-screen-button");
+    results.getChildren().addAll(back, next);
     return results;
   }
 }

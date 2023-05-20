@@ -1,12 +1,16 @@
 package edu.ntnu.idatt2001.controller;
 
+import com.sun.media.jfxmedia.MediaManager;
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
 import edu.ntnu.idatt2001.model.gui.ScreenType;
 import edu.ntnu.idatt2001.model.gui.controlleractions.*;
+import edu.ntnu.idatt2001.util.MusicManager;
 import edu.ntnu.idatt2001.view.ApplicationScreenBuilder;
 import javafx.scene.layout.Region;
+import javafx.scene.media.MediaPlayer;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,6 +22,7 @@ public class ApplicationController extends Controller {
   private final CharacterScreenController characterScreenController;
   private final SettingsController settingsController;
   private final Map<String, ControllerAction> actions = new HashMap<>();
+  private final MusicManager musicManager;
 
   public ApplicationController() {
     titleScreenController = new TitleScreenController();
@@ -32,6 +37,15 @@ public class ApplicationController extends Controller {
     view = new ApplicationScreenBuilder(model, this::settingsAction, this::helpAction, this::musicAction).build();
 
     initActions();
+
+    this.musicManager = new MusicManager();
+    initMusic();
+    musicManager.playTrack("title");
+  }
+
+  private void initMusic() {
+    musicManager.loadTrack("title", "src/main/resources/sound/1.MainTheme-320bit.mp3");
+    musicManager.loadTrack("game", "src/main/resources/sound/ambient_presentation.mp3");
   }
 
   private void initActions() {
@@ -87,8 +101,8 @@ public class ApplicationController extends Controller {
   }
 
   private void musicAction() {
+    musicManager.muteToggle();
     model.isMusicOnProperty().set(!model.isMusicOnProperty().get());
-    //TODO: add code to stop start music here
   }
 
   public void changeScreen(ScreenType screen) {
@@ -113,6 +127,10 @@ public class ApplicationController extends Controller {
     } else {
       onUpdate(new DataUpdateEvent("error", new IllegalArgumentException("Unknown key: " + key)));
     }
+  }
+
+  public MusicManager getMusicManager() {
+    return musicManager;
   }
 
   public Region getView() {

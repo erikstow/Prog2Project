@@ -42,11 +42,11 @@
 }
 
 .button-music:selected {
-  -fx-background-image: url('button-music-on.png');
+  -fx-background-image: url('button-music-off.png');
 }
 
 .button-music {
-  -fx-background-image: url('button-music-off.png');
+  -fx-background-image: url('button-music-on.png');
 }
 
 .bottom-text {

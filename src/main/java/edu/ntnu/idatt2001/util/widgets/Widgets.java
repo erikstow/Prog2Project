@@ -1,5 +1,6 @@
 package edu.ntnu.idatt2001.util.widgets;
 
+import java.io.File;
 import java.util.List;
 
 import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
@@ -11,9 +12,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 public class Widgets {
-  
+
   public static Label createLabel(String text, String styleClass) {
     Label results = new Label(text);
     results.getStyleClass().add(styleClass);
@@ -56,7 +60,13 @@ public class Widgets {
   public static Button createButton(String text, Runnable action, String styleClass) {
     Button results = new Button(text);
     results.getStyleClass().add(styleClass);
-    results.setOnAction(event -> action.run());
+    results.setOnAction(event -> {
+      Media clickSound = new Media(new File("src/main/resources/sound/click.mp3").toURI().toString());
+      MediaPlayer mediaPlayer = new MediaPlayer(clickSound);
+      mediaPlayer.seek(Duration.ZERO);
+      mediaPlayer.play();
+      action.run();
+    });
     return results;
   }
 
@@ -75,5 +85,4 @@ public class Widgets {
   public static Button createDifficultyButton(String label, int difficulty, CharacterScreenModel model, String styleClass) {
     return Widgets.createButton(label, () -> model.setDifficulty(difficulty), styleClass);
   }
-
 }

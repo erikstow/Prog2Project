@@ -10,6 +10,8 @@ public class ReturnToTitleAction implements ControllerAction {
   @Override
   public void execute(ControllerEvent event, ApplicationController controller, ApplicationModel model) {
     controller.update(new DataUpdateEvent("reset", null));
+    controller.getMusicManager().stopAllTracks();
+    controller.getMusicManager().playTrack("title");
     controller.changeScreen(ScreenType.TITLE_SCREEN);
   }
 }

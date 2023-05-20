@@ -57,7 +57,7 @@ public class TitleScreenController
 
   private List<String> getStoryList() {
     File[] files = new File(STORIES_PATH).listFiles();
-    Objects.requireNonNull(files, "Could not find any files at" + STORIES_PATH);
+    Objects.requireNonNull(files, "Could not find any files at " + STORIES_PATH);
     return Stream.of(files)
         .filter(file -> !file.isDirectory())
         .map(File::getName)
@@ -72,7 +72,9 @@ public class TitleScreenController
 
   @Override
   public void onUpdate(ControllerEvent event) {
-    initModelAndView();
+    if (event.getKey().equals("reset")) {
+      initModelAndView();
+    }
   }
 
   public Region getView() {

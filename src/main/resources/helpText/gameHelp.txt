@@ -4,4 +4,6 @@ You can access the help screen by pressing <F1>
 Here you can choose options in response to
 the text on the screen.
 
+To skip the text animation, click the mouse button.
+
 Good luck!

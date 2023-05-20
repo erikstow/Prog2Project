@@ -2,14 +2,13 @@ package edu.ntnu.idatt2001.model.gui.controlleractions;
 
 import edu.ntnu.idatt2001.controller.ApplicationController;
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
-import edu.ntnu.idatt2001.model.game.Story;
+import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
-import edu.ntnu.idatt2001.model.gui.ScreenType;
 
-public class SetStoryAction implements ControllerAction {
-
+public class SetCreatedPlayerAction implements ControllerAction {
+  @Override
   public void execute(ControllerEvent event, ApplicationController controller, ApplicationModel model) {
-    model.setStory((Story) event.getValue());
-    controller.changeScreen(ScreenType.CREATION_SCREEN);
+    Player player = (Player) event.getValue();
+    model.setStartingPlayer(player);
   }
 }

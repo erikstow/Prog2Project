@@ -16,13 +16,17 @@ import javafx.scene.layout.Region;
 
 public class TitleScreenController
     extends Controller {
-  private final Region view;
-  private final TitleScreenModel model;
+  private Region view;
+  private TitleScreenModel model;
   private static final String STORIES_PATH = "src/main/resources/stories/";
   private static final String FILE_EXTENSION = ".paths";
   private Story story;
 
   public TitleScreenController() {
+    initModelAndView();
+  }
+
+  private void initModelAndView() {
     List<String> storyNameList = getStoryList();
     model = new TitleScreenModel();
     view = new TitleScreenBuilder(model, storyNameList, this::startGame).build();
@@ -68,7 +72,7 @@ public class TitleScreenController
 
   @Override
   public void onUpdate(ControllerEvent event) {
-    // todo implement reset
+    initModelAndView();
   }
 
   public Region getView() {

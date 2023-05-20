@@ -1,0 +1,7 @@
+Welcome to the title screen!
+You can access the help screen by pressing <F1>
+
+To proceed, you must choose a story to play from the drop-down list.
+Then you can press the start button.
+
+Enjoy!

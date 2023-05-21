@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -18,28 +17,25 @@ import javafx.util.Duration;
 import java.io.File;
 
 public class ApplicationScreenBuilder implements Builder<Region> {
-  private final Runnable settingsAction;
-  private final Runnable helpAction;
-  private final Runnable musicAction;
   private final ApplicationModel gameModel;
   private final Region titleView;
   private final Region gameView;
   private final Region characterView;
   private final Region settingsView;
+  private final Region menubarView;
 
-  public ApplicationScreenBuilder(ApplicationModel gameModel, Runnable settingsAction, Runnable helpAction, Runnable musicAction,
+  public ApplicationScreenBuilder(ApplicationModel gameModel,
                                   Region titleView,
                                   Region gameView,
                                   Region characterView,
-                                  Region settingsView) {
-    this.settingsAction = settingsAction;
-    this.helpAction = helpAction;
-    this.musicAction = musicAction;
+                                  Region settingsView,
+                                  Region menubarView) {
     this.gameModel = gameModel;
     this.titleView = titleView;
     this.gameView = gameView;
     this.characterView = characterView;
     this.settingsView = settingsView;
+    this.menubarView = menubarView;
   }
 
   public Region build() {
@@ -47,19 +43,15 @@ public class ApplicationScreenBuilder implements Builder<Region> {
 
     results.setOnKeyPressed(event -> {
       if (event.getCode() == KeyCode.ESCAPE) {
-        settingsAction.run();
+        //settingsAction.run();
       } else if (event.getCode() == KeyCode.F1) {
-        helpAction.run();
+        //helpAction.run();
       }
     });
 
     results.getStylesheets().add("application.css");
     results.getStyleClass().add("app-pane");
-    results.setTop(new HBox(
-        Widgets.createButton("", settingsAction, "button-settings"), 
-        Widgets.createButton("", helpAction, "button-help"),
-        createToggleButton("", musicAction, "button-music")
-        ));
+    results.setTop(menubarView);
 
     results.setBottom(Widgets.createLabel("All Rights Reserved ©","bottom-text"));
     results.setCenter(changeScreen(gameModel.getCurrentScreen()));

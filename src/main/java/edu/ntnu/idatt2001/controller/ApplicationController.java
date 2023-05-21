@@ -16,6 +16,7 @@ public class ApplicationController extends Controller {
   private final GameController gameController;
   private final CharacterScreenController characterScreenController;
   private final SettingsController settingsController;
+  private final MenubarController menubarController;
   private final ControllerActionFactory actionFactory;
   private final MusicManager musicManager;
 
@@ -24,16 +25,19 @@ public class ApplicationController extends Controller {
     gameController = new GameController();
     characterScreenController = new CharacterScreenController();
     settingsController = new SettingsController();
+    menubarController = new MenubarController();
+
     initObservers();
 
     model = new ApplicationModel();
     model.setCurrentScreen(ScreenType.TITLE_SCREEN);
 
-    view = new ApplicationScreenBuilder(model, this::settingsAction, this::helpAction, this::musicAction,
+    view = new ApplicationScreenBuilder(model,
       titleScreenController.getView(),
       gameController.getView(),
       characterScreenController.getView(),
-      settingsController.getView()).build();
+      settingsController.getView(),
+      menubarController.getView()).build();
 
     actionFactory = new ControllerActionFactory();
 
@@ -53,32 +57,11 @@ public class ApplicationController extends Controller {
     gameController.addObserver(this);
     settingsController.addObserver(this);
     characterScreenController.addObserver(this);
+    menubarController.addObserver(this);
     addObserver(gameController);
     addObserver(characterScreenController);
     addObserver(settingsController);
     addObserver(titleScreenController);
-  }
-
-  private void settingsAction() {
-    if (model.getCurrentScreen() == ScreenType.SETTINGS_SCREEN) {
-      model.setCurrentScreen(model.getPreviousScreen());
-    } else {
-      model.setPreviousScreen(model.getCurrentScreen());
-      model.setCurrentScreen(ScreenType.SETTINGS_SCREEN);
-    }
-  }
-
-  private void helpAction() {
-    try {
-      new HelpAction().execute(new DataUpdateEvent("currentScreenType", model.getCurrentScreen()), this, model);
-    } catch (Exception e) {
-      onUpdate(new DataUpdateEvent("error", e));
-    }
-  }
-
-  private void musicAction() {
-    musicManager.muteToggle();
-    model.isMusicOnProperty().set(!model.isMusicOnProperty().get());
   }
 
   @Override

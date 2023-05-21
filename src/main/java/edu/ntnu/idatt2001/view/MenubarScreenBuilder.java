@@ -11,23 +11,19 @@ import javafx.util.Builder;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.util.function.Consumer;
 
 public class MenubarScreenBuilder implements Builder<Region> {
-  private final Runnable settingsAction;
-  private final Runnable helpAction;
-  private final Runnable musicAction;
-  public MenubarScreenBuilder(Runnable settingsAction, Runnable helpAction, Runnable musicAction) {
-    this.helpAction = helpAction;
-    this.musicAction = musicAction;
-    this.settingsAction = settingsAction;
-
+  private final Consumer<String> buttonAction;
+  public MenubarScreenBuilder(Consumer<String> buttonAction) {
+    this.buttonAction = buttonAction;
   }
 
   public Region build() {
     return new HBox(
-      Widgets.createButton("", settingsAction, "button-settings"),
-      Widgets.createButton("", helpAction, "button-help"),
-      createToggleButton("", musicAction, "button-music")
+      Widgets.createButton("", () -> buttonAction.accept("settings"), "button-settings"),
+      Widgets.createButton("", () -> buttonAction.accept("help"), "button-help"),
+      createToggleButton("", () -> buttonAction.accept("music"), "button-music")
     );
   }
 

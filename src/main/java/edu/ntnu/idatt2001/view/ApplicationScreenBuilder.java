@@ -4,17 +4,10 @@ import edu.ntnu.idatt2001.model.gui.ApplicationModel;
 import edu.ntnu.idatt2001.model.gui.ScreenType;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.util.Builder;
-import javafx.util.Duration;
-
-import java.io.File;
 
 public class ApplicationScreenBuilder implements Builder<Region> {
   private final ApplicationModel gameModel;
@@ -53,7 +46,7 @@ public class ApplicationScreenBuilder implements Builder<Region> {
     results.getStyleClass().add("app-pane");
     results.setTop(menubarView);
 
-    results.setBottom(Widgets.createLabel("All Rights Reserved ©","bottom-text"));
+    results.setBottom(Widgets.createLabel("All Rights Reserved ©", "bottom-text"));
     results.setCenter(changeScreen(gameModel.getCurrentScreen()));
     results.setAlignment(results.getTop(), Pos.TOP_RIGHT);
     results.setCenter(changeScreen(ScreenType.TITLE_SCREEN));
@@ -63,20 +56,7 @@ public class ApplicationScreenBuilder implements Builder<Region> {
     return results;
   }
 
-  private Node createToggleButton(String text, Runnable action, String styleClass) {
-    ToggleButton button = new ToggleButton(text);
-    button.getStyleClass().add(styleClass);
-    button.setOnAction(event -> {
-      Media clickSound = new Media(new File("src/main/resources/sound/click.mp3").toURI().toString());
-      MediaPlayer mediaPlayer = new MediaPlayer(clickSound);
-      mediaPlayer.seek(Duration.ZERO);
-      mediaPlayer.play();
-      action.run();
-    });
-    return button;
-  }
-
-  public Region changeScreen(ScreenType screen) {
+  private Region changeScreen(ScreenType screen) {
     return switch (screen) {
       case TITLE_SCREEN -> titleView;
       case CREATION_SCREEN -> characterView;

@@ -11,8 +11,17 @@ public class MusicManager {
   private final Map<String, MediaPlayer> tracks = new HashMap<>();
   private double volume = 1.0;
   private double unMutedVolume;
-  private final double mutedVolume = 0.0;
   private boolean isMuted = false;
+
+  public MusicManager() {
+    initMusic();
+  }
+
+  private void initMusic() {
+    loadTrack("title", "src/main/resources/sound/1.MainTheme-320bit.mp3");
+    loadTrack("game", "src/main/resources/sound/the-epic-2-by-rafael-krux.mp3");
+    loadTrack("boss", "src/main/resources/sound/Dragon-Castle.mp3");
+  }
 
   public void loadTrack(String trackName, String filePath) {
     Media media = new Media(new File(filePath).toURI().toString());
@@ -60,6 +69,7 @@ public class MusicManager {
       isMuted = false;
     } else {
       unMutedVolume = getVolume();
+      double mutedVolume = 0.0;
       setVolume(mutedVolume);
       isMuted = true;
     }

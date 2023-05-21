@@ -12,6 +12,6 @@ public class ReturnToTitleAction implements ControllerAction {
     controller.update(new DataUpdateEvent("reset", null));
     controller.getMusicManager().stopAllTracks();
     controller.getMusicManager().playTrack("title");
-    controller.changeScreen(ScreenType.TITLE_SCREEN);
+    model.setCurrentScreen(ScreenType.TITLE_SCREEN);
   }
 }

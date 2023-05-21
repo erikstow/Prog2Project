@@ -69,13 +69,17 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     results.disableProperty().bind(goalType.valueProperty().isNull());
     results.getStyleClass().add("goal-value-text-field");
     goalType.valueProperty().addListener((observable, oldValue, newValue) -> {
-      results.setText("");
-      if (newValue.equals("Inventory")) {
-        results.setPromptText("Comma-separated list of items...");
-        results.setTextFormatter(null);
+      if (newValue != null) {
+        results.setText("");
+        if (newValue.equals("Inventory")) {
+          results.setPromptText("Comma-separated list of items...");
+          results.setTextFormatter(null);
+        } else {
+          results.setPromptText("An integer...");
+          results.setTextFormatter(getPositiveIntegerFormatter());
+        }
       } else {
-        results.setPromptText("An integer...");
-        results.setTextFormatter(getPositiveIntegerFormatter());
+        results.setText("");
       }
     });
     return results;

@@ -4,41 +4,25 @@ import edu.ntnu.idatt2001.model.game.Game;
 import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.game.Story;
 import edu.ntnu.idatt2001.model.goals.Goal;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.layout.Region;
+import javafx.beans.property.*;
 
 import java.util.List;
 
 public class ApplicationModel {
   private Game game;
-  private final ObjectProperty<Region> currentScreen = new SimpleObjectProperty<>();
-  private Region previousScreen = new Region();
+  private final ObjectProperty<ScreenType> currentScreen = new SimpleObjectProperty<>(ScreenType.TITLE_SCREEN);
+  private ScreenType previousScreen;
   private Story story;
   private Player startingPlayer;
   private List<Goal> goals;
-  private BooleanProperty isMusicOn = new SimpleBooleanProperty(true);
+  private final BooleanProperty isMusicOn = new SimpleBooleanProperty(true);
 
 
-  public ObjectProperty<Region> currentScreenProperty() {
-    return currentScreen;
-  }
-
-  public Region getCurrentScreen() {
-    return currentScreen.get();
-  }
-
-  public void setCurrentScreen(Region screen) {
-    currentScreen.set(screen);
-  }
-
-  public Region getPreviousScreen() {
+  public ScreenType getPreviousScreen() {
     return previousScreen;
   }
 
-  public void setPreviousScreen(Region previousScreen) {
+  public void setPreviousScreen(ScreenType previousScreen) {
     this.previousScreen = previousScreen;
   }
 
@@ -76,7 +60,19 @@ public class ApplicationModel {
 
   public BooleanProperty isMusicOnProperty() {
     return isMusicOn;
-  } 
   }
+
+  public ScreenType getCurrentScreen() {
+    return currentScreen.get();
+  }
+
+  public ObjectProperty<ScreenType> currentScreenProperty() {
+    return currentScreen;
+  }
+
+  public void setCurrentScreen(ScreenType currentScreen) {
+    this.currentScreen.set(currentScreen);
+  }
+}
 
 

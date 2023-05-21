@@ -27,9 +27,13 @@ public class ApplicationController extends Controller {
     initObservers();
 
     model = new ApplicationModel();
-    model.setCurrentScreen(titleScreenController.getView());
+    model.setCurrentScreen(ScreenType.TITLE_SCREEN);
 
-    view = new ApplicationScreenBuilder(model, this::settingsAction, this::helpAction, this::musicAction).build();
+    view = new ApplicationScreenBuilder(model, this::settingsAction, this::helpAction, this::musicAction,
+      titleScreenController.getView(),
+      gameController.getView(),
+      characterScreenController.getView(),
+      settingsController.getView()).build();
 
     actionFactory = new ControllerActionFactory();
 
@@ -40,9 +44,9 @@ public class ApplicationController extends Controller {
 
   private void initMusic() {
     musicManager.loadTrack("title", "src/main/resources/sound/1.MainTheme-320bit.mp3");
-    musicManager.loadTrack("game", "src/main/resources/sound/ambient_presentation.mp3");
+    musicManager.loadTrack("game", "src/main/resources/sound/the-epic-2-by-rafael-krux.mp3");
+    musicManager.loadTrack("boss", "src/main/resources/sound/Dragon-Castle.mp3");
   }
-
 
   private void initObservers() {
     titleScreenController.addObserver(this);
@@ -56,28 +60,17 @@ public class ApplicationController extends Controller {
   }
 
   private void settingsAction() {
-    if (model.getCurrentScreen() == settingsController.getView()) {
+    if (model.getCurrentScreen() == ScreenType.SETTINGS_SCREEN) {
       model.setCurrentScreen(model.getPreviousScreen());
     } else {
       model.setPreviousScreen(model.getCurrentScreen());
-      changeScreen(ScreenType.SETTINGS_SCREEN);
+      model.setCurrentScreen(ScreenType.SETTINGS_SCREEN);
     }
   }
 
   private void helpAction() {
-    ScreenType currentScreenType = null;
-    Region currentScreen = model.getCurrentScreen();
-    if (currentScreen == titleScreenController.getView()) {
-      currentScreenType = ScreenType.TITLE_SCREEN;
-    } else if (currentScreen == characterScreenController.getView()) {
-      currentScreenType = ScreenType.CREATION_SCREEN;
-    } else if (currentScreen == gameController.getView()) {
-      currentScreenType = ScreenType.PASSAGE_SCREEN;
-    } else if (currentScreen == settingsController.getView()) {
-      currentScreenType = ScreenType.SETTINGS_SCREEN;
-    }
     try {
-      new HelpAction().execute(new DataUpdateEvent("currentScreenType", currentScreenType), this, model);
+      new HelpAction().execute(new DataUpdateEvent("currentScreenType", model.getCurrentScreen()), this, model);
     } catch (Exception e) {
       onUpdate(new DataUpdateEvent("error", e));
     }
@@ -86,15 +79,6 @@ public class ApplicationController extends Controller {
   private void musicAction() {
     musicManager.muteToggle();
     model.isMusicOnProperty().set(!model.isMusicOnProperty().get());
-  }
-
-  public void changeScreen(ScreenType screen) {
-    switch (screen) {
-      case TITLE_SCREEN -> model.setCurrentScreen(titleScreenController.getView());
-      case CREATION_SCREEN -> model.setCurrentScreen(characterScreenController.getView());
-      case SETTINGS_SCREEN -> model.setCurrentScreen(settingsController.getView());
-      case PASSAGE_SCREEN -> model.setCurrentScreen(gameController.getView());
-    }
   }
 
   @Override

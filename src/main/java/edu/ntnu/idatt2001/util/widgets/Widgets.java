@@ -18,6 +18,10 @@ import javafx.util.Duration;
 
 public class Widgets {
 
+  private Widgets() {
+    // Prevents instantiation of utility class
+  }
+
   public static Label createLabel(String text, String styleClass) {
     Label results = new Label(text);
     results.getStyleClass().add(styleClass);
@@ -27,7 +31,7 @@ public class Widgets {
   public static TextField createTextField(String promptText, StringProperty property, String styleClass) {
     TextField results = new TextField();
     results.setPromptText(promptText);
-    property.bind(results.textProperty());
+    property.bindBidirectional(results.textProperty());
     results.getStyleClass().add(styleClass);
     return results;
   }

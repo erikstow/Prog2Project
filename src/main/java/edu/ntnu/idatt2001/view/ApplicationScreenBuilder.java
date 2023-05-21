@@ -1,11 +1,10 @@
 package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
+import edu.ntnu.idatt2001.model.gui.ScreenType;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
@@ -23,12 +22,24 @@ public class ApplicationScreenBuilder implements Builder<Region> {
   private final Runnable helpAction;
   private final Runnable musicAction;
   private final ApplicationModel gameModel;
+  private final Region titleView;
+  private final Region gameView;
+  private final Region characterView;
+  private final Region settingsView;
 
-  public ApplicationScreenBuilder(ApplicationModel gameModel, Runnable settingsAction, Runnable helpAction, Runnable musicAction) {
+  public ApplicationScreenBuilder(ApplicationModel gameModel, Runnable settingsAction, Runnable helpAction, Runnable musicAction,
+                                  Region titleView,
+                                  Region gameView,
+                                  Region characterView,
+                                  Region settingsView) {
     this.settingsAction = settingsAction;
     this.helpAction = helpAction;
     this.musicAction = musicAction;
     this.gameModel = gameModel;
+    this.titleView = titleView;
+    this.gameView = gameView;
+    this.characterView = characterView;
+    this.settingsView = settingsView;
   }
 
   public Region build() {
@@ -51,10 +62,11 @@ public class ApplicationScreenBuilder implements Builder<Region> {
         ));
 
     results.setBottom(Widgets.createLabel("All Rights Reserved ©","bottom-text"));
-    results.setCenter(gameModel.getCurrentScreen());
+    results.setCenter(changeScreen(gameModel.getCurrentScreen()));
     results.setAlignment(results.getTop(), Pos.TOP_RIGHT);
+    results.setCenter(changeScreen(ScreenType.TITLE_SCREEN));
     gameModel.currentScreenProperty()
-      .addListener((observable, oldValue, newValue) -> results.setCenter(newValue));
+      .addListener((observable, oldValue, newValue) -> results.setCenter(changeScreen(newValue)));
 
     return results;
   }
@@ -70,5 +82,14 @@ public class ApplicationScreenBuilder implements Builder<Region> {
       action.run();
     });
     return button;
+  }
+
+  public Region changeScreen(ScreenType screen) {
+    return switch (screen) {
+      case TITLE_SCREEN -> titleView;
+      case CREATION_SCREEN -> characterView;
+      case SETTINGS_SCREEN -> settingsView;
+      case PASSAGE_SCREEN -> gameView;
+    };
   }
 }

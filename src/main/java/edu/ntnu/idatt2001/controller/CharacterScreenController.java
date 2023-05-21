@@ -14,23 +14,20 @@ import edu.ntnu.idatt2001.view.characterScreen.CharacterGoalsScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterInfoScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterSummaryScreenBuilder;
+import javafx.collections.FXCollections;
 import javafx.scene.layout.Region;
 
 public class CharacterScreenController extends Controller  {
 
-  private Region infoView;
-  private Region difficultyView;
-  private Region goalsView;
-  private Region summaryView;
-  private Region view;
-  private CharacterScreenModel model;
+  private final Region infoView;
+  private final Region difficultyView;
+  private final Region goalsView;
+  private final Region summaryView;
+  private final Region view;
+  private final CharacterScreenModel model;
   
 
   public CharacterScreenController() {
-    initModelAndView();
-  }
-
-  private void initModelAndView() {
     model = new CharacterScreenModel();
     infoView = new CharacterInfoScreenBuilder(model).build();
     difficultyView = new CharacterDifficultyScreenBuilder(model).build();
@@ -39,10 +36,15 @@ public class CharacterScreenController extends Controller  {
     model.setCurrentScreen(infoView);
     view = new CharacterScreenBuilder(model, this::back, this::next).build();
     model.difficulty().addListener((observable, oldValue, newValue) -> {
-      if (newValue != null) {
+      if (newValue != null && newValue.intValue() != 0) {
         model.sethealth(30 / model.getDifficulty());
         model.setScore(0 / model.getDifficulty());
         model.setGold(300 / model.getDifficulty());
+        model.setInventory(new ArrayList<>());
+      } else {
+        model.sethealth(0);
+        model.setScore(0);
+        model.setGold(0);
         model.setInventory(new ArrayList<>());
       }
     });
@@ -118,14 +120,16 @@ public class CharacterScreenController extends Controller  {
   @Override
   public void onUpdate(ControllerEvent event) {
     if (event.getKey().equals("reset")) {
-      initModelAndView();
+      model.setName("");
+      model.setAppearence("");
+      model.setDifficulty(0);
+      model.goals().set(FXCollections.observableList(new ArrayList<>()));
+      model.goalType().set(null);
+      changeScreen(CharacterScreenType.INFO_SCREEN);
     }
   }
 
   private void isStartAllowed() {
-    if (model.getCurrentScreen() == summaryView && (model.getDifficulty() == 0 || model.getName().isEmpty())) {
-        model.setNextAllowed(false);
-      } 
-      else {model.setNextAllowed(true);}
+    model.setNextAllowed(model.getCurrentScreen() != summaryView || (model.getDifficulty() != 0 && !model.getName().isEmpty()));
     }
   }

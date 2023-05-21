@@ -19,5 +19,7 @@ public class StartGamePressedAction implements ControllerAction {
     controller.update(new DataUpdateEvent("player", model.getGame().getPlayer()), GameController.class::isInstance);
     controller.changeScreen(ScreenType.PASSAGE_SCREEN);
     controller.update(new DataUpdateEvent("gameStarted", null), SettingsController.class::isInstance);
+    controller.getMusicManager().stopAllTracks();
+    controller.getMusicManager().playTrack("game");
   }
 }

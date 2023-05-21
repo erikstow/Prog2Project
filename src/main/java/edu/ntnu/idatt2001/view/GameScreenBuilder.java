@@ -43,7 +43,7 @@ public class GameScreenBuilder implements Builder<Region> {
         linkBox.getChildren().add(presentLink(link));
       }
     });
-
+    results.getStylesheets().add("game.css");
     results.setBottom(linkBox);
 
     return results;
@@ -82,7 +82,6 @@ public class GameScreenBuilder implements Builder<Region> {
         index[0]++;
       }));
 
-
       timeline.setCycleCount(model.getContent().length());
       timeline.play();
 
@@ -95,4 +94,3 @@ public class GameScreenBuilder implements Builder<Region> {
     return results;
   }
 }
-

@@ -31,10 +31,8 @@ public class TitleScreenBuilder implements Builder<Region> {
     VBox results = new VBox();
     results.getStylesheets().add("title.css");
     results.getStyleClass().add("title-pane");
-
     Label title = Widgets.createLabel("Paths", "title-label");
-    Label subtitle = Widgets.createLabel("Into the Unknown", "subtitle-label");
-
+    Label subtitle = Widgets.createLabel("Last Light", "subtitle-label");
     Node storySelect = createComboBox("Choose Story", storyTitles);
     storySelect.getStyleClass().add("story-select");
 
@@ -42,14 +40,14 @@ public class TitleScreenBuilder implements Builder<Region> {
     startButton.disableProperty().bind(model.startAllowedPorperty().not());
 
     Node info = createInfoBox();
-
+    info.getStyleClass().add("info-box");
     results.getChildren().addAll(title, subtitle, storySelect, startButton, info);
-
     return results;
   }
 
   private Node createComboBox(String prompt, List<String> options) {
     ComboBox<String> results = new ComboBox<>();
+    results.getStyleClass().add("story-select");
     results.setPromptText(prompt);
     results.getItems().addAll(options);
     model.storyNameProperty().bindBidirectional(results.valueProperty());
@@ -59,20 +57,22 @@ public class TitleScreenBuilder implements Builder<Region> {
 
   private Node createInfoBox() {
     VBox results = new VBox();
-    results.getStyleClass().add("info-box");
+    Label filePathPrompt = new Label("File Path:");
+    filePathPrompt.getStyleClass().add("file-path-label");
     Label filePathLabel = new Label();
     filePathLabel.textProperty().bind(model.filePathProperty());
     filePathLabel.getStyleClass().add("file-path-label");
-
+    
+    Label brokenLinksPrompt = new Label("Broken Links:");
+    brokenLinksPrompt.getStyleClass().add("broken-links-label");
     VBox brokenLinksBox = new VBox();
     brokenLinksBox.getStyleClass().add("broken-links-box");
     model.brokenLinksProperty().addListener((observable, oldValue, newValue) -> {
       brokenLinksBox.getChildren().clear();
       brokenLinksBox.getChildren().add(formatBrokenLinksBox());
     });
-
-    results.getChildren().add(filePathLabel);
-    results.getChildren().add(brokenLinksBox);
+  
+    results.getChildren().addAll(filePathPrompt, filePathLabel, brokenLinksPrompt, brokenLinksBox);
     VBox.setMargin(brokenLinksBox, new Insets(20, 0, 0, 0)); // Set a fixed margin for the brokenLinksBox
     return results;
   }

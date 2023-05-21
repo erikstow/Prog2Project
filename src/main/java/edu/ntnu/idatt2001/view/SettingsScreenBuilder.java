@@ -22,11 +22,15 @@ public class SettingsScreenBuilder implements Builder<Region> {
     Button restartButton = Widgets.createButton("Restart game", () -> buttonAction.accept("restartGame"), "");
     restartButton.disableProperty().bind(model.restartAllowedProperty().not());
 
-    return new VBox(
+    VBox results = new VBox(
+      Widgets.createLabel("Options", "settings-title"),
       Widgets.createButton("Resume game", () -> buttonAction.accept("resumeGame"), ""),
       Widgets.createButton("Return to title screen", () -> buttonAction.accept("returnToTitle"), ""),
       Widgets.createButton("Exit game", () -> buttonAction.accept("exitGame"), ""),
       restartButton
     );
+    results.getStylesheets().add("settings.css");
+    results.getStyleClass().add("settings-box");
+    return results;
   }
 }

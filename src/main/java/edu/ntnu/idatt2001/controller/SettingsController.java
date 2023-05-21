@@ -10,29 +10,14 @@ public class SettingsController extends Controller {
   private final Region view;
   private final SettingsModel model;
 
-  SettingsController() {
+  public SettingsController() {
     model = new SettingsModel();
-    this.view = new SettingsScreenBuilder(model,
-      this::resume,
-      this::exitToTitle,
-      this::restartGame,
-      this::exitGame).build();
+
+    view = new SettingsScreenBuilder(model, this::buttonAction).build();
   }
 
-  private void resume() {
-    update(new DataUpdateEvent("resumeGame", null));
-  }
-
-  private void restartGame() {
-    update(new DataUpdateEvent("restartGame", null));
-  }
-
-  private void exitToTitle() {
-    update(new DataUpdateEvent("returnToTitle", null));
-  }
-
-  private void exitGame() {
-    update(new DataUpdateEvent("exitGame", null));
+  private void buttonAction(String action) {
+    update(new DataUpdateEvent(action, null));
   }
 
   @Override

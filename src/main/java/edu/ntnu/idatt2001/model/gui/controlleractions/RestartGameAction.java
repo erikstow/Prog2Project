@@ -20,6 +20,6 @@ public class RestartGameAction implements ControllerAction {
     DataUpdateEvent updatedPlayer = new DataUpdateEvent("player", model.getGame().getPlayer());
     controller.update(next, GameController.class::isInstance);
     controller.update(updatedPlayer, GameController.class::isInstance);
-    controller.changeScreen(ScreenType.PASSAGE_SCREEN);
+    model.setCurrentScreen(ScreenType.PASSAGE_SCREEN);
   }
 }

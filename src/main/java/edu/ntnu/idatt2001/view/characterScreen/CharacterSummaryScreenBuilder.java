@@ -38,9 +38,9 @@ public class CharacterSummaryScreenBuilder implements Builder<Region> {
     HBox results = new HBox();
     results.getStyleClass().add("hbox");
     Label name = Widgets.createLabel("Name", "info-label");
-    name.textProperty().bind(model.name());
+    name.textProperty().bindBidirectional(model.name());
     Label appearance = Widgets.createLabel("Appearance", "info-label");
-    appearance.textProperty().bind(model.appearence());
+    appearance.textProperty().bindBidirectional(model.appearence());
     results.getChildren().addAll(appearance, name);
     return results;
   }

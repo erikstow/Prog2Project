@@ -10,6 +10,6 @@ public class SetStoryAction implements ControllerAction {
 
   public void execute(ControllerEvent event, ApplicationController controller, ApplicationModel model) {
     model.setStory((Story) event.getValue());
-    controller.changeScreen(ScreenType.CREATION_SCREEN);
+    model.setCurrentScreen(ScreenType.CREATION_SCREEN);
   }
 }

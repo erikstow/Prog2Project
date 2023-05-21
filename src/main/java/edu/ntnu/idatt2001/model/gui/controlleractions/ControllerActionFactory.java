@@ -13,6 +13,9 @@ public class ControllerActionFactory {
       case "chosenGoals" -> new SetChosenGoalsAction();
       case "startGamePressed" -> new StartGamePressedAction();
       case "exitGame" -> new ExitGameAction();
+      case "settings" -> new ClickSettingsAction();
+      case "help" -> new ClickHelpAction();
+      case "music" -> new ClickMuteAction();
       default -> throw new IllegalArgumentException("Can't parse action: " + actionType);
     };
   }

@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.view;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.media.Media;
@@ -20,11 +21,21 @@ public class MenubarScreenBuilder implements Builder<Region> {
   }
 
   public Region build() {
-    return new HBox(
+    HBox results = new HBox(
       Widgets.createButton("", () -> buttonAction.accept("settings"), "button-settings"),
       Widgets.createButton("", () -> buttonAction.accept("help"), "button-help"),
       createToggleButton("", () -> buttonAction.accept("music"), "button-music")
     );
+
+    results.setOnKeyPressed(event -> {
+      if (event.getCode() == KeyCode.ESCAPE) {
+        buttonAction.accept("settings");
+      } else if (event.getCode() == KeyCode.F1) {
+        buttonAction.accept("help");
+      }
+    });
+
+    return results;
   }
 
   private Node createToggleButton(String text, Runnable action, String styleClass) {

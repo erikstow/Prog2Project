@@ -3,6 +3,7 @@ package edu.ntnu.idatt2001.view.characterScreen;
 import edu.ntnu.idatt2001.model.goals.Goal;
 import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
+import javafx.beans.InvalidationListener;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -44,6 +45,10 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     goalList.getStyleClass().add("goals-list-view");
     results.getStyleClass().add("goals-view-box");
     Button undoGoalButton = Widgets.createButton("Undo last Goal", undoGoal, "undo-goal-button");
+    undoGoalButton.disableProperty().setValue(true);
+    goalList.getItems().addListener((InvalidationListener) change -> {
+      undoGoalButton.disableProperty().setValue(goalList.getItems().isEmpty());
+    });
     results.getChildren().addAll(goalList, undoGoalButton);
     return results;
   }
@@ -55,12 +60,11 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     goalType.getStyleClass().add("goal-type-combobox");
     TextField goalValue = createGoalValueField(goalType);
 
-    Button addGoalButton = Widgets.createButton("Add Goal", addGoal, "add-goal-button");
+    Button addGoalButton = Widgets.createButton("Add Goal", () -> {addGoal.run(); goalValue.setText("");}, "add-goal-button");
     addGoalButton.disableProperty().bind(goalValue.textProperty().isEmpty().or(goalType.valueProperty().isNull()));
     results.getChildren().addAll(goalAddPrompt, goalType, goalValue, addGoalButton);
     results.getStyleClass().add("goal-adder-box");
     return results;
-  
   }
   
   private TextField createGoalValueField(ComboBox<String> goalType) {
@@ -80,6 +84,12 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
         }
       } else {
         results.setText("");
+      }
+    });
+
+    results.textProperty().addListener((observable, oldValue, newValue) -> {
+      if (!newValue.isEmpty() && checkIntegerOverflow(newValue) && !goalType.getValue().equals("Inventory")) {
+        results.setText(oldValue);
       }
     });
     return results;
@@ -106,4 +116,12 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     return new TextFormatter<>(filter);
   }
 
+  private boolean checkIntegerOverflow(String value) throws NumberFormatException {
+    try {
+      Integer.parseInt(value);
+    } catch (NumberFormatException e) {
+      return true;
+    }
+    return false;
+  }
 }

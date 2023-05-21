@@ -4,7 +4,6 @@ import edu.ntnu.idatt2001.model.gui.ApplicationModel;
 import edu.ntnu.idatt2001.model.gui.ScreenType;
 import edu.ntnu.idatt2001.util.widgets.Widgets;
 import javafx.geometry.Pos;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.util.Builder;
@@ -33,14 +32,6 @@ public class ApplicationScreenBuilder implements Builder<Region> {
 
   public Region build() {
     BorderPane results = new BorderPane();
-
-    results.setOnKeyPressed(event -> {
-      if (event.getCode() == KeyCode.ESCAPE) {
-        //settingsAction.run();
-      } else if (event.getCode() == KeyCode.F1) {
-        //helpAction.run();
-      }
-    });
 
     results.getStylesheets().add("application.css");
     results.getStyleClass().add("app-pane");

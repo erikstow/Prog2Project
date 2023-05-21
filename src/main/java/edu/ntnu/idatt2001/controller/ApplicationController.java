@@ -1,6 +1,5 @@
 package edu.ntnu.idatt2001.controller;
 
-import com.sun.media.jfxmedia.MediaManager;
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.gui.ApplicationModel;
@@ -9,10 +8,6 @@ import edu.ntnu.idatt2001.model.gui.controlleractions.*;
 import edu.ntnu.idatt2001.util.MusicManager;
 import edu.ntnu.idatt2001.view.ApplicationScreenBuilder;
 import javafx.scene.layout.Region;
-import javafx.scene.media.MediaPlayer;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class ApplicationController extends Controller {
   private final Region view;
@@ -21,7 +16,7 @@ public class ApplicationController extends Controller {
   private final GameController gameController;
   private final CharacterScreenController characterScreenController;
   private final SettingsController settingsController;
-  private final Map<String, ControllerAction> actions = new HashMap<>();
+  private final ControllerActionFactory actionFactory;
   private final MusicManager musicManager;
 
   public ApplicationController() {
@@ -36,7 +31,7 @@ public class ApplicationController extends Controller {
 
     view = new ApplicationScreenBuilder(model, this::settingsAction, this::helpAction, this::musicAction).build();
 
-    initActions();
+    actionFactory = new ControllerActionFactory();
 
     this.musicManager = new MusicManager();
     initMusic();
@@ -48,18 +43,6 @@ public class ApplicationController extends Controller {
     musicManager.loadTrack("game", "src/main/resources/sound/ambient_presentation.mp3");
   }
 
-  private void initActions() {
-    actions.put("story", new SetStoryAction());
-    actions.put("linkToNextPassage", new GetNextPassageFromLink());
-    actions.put("resumeGame", new ResumeGameAction());
-    actions.put("returnToTitle", new ReturnToTitleAction());
-    actions.put("restartGame", new RestartGameAction());
-    actions.put("error", new ErrorAction());
-    actions.put("createdPlayer", new SetCreatedPlayerAction());
-    actions.put("chosenGoals", new SetChosenGoalsAction());
-    actions.put("startGamePressed", new StartGamePressedAction());
-    actions.put("exitGame", new ExitGameAction());
-  }
 
   private void initObservers() {
     titleScreenController.addObserver(this);
@@ -117,7 +100,7 @@ public class ApplicationController extends Controller {
   @Override
   public void onUpdate(ControllerEvent event) {
     String key = event.getKey();
-    ControllerAction action = actions.get(key);
+    ControllerAction action = actionFactory.createAction(key);
     if (action != null) {
       try {
         action.execute(event, this, model);

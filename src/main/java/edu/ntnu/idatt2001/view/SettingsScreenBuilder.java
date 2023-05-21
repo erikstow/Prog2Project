@@ -23,14 +23,16 @@ public class SettingsScreenBuilder implements Builder<Region> {
   }
 
   public Region build() {
-    Button restartButton = Widgets.createButton("Restart game", restart, "");
+    Button restartButton = Widgets.createButton("Restart", restart, "");
     restartButton.disableProperty().bind(model.restartAllowedProperty().not());
-
-    return new VBox(
-      Widgets.createButton("Resume game", resume, ""),
-      Widgets.createButton("Return to title screen", title, ""),
-      Widgets.createButton("Exit game", exit, ""),
-      restartButton
+    VBox results = new VBox(
+      Widgets.createLabel("Options", "settings-title"),
+      Widgets.createButton("Resume", resume, ""),
+      Widgets.createButton("Title Screen", title, ""),
+      restartButton, Widgets.createButton("Exit", exit, "")
     );
+    results.getStylesheets().add("settings.css");
+    results.getStyleClass().add("settings-box");
+    return results;
   }
 }

@@ -53,7 +53,7 @@ public class CharacterScreenBuilder implements Builder<Region> {
   private Node createNextBackButtonBar() {
     HBox results = new HBox();
     results.setAlignment(Pos.CENTER);
-    results.getStyleClass().add("character-screen-button-bar");
+    results.getStyleClass().add("character-screen-button-hbox");
     Button next = Widgets.createButton("Next", nextAction, "character-screen-button");
     next.disableProperty().bind(model.nextAllowed().not());
     Button back = Widgets.createButton("Back", backAction, "character-screen-button");

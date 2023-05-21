@@ -1,3 +1,7 @@
+.root {
+  -fx-font-family: "Times New Roman";
+}
+
 .title-pane {
   -fx-spacing: 20px;
   -fx-alignment: center;
@@ -5,65 +9,80 @@
 }
 
 .title-label {
-  -fx-font-family: "Times New Roman";
-  -fx-font-size: 72px; /* Even bigger font size */
-  -fx-text-fill: #FF0000; /* Scary red color */
+  -fx-font-size: 72px;
+  -fx-text-fill: #FFFF00; /* Ominous yellow color */
   -fx-font-weight: bold;
-  -fx-effect: dropshadow(three-pass-box, rgba(255,0,0,0.7), 10, 0.5, 0, 1); /* Red drop shadow */
+  -fx-effect: dropshadow(three-pass-box, rgba(255,0,0,0.7), 10, 0.5, 0, 1);
 }
 
 .subtitle-label {
-  -fx-font-family: "Times New Roman";
-  -fx-font-size: 36px; /* Larger font size */
-  -fx-text-fill: #FFFFFF; /* White color for contrast */
+  -fx-font-size: 36px;
+  -fx-text-fill: #FFFF00; /* Ominous yellow color */
   -fx-font-weight: bold;
-  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.7), 10, 0.5, 0, 1); /* White drop shadow */
-  -fx-padding: 0;
+  -fx-font-style: italic; /* Cursive text */
+  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.7), 10, 0.5, 0, 1);
 }
 
-.start-button {
-  -fx-background-color: #800000; /* Dark red color */
+.button { /* All buttons */
+  -fx-background-color: rgba(255,0,0,0.85); /* Red, somewhat transparent */
   -fx-text-fill: white;
-  -fx-font-family: "Times New Roman";
-  -fx-font-size: 24px; /* Larger font size */
-  -fx-padding: 20px 40px; /* Larger padding */
-  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.7), 10, 0.5, 0, 1); /* White drop shadow */
-  -fx-border-width: 2.2px;
-  -fx-border-color: #FFFFFF; /* White border */
+  -fx-font-size: 24px;
+  -fx-padding: 10px 40px;
+  -fx-border-width: 0; /* No border */
 }
 
-.start-button:hover {
-  -fx-background-color: #FF0000; /* Bright red color on hover */
-  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.9), 10, 0.5, 0, 1); /* More intense drop shadow */
+.button:hover {
+  -fx-background-color: rgba(255,0,0,1); /* Darker red on hover */
 }
 
 .story-select {
+  -fx-background-color: rgba(51,51,51,0.7);
   -fx-font-family: "Times New Roman";
-  -fx-font-size: 24px; /* Larger font size */
-  -fx-background-color: #333; /* Dark gray background */
-  -fx-text-fill: #FAF0E6; /* Light text color */
-  -fx-padding: 10px; /* Larger padding */
+  -fx-font-size: 24px;
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+  -fx-padding: 10px;
+  -fx-border-radius: 5px;
+  -fx-border-color: #FAF0E6;
+  -fx-border-width: 2px;
+}
+
+/* Style for ComboBox dropdown */
+.story-select .list-view {
+  -fx-background-color: rgba(51,51,51,0.85); /* Dark gray background */
+}
+
+/* Style for ComboBox items */
+.story-select .list-view .list-cell {
+  -fx-background-color: rgba(51,51,51,0.85);
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
 }
 
 .story-select .cell {
-  -fx-text-fill: #FAF0E6; /* Light text color */
+  -fx-background-color: transparent;
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+}
+
+.file-path-label, .broken-links-label {
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+  -fx-alignment: center;
 }
 
 .file-path-label {
-  -fx-font-family: "Times New Roman";
-  -fx-font-size: 20px; /* Larger font size */
-  -fx-text-fill: #FFFFFF;
-  -fx-font-weight: bold;
-  -fx-padding: 0 0 10px 0; /* Bigger bottom padding */
-  -fx-alignment: center;
+  -fx-text-fill: linen;
 }
 
 .broken-links-label {
-  -fx-font-family: "Times New Roman";
-  -fx-font-size: 20px; /* Larger font size */
-  -fx-text-fill: #FF0000; /* Red color */
-  -fx-font-weight: bold;
-  -fx-effect: dropshadow(three-pass-box, rgba(255,0,0,0.7), 10, 0.5, 0, 1); /* Red drop shadow */
+  -fx-text-fill: #FF0000;
+  -fx-effect: dropshadow(three-pass-box, rgba(255,0,0,0.7), 10, 0.5, 0, 1);
+}
+
+.info-box {
+  -fx-spacing: 10px;
   -fx-alignment: center;
 }
 
+.broken-links-box {
+  -fx-spacing: 10px;
+  -fx-alignment: center;
+}

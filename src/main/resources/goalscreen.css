@@ -54,7 +54,7 @@
 }
 
 .goal-type-combobox {
-  -fx-background-color: transparent; 
+  -fx-background-color: rgba(51,51,51,0.85);
   -fx-font-family: "Times New Roman";
   -fx-font-size: 24px;
   -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
@@ -66,12 +66,12 @@
 
 /* Style for ComboBox dropdown */
 .goal-type-combobox .list-view {
-  -fx-background-color: #333; /* Dark gray background */
+  -fx-background-color: rgba(51,51,51,0.85); /* Dark gray background */
 }
 
 /* Style for ComboBox items */
 .goal-type-combobox .list-view .list-cell {
-  -fx-background-color: #333; /* Dark gray background */
+  -fx-background-color: rgba(51,51,51,0.85);
   -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
 }
 
@@ -79,6 +79,7 @@
   -fx-background-color: transparent;
   -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
 }
+
 
 /* Styles for VBox */
 .goals-view-box,

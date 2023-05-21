@@ -1,0 +1,52 @@
+.root {
+  -fx-font-family: "Times New Roman"; /* Times New Roman font */
+}
+
+/* VBox styling */
+.settings-box {
+  -fx-spacing: 20px; /* Space between buttons */
+  -fx-alignment: center; /* Center alignment */
+  -fx-padding: 40px; /* Padding around the VBox */
+  -fx-border-radius: 10px; /* Rounded corners */
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 20, 0.1, 0, 2); /* Subtle shadow for depth */
+}
+
+.settings-title {
+  -fx-font-size: 36px;
+  -fx-text-fill: #FFFF00; /* Ominous yellow color */
+  -fx-font-weight: bold;
+  -fx-font-style: italic; /* Cursive text */
+  -fx-effect: dropshadow(three-pass-box, rgba(255,255,255,0.7), 10, 0.5, 0, 1);
+  -fx-padding: 10px; /* Padding around title */
+  -fx-underline: true; /* Underline for the title */
+}
+
+
+/* Button styling */
+.button {
+  -fx-background-color: rgba(70,70,80, 0.85); /* Dark cool grey color */
+  -fx-text-fill: #DDD; /* Light gray text */
+  -fx-font-size: 24px; /* Font size */
+  -fx-padding: 15px 40px; /* Padding for button size */
+  -fx-border-radius: 10px; /* Rounded corners for buttons */
+  -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.6), 10, 0.1, 0, 1); /* Subtle shadow for depth */
+  -fx-transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover state */
+.button:hover {
+  -fx-background-color: rgba(90,90,100, 1); /* Lighter color on hover */
+  -fx-text-fill: #FFF; /* White text on hover */
+}
+
+/* Pressed state */
+.button:pressed {
+  -fx-background-color: rgba(50,50,60, 1); /* Slightly darker color when pressed */
+}
+
+/* Disabled state */
+.button:disabled {
+  -fx-background-color: rgba(70,70,80, 0.5); /* More transparent when disabled */
+  -fx-text-fill: #CCC; /* Brighter grey when disabled for better readability */
+}
+

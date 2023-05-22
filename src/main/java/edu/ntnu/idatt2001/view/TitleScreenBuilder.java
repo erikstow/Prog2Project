@@ -1,8 +1,9 @@
 package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.model.game.Link;
-import edu.ntnu.idatt2001.model.gui.TitleScreenModel;
-import edu.ntnu.idatt2001.util.widgets.Widgets;
+import edu.ntnu.idatt2001.model.state.TitleScreenState;
+import edu.ntnu.idatt2001.util.Widgets;
+import java.util.List;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -12,15 +13,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Builder;
 
-import java.util.List;
-
-
 public class TitleScreenBuilder implements Builder<Region> {
-  private final TitleScreenModel model;
+  private final TitleScreenState model;
   private final Runnable actionHandler;
   private final List<String> storyTitles;
 
-  public TitleScreenBuilder(TitleScreenModel model, List<String> storyTitles, Runnable action) {
+  public TitleScreenBuilder(TitleScreenState model, List<String> storyTitles, Runnable action) {
     this.model = model;
     this.actionHandler = action;
     this.storyTitles = storyTitles;
@@ -73,7 +71,7 @@ public class TitleScreenBuilder implements Builder<Region> {
     });
   
     results.getChildren().addAll(filePathPrompt, filePathLabel, brokenLinksPrompt, brokenLinksBox);
-    VBox.setMargin(brokenLinksBox, new Insets(20, 0, 0, 0)); // Set a fixed margin for the brokenLinksBox
+    VBox.setMargin(brokenLinksBox, new Insets(20, 0, 0, 0));
     return results;
   }
 

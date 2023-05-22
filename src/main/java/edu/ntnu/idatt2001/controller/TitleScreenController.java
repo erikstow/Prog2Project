@@ -3,30 +3,29 @@ package edu.ntnu.idatt2001.controller;
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.game.Story;
-import edu.ntnu.idatt2001.model.gui.TitleScreenModel;
-import edu.ntnu.idatt2001.util.filehandling.text.StoryReader;
+import edu.ntnu.idatt2001.model.state.TitleScreenState;
+import edu.ntnu.idatt2001.util.StoryReader;
 import edu.ntnu.idatt2001.view.TitleScreenBuilder;
-import javafx.collections.FXCollections;
-import javafx.scene.layout.Region;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
+import javafx.collections.FXCollections;
+import javafx.scene.layout.Region;
 
 public class TitleScreenController
-  extends Controller {
+    extends Controller {
   private final Region view;
-  private final TitleScreenModel model;
+  private final TitleScreenState model;
   private static final String STORIES_PATH = "src/main/resources/stories/";
   private static final String FILE_EXTENSION = ".paths";
   private Story story;
 
   public TitleScreenController() {
     List<String> storyNameList = getStoryList();
-    model = new TitleScreenModel();
+    model = new TitleScreenState();
     view = new TitleScreenBuilder(model, storyNameList, this::startGame).build();
     model.storyNameProperty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null && !newValue.isEmpty() && !newValue.isBlank()) {

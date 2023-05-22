@@ -1,11 +1,10 @@
 package edu.ntnu.idatt2001.util;
 
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class MusicManager {
   private final Map<String, MediaPlayer> tracks = new HashMap<>();

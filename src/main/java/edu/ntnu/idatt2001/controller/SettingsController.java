@@ -2,16 +2,16 @@ package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
-import edu.ntnu.idatt2001.model.gui.SettingsModel;
+import edu.ntnu.idatt2001.model.state.SettingsState;
 import edu.ntnu.idatt2001.view.SettingsScreenBuilder;
 import javafx.scene.layout.Region;
 
 public class SettingsController extends Controller {
   private final Region view;
-  private final SettingsModel model;
+  private final SettingsState model;
 
   public SettingsController() {
-    model = new SettingsModel();
+    model = new SettingsState();
 
     view = new SettingsScreenBuilder(model, this::buttonAction).build();
   }

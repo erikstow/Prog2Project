@@ -1,10 +1,7 @@
 package edu.ntnu.idatt2001.view.characterScreen;
 
-import java.util.List;
-
-import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
-import edu.ntnu.idatt2001.util.widgets.Widgets;
-import javafx.beans.property.ListProperty;
+import edu.ntnu.idatt2001.model.state.CharacterScreenState;
+import edu.ntnu.idatt2001.util.Widgets;
 import javafx.beans.property.Property;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -16,10 +13,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Builder;
 
 public class CharacterDifficultyScreenBuilder implements Builder<Region> {
+  private final CharacterScreenState model;
 
-  private final CharacterScreenModel model;
-
-  public CharacterDifficultyScreenBuilder(CharacterScreenModel model) {
+  public CharacterDifficultyScreenBuilder(CharacterScreenState model) {
     this.model = model;
   }
 
@@ -34,9 +30,9 @@ public class CharacterDifficultyScreenBuilder implements Builder<Region> {
   private Node createDifficultySection() {
     return new HBox(
         Widgets.createLabel("Choose difficulty:", "choose-difficulty-label"),
-        Widgets.createDifficultyButton("Easy", 1, model, "difficulty-button-easy"), 
-        Widgets.createDifficultyButton("Medium", 2, model, "difficulty-button-medium"),
-        Widgets.createDifficultyButton("Hard", 3, model, "difficulty-button-hard"));
+        createDifficultyButton("Easy", 1, model, "difficulty-button-easy"),
+        createDifficultyButton("Medium", 2, model, "difficulty-button-medium"),
+        createDifficultyButton("Hard", 3, model, "difficulty-button-hard"));
   }
 
   private Node createStatsBox() {
@@ -61,5 +57,12 @@ public class CharacterDifficultyScreenBuilder implements Builder<Region> {
       results.getChildren().add(label);
     }
     return results;
+  }
+
+  public static Button createDifficultyButton(String label,
+                                              int difficulty,
+                                              CharacterScreenState model,
+                                              String styleClass) {
+    return Widgets.createButton(label, () -> model.setDifficulty(difficulty), styleClass);
   }
 }

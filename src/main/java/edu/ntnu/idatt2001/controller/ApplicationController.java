@@ -2,17 +2,17 @@ package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
-import edu.ntnu.idatt2001.model.gui.ApplicationModel;
-import edu.ntnu.idatt2001.model.gui.ScreenType;
-import edu.ntnu.idatt2001.model.gui.controlleractions.ControllerAction;
-import edu.ntnu.idatt2001.model.gui.controlleractions.ControllerActionFactory;
+import edu.ntnu.idatt2001.model.state.ApplicationState;
+import edu.ntnu.idatt2001.model.screentype.ApplicationScreenType;
+import edu.ntnu.idatt2001.model.actions.controller.ControllerAction;
+import edu.ntnu.idatt2001.model.actions.controller.ControllerActionFactory;
 import edu.ntnu.idatt2001.util.MusicManager;
 import edu.ntnu.idatt2001.view.ApplicationScreenBuilder;
 import javafx.scene.layout.Region;
 
 public class ApplicationController extends Controller {
   private final Region view;
-  private final ApplicationModel model;
+  private final ApplicationState model;
   private final ControllerActionFactory actionFactory;
   private final MusicManager musicManager;
 
@@ -22,10 +22,15 @@ public class ApplicationController extends Controller {
                                Region settingsView,
                                Region menubarView,
                                MusicManager musicManager) {
-    model = new ApplicationModel();
-    model.setCurrentScreen(ScreenType.TITLE_SCREEN);
+    model = new ApplicationState();
+    model.setCurrentScreen(ApplicationScreenType.TITLE_SCREEN);
 
-    view = new ApplicationScreenBuilder(model, titleView, gameView, characterView, settingsView, menubarView).build();
+    view = new ApplicationScreenBuilder(model,
+      titleView,
+      gameView,
+      characterView,
+      settingsView,
+      menubarView).build();
 
     actionFactory = new ControllerActionFactory();
 

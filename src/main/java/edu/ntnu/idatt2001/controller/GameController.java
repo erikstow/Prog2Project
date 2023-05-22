@@ -5,18 +5,18 @@ import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.game.Link;
 import edu.ntnu.idatt2001.model.game.Passage;
 import edu.ntnu.idatt2001.model.game.Player;
-import edu.ntnu.idatt2001.model.gui.GameModel;
+import edu.ntnu.idatt2001.model.state.GameState;
 import edu.ntnu.idatt2001.view.GameScreenBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.Region;
 
 public class GameController extends Controller implements ControllerObserver {
-  private final GameModel model;
+  private final GameState model;
   private final Region view;
 
   public GameController() {
-    this.model = new GameModel();
+    this.model = new GameState();
     this.view = new GameScreenBuilder(model, this::linkClicked).build();
   }
 

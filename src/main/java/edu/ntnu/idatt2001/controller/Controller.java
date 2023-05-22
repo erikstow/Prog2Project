@@ -1,7 +1,6 @@
 package edu.ntnu.idatt2001.controller;
 
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;

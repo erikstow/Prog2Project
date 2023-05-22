@@ -1,26 +1,33 @@
 package edu.ntnu.idatt2001.view.characterScreen;
 
 import edu.ntnu.idatt2001.model.goals.Goal;
-import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
-import edu.ntnu.idatt2001.util.widgets.Widgets;
+import edu.ntnu.idatt2001.model.state.CharacterScreenState;
+import edu.ntnu.idatt2001.util.Widgets;
+import java.util.function.UnaryOperator;
+import java.util.regex.Pattern;
 import javafx.beans.InvalidationListener;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Builder;
-import java.util.function.UnaryOperator;
-import java.util.regex.Pattern;
 
 public class CharacterGoalsScreenBuilder implements Builder<Region> {
 
-  private final CharacterScreenModel model;
+  private final CharacterScreenState model;
   private final Runnable addGoal;
   private final Runnable undoGoal;
 
-  public CharacterGoalsScreenBuilder(CharacterScreenModel model, Runnable addGoal, Runnable undoGoal) {
+  public CharacterGoalsScreenBuilder(CharacterScreenState model,
+                                     Runnable addGoal,
+                                     Runnable undoGoal) {
     this.model = model;
     this.addGoal = addGoal;
     this.undoGoal = undoGoal;
@@ -54,19 +61,32 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
   }
 
   private Node createGoalAdderBox() {
-    VBox results = new VBox();
-    Label goalAddPrompt = Widgets.createLabel("Choose goals to add", "goal-add-prompt");
+    VBox results = new VBox(
+        Widgets.createLabel("Choose goals to add", "goal-add-prompt")
+    );
+
     ComboBox<String> goalType = createGoalTypeComboBox();
     goalType.getStyleClass().add("goal-type-combobox");
-    TextField goalValue = createGoalValueField(goalType);
+    results.getChildren().add(goalType);
 
-    Button addGoalButton = Widgets.createButton("Add Goal", () -> {addGoal.run(); goalValue.setText("");}, "add-goal-button");
-    addGoalButton.disableProperty().bind(goalValue.textProperty().isEmpty().or(goalType.valueProperty().isNull()));
-    results.getChildren().addAll(goalAddPrompt, goalType, goalValue, addGoalButton);
+    TextField goalValue = createGoalValueField(goalType);
+    results.getChildren().add(goalValue);
+
+    Button addGoalButton = Widgets.createButton("Add Goal", () -> {
+      addGoal.run();
+      goalValue.setText("");
+    }, "add-goal-button");
+
+    addGoalButton
+        .disableProperty()
+        .bind(goalValue.textProperty().isEmpty().or(goalType.valueProperty().isNull()));
+    addGoalButton.setDefaultButton(true);
+    results.getChildren().add(addGoalButton);
+
     results.getStyleClass().add("goal-adder-box");
     return results;
   }
-  
+
   private TextField createGoalValueField(ComboBox<String> goalType) {
     TextField results = new TextField();
     results.textProperty().bindBidirectional(model.goalValue());
@@ -88,7 +108,9 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     });
 
     results.textProperty().addListener((observable, oldValue, newValue) -> {
-      if (!newValue.isEmpty() && checkIntegerOverflow(newValue) && !goalType.getValue().equals("Inventory")) {
+      boolean newValueValid = !newValue.isEmpty() && checkIntegerOverflow(newValue);
+      boolean notInventory = !goalType.getValue().equals("Inventory");
+      if (newValueValid && notInventory) {
         results.setText(oldValue);
       }
     });
@@ -103,7 +125,7 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     results.valueProperty().bindBidirectional(model.goalType());
 
     return results;
-  } 
+  }
 
   private TextFormatter<String> getPositiveIntegerFormatter() {
     UnaryOperator<TextFormatter.Change> filter = change -> {

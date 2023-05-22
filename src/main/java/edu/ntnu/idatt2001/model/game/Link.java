@@ -1,6 +1,6 @@
 package edu.ntnu.idatt2001.model.game;
 
-import edu.ntnu.idatt2001.model.actions.Action;
+import edu.ntnu.idatt2001.model.actions.player.Action;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -72,10 +72,10 @@ public class Link {
   public String getAsString() {
     StringBuilder sb = new StringBuilder();
     sb.append("[")
-      .append(getText())
-      .append("](")
-      .append(getReference())
-      .append(")\n");
+        .append(getText())
+        .append("](")
+        .append(getReference())
+        .append(")\n");
     for (Action action : this.actions) {
       sb.append(action.getAsString());
     }

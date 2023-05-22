@@ -1,7 +1,7 @@
 package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.model.game.Link;
-import edu.ntnu.idatt2001.model.gui.GameModel;
+import edu.ntnu.idatt2001.model.state.GameState;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -18,10 +18,10 @@ import javafx.util.Duration;
 import java.util.function.Consumer;
 
 public class GameScreenBuilder implements Builder<Region> {
-  private final GameModel model;
+  private final GameState model;
   private final Consumer<Link> linkClickAction;
 
-  public GameScreenBuilder(GameModel model, Consumer<Link> linkClickAction) {
+  public GameScreenBuilder(GameState model, Consumer<Link> linkClickAction) {
     this.model = model;
     this.linkClickAction = linkClickAction;
   }

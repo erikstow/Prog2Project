@@ -1,6 +1,10 @@
 package edu.ntnu.idatt2001.model.game;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 /** 
  * A story is a collection of passages. It contains the title of the story,
@@ -115,8 +119,12 @@ public class Story {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Story story = (Story) o;
     return Objects.equals(title, story.title) && Objects.equals(passages, story.passages) && Objects.equals(openingPassage, story.openingPassage);
   }

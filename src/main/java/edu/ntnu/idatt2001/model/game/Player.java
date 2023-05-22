@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * A player is a character in the game. It contains the name of the player, 
+ * A player is a character in the game. It contains the name of the player,
  * the health of the player, the score of the player, the gold of the player.
  * Aswell as the inventory of the player.
  * It uses the builder pattern to create a player.
@@ -20,7 +20,7 @@ public class Player {
   /**
    * A private constructor for the player class.
    * To create a player, use the PlayerBuilder class.
-   * 
+   *
    * @param builder The builder to create the player.
    */
   private Player(PlayerBuilder builder) {
@@ -55,8 +55,8 @@ public class Player {
      * @param name The name of the player.
      */
     public PlayerBuilder(String name) {
-    Objects.requireNonNull(name, "Name cannot be null");
-      
+      Objects.requireNonNull(name, "Name cannot be null");
+
       this.name = name;
       this.health = 100;
       this.score = 0;
@@ -66,9 +66,8 @@ public class Player {
 
     /**
      * Method to set the health of the player.
-     * 
+     *
      * @param health The health of the player.
-     * 
      * @return The builder.
      */
     public PlayerBuilder health(int health) {
@@ -82,9 +81,8 @@ public class Player {
 
     /**
      * Method to set the score of the player.
-     * 
+     *
      * @param score The score of the player.
-     * 
      * @return The builder.
      */
     public PlayerBuilder score(int score) {
@@ -97,9 +95,8 @@ public class Player {
 
     /**
      * Method to set the gold of the player.
-     * 
+     *
      * @param gold The gold of the player.
-     * 
      * @return The builder.
      */
     public PlayerBuilder gold(int gold) {
@@ -112,9 +109,8 @@ public class Player {
 
     /**
      * Method to set the inventory of the player.
-     * 
+     *
      * @param inventory The inventory of the player.
-     * 
      * @return The builder.
      */
     public PlayerBuilder inventory(List<String> inventory) {
@@ -127,7 +123,7 @@ public class Player {
 
     /**
      * A method for retunring the built player.
-     * 
+     *
      * @return The built player.
      */
     public Player build() {
@@ -135,7 +131,7 @@ public class Player {
     }
   }
 
-    /**
+  /**
    * Method to get the name of the player.
    *
    * @return The name of the player.
@@ -180,7 +176,7 @@ public class Player {
     return inventory;
   }
 
-  /** 
+  /**
    * Method to add health to the player.
    *
    * @param health The amount of health to be added.
@@ -214,7 +210,7 @@ public class Player {
    */
   public void addToInventory(String item) throws NullPointerException {
     Objects.requireNonNull(item, "Item cannot be null");
-    
+
     inventory.add(item);
   }
 }

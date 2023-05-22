@@ -1,6 +1,8 @@
 package edu.ntnu.idatt2001.view;
 
-import edu.ntnu.idatt2001.util.widgets.Widgets;
+import edu.ntnu.idatt2001.util.Widgets;
+import java.io.File;
+import java.util.function.Consumer;
 import javafx.scene.Node;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.input.KeyCode;
@@ -11,20 +13,19 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Builder;
 import javafx.util.Duration;
 
-import java.io.File;
-import java.util.function.Consumer;
 
 public class MenubarScreenBuilder implements Builder<Region> {
   private final Consumer<String> buttonAction;
+
   public MenubarScreenBuilder(Consumer<String> buttonAction) {
     this.buttonAction = buttonAction;
   }
 
   public Region build() {
     HBox results = new HBox(
-      Widgets.createButton("", () -> buttonAction.accept("settings"), "button-settings"),
-      Widgets.createButton("", () -> buttonAction.accept("help"), "button-help"),
-      createToggleButton("", () -> buttonAction.accept("music"), "button-music")
+        Widgets.createButton("", () -> buttonAction.accept("settings"), "button-settings"),
+        Widgets.createButton("", () -> buttonAction.accept("help"), "button-help"),
+        createToggleButton("", () -> buttonAction.accept("music"), "button-music")
     );
 
     results.setOnKeyPressed(event -> {
@@ -42,7 +43,8 @@ public class MenubarScreenBuilder implements Builder<Region> {
     ToggleButton button = new ToggleButton(text);
     button.getStyleClass().add(styleClass);
     button.setOnAction(event -> {
-      Media clickSound = new Media(new File("src/main/resources/sound/click.mp3").toURI().toString());
+      String clickFile = new File("src/main/resources/sound/click.mp3").toURI().toString();
+      Media clickSound = new Media(clickFile);
       MediaPlayer mediaPlayer = new MediaPlayer(clickSound);
       mediaPlayer.seek(Duration.ZERO);
       mediaPlayer.play();

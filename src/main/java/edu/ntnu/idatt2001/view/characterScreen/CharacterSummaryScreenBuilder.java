@@ -1,8 +1,8 @@
 package edu.ntnu.idatt2001.view.characterScreen;
 
 import edu.ntnu.idatt2001.model.goals.Goal;
-import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
-import edu.ntnu.idatt2001.util.widgets.Widgets;
+import edu.ntnu.idatt2001.model.state.CharacterScreenState;
+import edu.ntnu.idatt2001.util.Widgets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -12,8 +12,9 @@ import javafx.scene.layout.VBox;
 import javafx.util.Builder;
 
 public class CharacterSummaryScreenBuilder implements Builder<Region> {
-  private final CharacterScreenModel model;
-  public CharacterSummaryScreenBuilder(CharacterScreenModel model) {
+  private final CharacterScreenState model;
+
+  public CharacterSummaryScreenBuilder(CharacterScreenState model) {
     this.model = model;
   }
 
@@ -24,12 +25,12 @@ public class CharacterSummaryScreenBuilder implements Builder<Region> {
     hbox.getStyleClass().add("hbox");
     results.getStylesheets().add("summaryscreen.css");
     hbox.getChildren().addAll(
-      createDifficultyBox(),
-      createGoalsBox()
+        createDifficultyBox(),
+        createGoalsBox()
     );
     results.getChildren().addAll(
-      createPlayerInfoBox(),
-      hbox
+        createPlayerInfoBox(),
+        hbox
     );
     return results;
   }
@@ -64,18 +65,18 @@ public class CharacterSummaryScreenBuilder implements Builder<Region> {
     VBox statsTypeLabel = new VBox();
     statsTypeLabel.getStyleClass().add("stats-label-box");
     statsTypeLabel.getChildren().addAll(
-      Widgets.createLabel("Health: ", "stats-label"),
-      Widgets.createLabel("Gold: ", "stats-label"),
-      Widgets.createLabel("Score: ", "stats-label"),
-      Widgets.createLabel("Inventory: ", "stats-label")
+        Widgets.createLabel("Health: ", "stats-label"),
+        Widgets.createLabel("Gold: ", "stats-label"),
+        Widgets.createLabel("Score: ", "stats-label"),
+        Widgets.createLabel("Inventory: ", "stats-label")
     );
     VBox statsValueLabel = new VBox();
     statsValueLabel.getStyleClass().add("stats-label-box");
     statsValueLabel.getChildren().addAll(
-      Widgets.createLabelWithBinding(model.health(), "stats-value"),
-      Widgets.createLabelWithBinding(model.gold(), "stats-value"),
-      Widgets.createLabelWithBinding(model.score(), "stats-value"),
-      Widgets.createLabelWithBinding(model.inventory(), "stats-value")
+        Widgets.createLabelWithBinding(model.health(), "stats-value"),
+        Widgets.createLabelWithBinding(model.gold(), "stats-value"),
+        Widgets.createLabelWithBinding(model.score(), "stats-value"),
+        Widgets.createLabelWithBinding(model.inventory(), "stats-value")
     );
     results.getChildren().addAll(statsTypeLabel, statsValueLabel);
     return results;

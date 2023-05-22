@@ -1,14 +1,14 @@
 package edu.ntnu.idatt2001.filehandling;
 
-import edu.ntnu.idatt2001.model.actions.Action;
-import edu.ntnu.idatt2001.model.actions.GoldAction;
-import edu.ntnu.idatt2001.model.actions.InventoryAction;
-import edu.ntnu.idatt2001.model.actions.ScoreAction;
+import edu.ntnu.idatt2001.model.actions.player.Action;
+import edu.ntnu.idatt2001.model.actions.player.GoldAction;
+import edu.ntnu.idatt2001.model.actions.player.InventoryAction;
+import edu.ntnu.idatt2001.model.actions.player.ScoreAction;
 import edu.ntnu.idatt2001.model.game.Link;
 import edu.ntnu.idatt2001.model.game.Passage;
 import edu.ntnu.idatt2001.model.game.Story;
-import edu.ntnu.idatt2001.util.filehandling.text.StoryReader;
-import edu.ntnu.idatt2001.util.filehandling.text.StoryWriter;
+import edu.ntnu.idatt2001.util.StoryReader;
+import edu.ntnu.idatt2001.util.StoryWriter;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

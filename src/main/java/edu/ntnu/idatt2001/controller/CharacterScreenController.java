@@ -1,40 +1,37 @@
 package edu.ntnu.idatt2001.controller;
 
-import java.util.ArrayList;
-
 import edu.ntnu.idatt2001.model.events.ControllerEvent;
 import edu.ntnu.idatt2001.model.events.DataUpdateEvent;
 import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.goals.Goal;
 import edu.ntnu.idatt2001.model.goals.GoalFactory;
-import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenModel;
-import edu.ntnu.idatt2001.model.gui.characterScreenModel.CharacterScreenType;
+import edu.ntnu.idatt2001.model.state.CharacterScreenState;
+import edu.ntnu.idatt2001.model.screentype.CharacterScreenType;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterDifficultyScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterGoalsScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterInfoScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterSummaryScreenBuilder;
-import javafx.collections.FXCollections;
+import java.util.ArrayList;
 import javafx.scene.layout.Region;
 
-public class CharacterScreenController extends Controller  {
+public class CharacterScreenController extends Controller {
 
-  private final Region infoView;
-  private final Region difficultyView;
-  private final Region goalsView;
-  private final Region summaryView;
   private final Region view;
-  private final CharacterScreenModel model;
-  
+  private final CharacterScreenState model;
+
 
   public CharacterScreenController() {
-    model = new CharacterScreenModel();
-    infoView = new CharacterInfoScreenBuilder(model).build();
-    difficultyView = new CharacterDifficultyScreenBuilder(model).build();
-    goalsView = new CharacterGoalsScreenBuilder(model, this::addGoal, this::undoGoal).build();
-    summaryView = new CharacterSummaryScreenBuilder(model).build();
-    model.setCurrentScreen(infoView);
-    view = new CharacterScreenBuilder(model, this::back, this::next).build();
+    model = new CharacterScreenState();
+    model.setCurrentScreen(CharacterScreenType.INFO_SCREEN);
+
+    view = new CharacterScreenBuilder(model, this::back, this::next,
+        new CharacterInfoScreenBuilder(model).build(),
+        new CharacterDifficultyScreenBuilder(model).build(),
+        new CharacterGoalsScreenBuilder(model, this::addGoal, this::undoGoal).build(),
+        new CharacterSummaryScreenBuilder(model).build()
+    ).build();
+
     model.difficulty().addListener((observable, oldValue, newValue) -> {
       if (newValue != null && newValue.intValue() != 0) {
         model.sethealth(30 / model.getDifficulty());
@@ -52,32 +49,34 @@ public class CharacterScreenController extends Controller  {
   }
 
   private void back() {
-    if (model.getCurrentScreen() == difficultyView) {
-      this.changeScreen(CharacterScreenType.INFO_SCREEN);
-    } else if (model.getCurrentScreen() == goalsView) {
-      this.changeScreen(CharacterScreenType.DIFFICULTY_SCREEN);
-    } else if (model.getCurrentScreen() == summaryView) {
-      this.changeScreen(CharacterScreenType.GOALS_SCREEN);
+    if (model.getCurrentScreen() == CharacterScreenType.DIFFICULTY_SCREEN) {
+      model.setCurrentScreen(CharacterScreenType.INFO_SCREEN);
+    } else if (model.getCurrentScreen() == CharacterScreenType.GOALS_SCREEN) {
+      model.setCurrentScreen(CharacterScreenType.DIFFICULTY_SCREEN);
+    } else if (model.getCurrentScreen() == CharacterScreenType.SUMMARY_SCREEN) {
+      model.setCurrentScreen(CharacterScreenType.GOALS_SCREEN);
+    } else {
+      update(new DataUpdateEvent("returnToTitle", null));
     }
   }
 
-  private void next() {  
-    if (model.getCurrentScreen() == infoView) {
-      this.changeScreen(CharacterScreenType.DIFFICULTY_SCREEN);
-    } else if (model.getCurrentScreen() == difficultyView) {
-      this.changeScreen(CharacterScreenType.GOALS_SCREEN);
-    } else if (model.getCurrentScreen() == goalsView) {
-      this.changeScreen(CharacterScreenType.SUMMARY_SCREEN);
-    } else if (model.getCurrentScreen() == summaryView) {
-      this.start();
+  private void next() {
+    if (model.getCurrentScreen() == CharacterScreenType.INFO_SCREEN) {
+      model.setCurrentScreen(CharacterScreenType.DIFFICULTY_SCREEN);
+    } else if (model.getCurrentScreen() == CharacterScreenType.DIFFICULTY_SCREEN) {
+      model.setCurrentScreen(CharacterScreenType.GOALS_SCREEN);
+    } else if (model.getCurrentScreen() == CharacterScreenType.GOALS_SCREEN) {
+      model.setCurrentScreen(CharacterScreenType.SUMMARY_SCREEN);
+    } else {
+      start();
     }
   }
-  
+
   private void start() {
     Player player = new Player.PlayerBuilder(model.getName())
-      .gold(300 / model.getDifficulty())
-      .health(30 / model.getDifficulty())
-      .build();
+        .gold(300 / model.getDifficulty())
+        .health(30 / model.getDifficulty())
+        .build();
 
     DataUpdateEvent createdPlayer = new DataUpdateEvent("createdPlayer", player);
     DataUpdateEvent chosenGoals = new DataUpdateEvent("chosenGoals", model.getGoals());
@@ -90,8 +89,8 @@ public class CharacterScreenController extends Controller  {
   private void addGoal() {
     try {
       Goal goal = GoalFactory.get(
-        GoalFactory.GoalType.valueOf(model.getGoalType().toUpperCase() + "GOAL"),
-        model.getGoalValue());
+          GoalFactory.GoalType.valueOf(model.getGoalType().toUpperCase() + "GOAL"),
+          model.getGoalValue());
       model.goals().get().add(goal);
     } catch (NumberFormatException | NullPointerException e) {
       update(new DataUpdateEvent("error", e));
@@ -104,15 +103,6 @@ public class CharacterScreenController extends Controller  {
     }
   }
 
-  private void changeScreen(CharacterScreenType screen) {
-    switch (screen) {
-      case INFO_SCREEN -> model.setCurrentScreen(infoView);
-      case DIFFICULTY_SCREEN -> model.setCurrentScreen(difficultyView);
-      case GOALS_SCREEN -> model.setCurrentScreen(goalsView);
-      case SUMMARY_SCREEN -> model.setCurrentScreen(summaryView);
-    }
-  }
-    
   public Region getView() {
     return view;
   }
@@ -120,16 +110,15 @@ public class CharacterScreenController extends Controller  {
   @Override
   public void onUpdate(ControllerEvent event) {
     if (event.getKey().equals("reset")) {
-      model.setName("");
-      model.setAppearence("");
-      model.setDifficulty(0);
-      model.goals().set(FXCollections.observableList(new ArrayList<>()));
-      model.goalType().set(null);
-      changeScreen(CharacterScreenType.INFO_SCREEN);
+      model.reset();
+      model.setCurrentScreen(CharacterScreenType.INFO_SCREEN);
     }
   }
 
   private void isStartAllowed() {
-    model.setNextAllowed(model.getCurrentScreen() != summaryView || (model.getDifficulty() != 0 && !model.getName().isEmpty()));
-    }
+    boolean isSummaryScreen = model.getCurrentScreen() != CharacterScreenType.SUMMARY_SCREEN;
+    boolean validName = !model.getName().isEmpty();
+    boolean validDifficulty =  model.getDifficulty() != 0;
+    model.setNextAllowed(isSummaryScreen || (validDifficulty && validName));
   }
+}

@@ -3,7 +3,7 @@ package edu.ntnu.idatt2001.actions;
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.ntnu.idatt2001.model.game.Player;
-import edu.ntnu.idatt2001.model.actions.InventoryAction;
+import edu.ntnu.idatt2001.model.actions.player.InventoryAction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

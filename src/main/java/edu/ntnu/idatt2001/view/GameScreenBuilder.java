@@ -2,6 +2,7 @@ package edu.ntnu.idatt2001.view;
 
 import edu.ntnu.idatt2001.model.game.Link;
 import edu.ntnu.idatt2001.model.gui.GameModel;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.StringProperty;
@@ -51,10 +52,10 @@ public class GameScreenBuilder implements Builder<Region> {
 
   private Node createPlayerBox() {
     return new VBox(
-    createLabel(model.healthProperty()),
-    createLabel(model.goldProperty()),
-    createLabel(model.scoreProperty())
-    // createLabel(model.inventoryProperty())
+      createLabel(model.healthProperty()),
+      createLabel(model.goldProperty()),
+      createLabel(model.scoreProperty())
+      // createLabel(model.inventoryProperty())
     );
   }
 
@@ -73,24 +74,37 @@ public class GameScreenBuilder implements Builder<Region> {
 
   private Label createContentLabel(BorderPane view) {
     Label results = new Label();
+    final Timeline[] timeline = new Timeline[1];
 
     model.contentProperty().addListener((observable, oldValue, newValue) -> {
+      if (timeline[0] != null && timeline[0].getStatus() == Animation.Status.RUNNING) {
+        timeline[0].stop();
+      }
       results.setText("");
-      final int[] index = {0};
-      Timeline timeline = new Timeline(new KeyFrame(Duration.millis(20), event -> {
-        results.setText(results.getText() + model.getContent().charAt(index[0]));
-        index[0]++;
-      }));
+      timeline[0] = createContentTimeline(results, newValue);
+      timeline[0].play();
+    });
 
-      timeline.setCycleCount(model.getContent().length());
-      timeline.play();
-
-      view.setOnMouseClicked(event -> {
-        timeline.stop();
+    view.setOnMouseClicked(event -> {
+      if (timeline[0] != null && timeline[0].getStatus() == Animation.Status.RUNNING) {
+        timeline[0].stop();
         results.setText(model.getContent());
-      });
+      }
     });
 
     return results;
+  }
+
+  private Timeline createContentTimeline(Label label, String content) {
+    final int[] index = new int[1];
+    Timeline timeline = new Timeline();
+
+    timeline.getKeyFrames().add(new KeyFrame(Duration.millis(20), event -> {
+      label.setText(label.getText() + model.getContent().charAt(index[0]));
+      index[0]++;
+    }));
+    timeline.setCycleCount(content.length());
+
+    return timeline;
   }
 }

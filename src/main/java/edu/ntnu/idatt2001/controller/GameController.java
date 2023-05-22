@@ -9,6 +9,7 @@ import edu.ntnu.idatt2001.model.state.GameState;
 import edu.ntnu.idatt2001.view.GameScreenBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 
 public class GameController extends Controller implements ControllerObserver {
@@ -30,6 +31,8 @@ public class GameController extends Controller implements ControllerObserver {
         updatePassage(passage);
       } else if (due.getKey().equals("player") && due.getValue() instanceof Player player) {
         updatePlayer(player);
+      } else if (due.getKey().equals("chosenSprite") && due.getValue() instanceof Image image) {
+        model.setPlayerSprite(image);
       }
     }
   }

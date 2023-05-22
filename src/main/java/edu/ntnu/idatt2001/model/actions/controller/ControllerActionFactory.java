@@ -16,6 +16,7 @@ public class ControllerActionFactory {
       case "settings" -> new ClickSettingsAction();
       case "help" -> new ClickHelpAction();
       case "music" -> new ClickMuteAction();
+      case "chosenSprite" -> new SetChosenSpriteAction();
       default -> throw new IllegalArgumentException("Can't parse action: " + actionType);
     };
   }

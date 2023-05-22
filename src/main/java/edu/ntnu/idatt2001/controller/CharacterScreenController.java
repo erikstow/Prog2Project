@@ -13,6 +13,11 @@ import edu.ntnu.idatt2001.view.characterScreen.CharacterInfoScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterSummaryScreenBuilder;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Region;
 
 public class CharacterScreenController extends Controller {
@@ -46,6 +51,8 @@ public class CharacterScreenController extends Controller {
       }
     });
     model.currentScreen().addListener((observable, oldValue, newValue) -> isStartAllowed());
+    model.setPlayerImages(FXCollections.observableList(getPlayerImages()));
+    System.out.println(model.getPlayerImages().size());
   }
 
   private void back() {
@@ -80,9 +87,12 @@ public class CharacterScreenController extends Controller {
 
     DataUpdateEvent createdPlayer = new DataUpdateEvent("createdPlayer", player);
     DataUpdateEvent chosenGoals = new DataUpdateEvent("chosenGoals", model.getGoals());
+    DataUpdateEvent chosenSprite = new DataUpdateEvent("chosenSprite", model.getChosenPlayerImage());
     DataUpdateEvent startPressed = new DataUpdateEvent("startGamePressed", null);
+
     update(createdPlayer);
     update(chosenGoals);
+    update(chosenSprite);
     update(startPressed);
   }
 
@@ -116,9 +126,19 @@ public class CharacterScreenController extends Controller {
   }
 
   private void isStartAllowed() {
-    boolean isSummaryScreen = model.getCurrentScreen() != CharacterScreenType.SUMMARY_SCREEN;
+    boolean notSummaryScreen = model.getCurrentScreen() != CharacterScreenType.SUMMARY_SCREEN;
     boolean validName = !model.getName().isEmpty();
     boolean validDifficulty =  model.getDifficulty() != 0;
-    model.setNextAllowed(isSummaryScreen || (validDifficulty && validName));
+    boolean hasSprite = model.getChosenPlayerImage() != null;
+    boolean startAllowed = validDifficulty && validName && hasSprite;
+    model.setNextAllowed(notSummaryScreen || startAllowed);
+  }
+
+  private List<Image> getPlayerImages() {
+    return Arrays.asList(getImage("female-sprite.png"), getImage("male-sprite.png"));
+  }
+
+  private Image getImage(String path) {
+    return new Image(getClass().getResourceAsStream("/images/" + path));
   }
 }

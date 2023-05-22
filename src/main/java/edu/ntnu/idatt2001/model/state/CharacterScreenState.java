@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
+import javafx.scene.image.Image;
 
 public class CharacterScreenState {
   
@@ -33,6 +34,8 @@ public class CharacterScreenState {
   private final StringProperty goalValue = new SimpleStringProperty();
   private final ObjectProperty<CharacterScreenType> currentScreen = new SimpleObjectProperty<>();
   private final BooleanProperty nextAllowed = new SimpleBooleanProperty(true);
+  private final ListProperty<Image> playerImages = new SimpleListProperty<>(FXCollections.observableArrayList());
+  private Image chosenPlayerImage;
 
   public void reset() {
     setName("");
@@ -164,5 +167,25 @@ public class CharacterScreenState {
 
   public void setNextAllowed(boolean nextAllowed) {
     this.nextAllowed.set(nextAllowed);
+  }
+
+  public List<Image> getPlayerImages() {
+    return playerImages.get();
+  }
+
+  public ListProperty<Image> playerImagesProperty() {
+    return playerImages;
+  }
+
+  public void setPlayerImages(List<Image> playerImages) {
+    this.playerImages.set(FXCollections.observableArrayList(playerImages));
+  }
+
+  public Image getChosenPlayerImage() {
+    return chosenPlayerImage;
+  }
+
+  public void setChosenPlayerImage(Image chosenPlayerImage) {
+    this.chosenPlayerImage = chosenPlayerImage;
   }
 }

@@ -11,7 +11,12 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+/**
+ * StoryReader is a utility class that reads stories from files.
+ * Each story consists of passages and links. Links may contain actions.
+ * The passages, links, and actions are defined by specific patterns in the file text.
+ * This class uses regular expressions (Patterns) to identify the different elements of a story.
+ */
 public class StoryReader {
   private static final Pattern PASSAGE_PATTERN = Pattern.compile("::.*");
   private static final Pattern LINK_PATTERN = Pattern.compile("\\[.*");
@@ -20,10 +25,21 @@ public class StoryReader {
   private static final Pattern ACTION_PATTERN = Pattern.compile("!.*");
   private static final String ACTION_DELIMITER = ":";
 
+  /**
+   * Private constructor for utility class.
+   */
   private StoryReader() {
     // Empty
   }
 
+  /**
+   * Reads a Story from the file at the specified path.
+   * The story is composed of a title, opening passage, and additional passages if available.
+   *
+   * @param path The file path to read the story from.
+   * @return A Story object containing the data from the file.
+   * @throws IOException If an error occurs while trying to read the file.
+   */
   public static Story read(String path) throws IOException {
     Story story;
 
@@ -48,6 +64,13 @@ public class StoryReader {
     return story;
   }
 
+  /**
+   * Reads a Passage from the Scanner.
+   * The passage includes a title, content, and any available links.
+   *
+   * @param scanner A Scanner object that is used to read the passage.
+   * @return A Passage object containing the data read from the Scanner.
+   */
   private static Passage readPassage(Scanner scanner) {
     String title = scanner.nextLine();
     title = title.substring(2);
@@ -62,6 +85,14 @@ public class StoryReader {
     return passage;
   }
 
+
+  /**
+   * Reads a Link from the Scanner.
+   * The link includes a link text, link reference, and any available actions.
+   *
+   * @param scanner A Scanner object that is used to read the link.
+   * @return A Link object containing the data read from the Scanner.
+   */
   private static Link readLink(Scanner scanner) {
     String line = scanner.nextLine();
     Matcher textMatcher = LINK_TEXT_PATTERN.matcher(line);
@@ -87,6 +118,13 @@ public class StoryReader {
     return link;
   }
 
+  /**
+   * Reads an Action from the Scanner.
+   * The action includes an action type and action value.
+   *
+   * @param scanner A Scanner object that is used to read the action.
+   * @return An Action object containing the data read from the Scanner.
+   */
   private static Action readAction(Scanner scanner) {
     String line = scanner.nextLine();
     line = line.substring(1);
@@ -97,6 +135,12 @@ public class StoryReader {
     return ActionFactory.get(actionType, actionValue);
   }
 
+  /**
+   * Parses a String to match it with an ActionType.
+   *
+   * @param action A String that represents the action type.
+   * @return An ActionType that matches the given string.
+   */
   private static ActionFactory.ActionType parseActionType(String action) {
     return ActionFactory.ActionType.valueOf((action.toUpperCase()));
   }

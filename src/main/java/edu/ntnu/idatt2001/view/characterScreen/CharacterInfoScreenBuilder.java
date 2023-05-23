@@ -12,16 +12,30 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Builder;
 
-import java.util.List;
-
+/**
+ * This class provides a builder for the character information screen in the game.
+ * The screen displays the character's name and appearance, *
+ * and provides an interface for changing these attributes.
+ */
 public class CharacterInfoScreenBuilder implements Builder<Region> {
 
-  private final CharacterScreenState model;
+  private final CharacterScreenState state;
 
-  public CharacterInfoScreenBuilder(CharacterScreenState model) {
-    this.model = model;
+  /**
+   * Constructor for CharacterInfoScreenBuilder.
+   *
+   * @param state the CharacterScreenState model containing the current character state
+   */
+  public CharacterInfoScreenBuilder(CharacterScreenState state) {
+    this.state = state;
   }
 
+  /**
+   * Builds the character information screen as a Region.
+   * Sets up the layout and bindings for all UI elements on the screen.
+   *
+   * @return a Region containing the character information screen
+   */
   @Override
   public Region build() {
     VBox results = new VBox();
@@ -30,7 +44,7 @@ public class CharacterInfoScreenBuilder implements Builder<Region> {
 
     Label name = Widgets.createLabel("Who are you?", "character-info-label");
     TextField nameField =
-        Widgets.createTextField("Name..", model.name(), "character-info-text-field");
+        Widgets.createTextField("Name..", state.name(), "character-info-text-field");
     Label appearance = Widgets.createLabel("What do you look like?", "character-info-label");
     Node appearanceField = createSpritePicker();
 
@@ -44,12 +58,19 @@ public class CharacterInfoScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates an HBox for choosing the character's sprite image.
+   * The HBox is populated with ImageViews for each available sprite,
+   * and clicking on an ImageView sets the corresponding image as the character's chosen sprite.
+   *
+   * @return a Node representing the HBox
+   */
   private Node createSpritePicker() {
     HBox results = new HBox();
-    model.playerImagesProperty().addListener((observable, oldValue, newValue) -> {
-      for (Image image : model.getPlayerImages()) {
+    state.playerImagesProperty().addListener((observable, oldValue, newValue) -> {
+      for (Image image : state.getPlayerImages()) {
         ImageView view = new ImageView(image);
-        view.setOnMouseClicked(event -> model.setChosenPlayerImage(image));
+        view.setOnMouseClicked(event -> state.setChosenPlayerImage(image));
         results.getChildren().add(view);
       }
     });

@@ -126,7 +126,9 @@ public class Story {
       return false;
     }
     Story story = (Story) o;
-    return Objects.equals(title, story.title) && Objects.equals(passages, story.passages) && Objects.equals(openingPassage, story.openingPassage);
+    return Objects.equals(title, story.title)
+        && Objects.equals(passages, story.passages)
+        && Objects.equals(openingPassage, story.openingPassage);
   }
 
   @Override

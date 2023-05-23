@@ -31,6 +31,11 @@ public class Player {
     this.inventory = new ArrayList<>(builder.inventory);
   }
 
+  /**
+   * A public copy constructor for the Player class.
+   *
+   * @param player The player to be copied
+   */
   public Player(Player player) {
     this.name = player.getName();
     this.gold = player.getGold();

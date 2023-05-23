@@ -9,15 +9,34 @@ import edu.ntnu.idatt2001.controller.TitleScreenController;
 import edu.ntnu.idatt2001.util.MusicManager;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
+/**
+ * The main class that serves as the entry point for the application.
+ * It initializes and configures the application's controllers and views,
+ * sets up the scene, and handles the primary stage.
+ */
 public class Main extends Application {
 
+  /**
+   * The main method that launches the JavaFX application.
+   *
+   * @param args the command-line arguments
+   */
   public static void main(String[] args) {
     launch(args);
   }
 
+
+  /**
+   * The start method of the JavaFX application.
+   * It sets up the primary stage, initializes controllers and views,
+   * and configures event handling.
+   *
+   * @param primaryStage the primary stage of the application
+   */
   @Override
   public void start(Stage primaryStage) {
   @Override
@@ -61,7 +80,7 @@ public class Main extends Application {
         primaryStage.setFullScreen(!primaryStage.isFullScreen());
       }
     });
-    // primaryStage.getIcons().add(new Image(""));
+    primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/icon.png")));
     primaryStage.show();
   }
 }

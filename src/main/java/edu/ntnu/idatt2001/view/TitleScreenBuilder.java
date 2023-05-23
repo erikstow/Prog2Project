@@ -13,17 +13,36 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Builder;
 
+/**
+ * This class is responsible for building the title screen of the game.
+ * The title screen includes the title and subtitle of the game,
+ * a dropdown to choose the story, a start button, and information about the game state.
+ */
 public class TitleScreenBuilder implements Builder<Region> {
-  private final TitleScreenState model;
+  private final TitleScreenState state;
   private final Runnable actionHandler;
   private final List<String> storyTitles;
 
-  public TitleScreenBuilder(TitleScreenState model, List<String> storyTitles, Runnable action) {
-    this.model = model;
+  /**
+   * Constructor for TitleScreenBuilder.
+   *
+   * @param state the TitleScreenState model that contains the current state of the title screen
+   * @param storyTitles a list of story titles
+   * @param action a Runnable to handle actions
+   */
+  public TitleScreenBuilder(TitleScreenState state, List<String> storyTitles, Runnable action) {
+    this.state = state;
     this.actionHandler = action;
     this.storyTitles = storyTitles;
   }
 
+  /**
+   * Builds and returns a Region representing the title screen.
+   * The screen includes the title and subtitle of the game,
+   * a dropdown to choose the story, a start button, and information about the game state.
+   *
+   * @return a Region containing the built title screen
+   */
   @Override
   public Region build() {
     VBox results = new VBox();
@@ -35,7 +54,7 @@ public class TitleScreenBuilder implements Builder<Region> {
     storySelect.getStyleClass().add("story-select");
 
     Button startButton = Widgets.createButton("START", actionHandler, "start-button");
-    startButton.disableProperty().bind(model.startAllowedPorperty().not());
+    startButton.disableProperty().bind(state.startAllowedPorperty().not());
 
     Node info = createInfoBox();
     info.getStyleClass().add("info-box");
@@ -43,29 +62,42 @@ public class TitleScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates and returns a ComboBox Node allowing the user to select a story.
+   *
+   * @param prompt the text to be displayed in the ComboBox when no option is selected
+   * @param options a list of story titles to be displayed as options in the ComboBox
+   * @return a Node containing the created ComboBox
+   */
   private Node createComboBox(String prompt, List<String> options) {
     ComboBox<String> results = new ComboBox<>();
     results.getStyleClass().add("story-select");
     results.setPromptText(prompt);
     results.getItems().addAll(options);
-    model.storyNameProperty().bindBidirectional(results.valueProperty());
+    state.storyNameProperty().bindBidirectional(results.valueProperty());
 
     return results;
   }
 
+
+  /**
+   * Creates and returns an InfoBox Node displaying information about the game state.
+   *
+   * @return a Node containing the created InfoBox
+   */
   private Node createInfoBox() {
     VBox results = new VBox();
     Label filePathPrompt = new Label("File Path:");
     filePathPrompt.getStyleClass().add("file-path-label");
     Label filePathLabel = new Label();
-    filePathLabel.textProperty().bind(model.filePathProperty());
+    filePathLabel.textProperty().bind(state.filePathProperty());
     filePathLabel.getStyleClass().add("file-path-label");
     
     Label brokenLinksPrompt = new Label("Broken Links:");
     brokenLinksPrompt.getStyleClass().add("broken-links-label");
     VBox brokenLinksBox = new VBox();
     brokenLinksBox.getStyleClass().add("broken-links-box");
-    model.brokenLinksProperty().addListener((observable, oldValue, newValue) -> {
+    state.brokenLinksProperty().addListener((observable, oldValue, newValue) -> {
       brokenLinksBox.getChildren().clear();
       brokenLinksBox.getChildren().add(formatBrokenLinksBox());
     });
@@ -76,9 +108,14 @@ public class TitleScreenBuilder implements Builder<Region> {
   }
 
 
+  /**
+   * Formats and returns a VBox Node containing information about broken links in the game.
+   *
+   * @return a Node containing the formatted VBox with broken link information
+   */
   private Node formatBrokenLinksBox() {
     VBox results = new VBox();
-    for (Link link : model.getBrokenLinks()) {
+    for (Link link : state.getBrokenLinks()) {
       Label label = new Label(link.getAsString());
       label.getStyleClass().add("broken-links-label");
       results.getChildren().add(label);

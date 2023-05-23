@@ -41,6 +41,10 @@ public class StoryReader {
    * @throws IOException If an error occurs while trying to read the file.
    */
   public static Story read(String path) throws IOException {
+    if (!path.endsWith(".paths")) {
+      throw new IOException("Invalid file type");
+    }
+    
     Story story;
 
     try (Scanner scanner = new Scanner(new File(path))) {

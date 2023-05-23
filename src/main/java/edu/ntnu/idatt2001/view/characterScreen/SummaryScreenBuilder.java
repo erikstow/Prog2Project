@@ -15,7 +15,7 @@ import javafx.util.Builder;
  * This class provides a builder for the character summary screen in the game.
  * The screen provides an overview of the character's current stats, goals, and other attributes.
  */
-public class CharacterSummaryScreenBuilder implements Builder<Region> {
+public class SummaryScreenBuilder implements Builder<Region> {
   private final CharacterScreenState state;
 
   /**
@@ -23,7 +23,7 @@ public class CharacterSummaryScreenBuilder implements Builder<Region> {
    *
    * @param state the CharacterScreenState model containing the current character state
    */
-  public CharacterSummaryScreenBuilder(CharacterScreenState state) {
+  public SummaryScreenBuilder(CharacterScreenState state) {
     this.state = state;
   }
 
@@ -38,7 +38,7 @@ public class CharacterSummaryScreenBuilder implements Builder<Region> {
     VBox results = new VBox();
     HBox hbox = new HBox();
     hbox.getStyleClass().add("hbox");
-    results.getStylesheets().add("summaryscreen.css");
+    results.getStylesheets().add("/css/summaryscreen.css");
     hbox.getChildren().addAll(
         createDifficultyBox(),
         createGoalsBox()
@@ -60,9 +60,7 @@ public class CharacterSummaryScreenBuilder implements Builder<Region> {
     results.getStyleClass().add("hbox");
     Label name = Widgets.createLabel("Name", "info-label");
     name.textProperty().bindBidirectional(state.name());
-    Label appearance = Widgets.createLabel("Appearance", "info-label");
-    appearance.textProperty().bindBidirectional(state.appearence());
-    results.getChildren().addAll(appearance, name);
+    results.getChildren().addAll(name);
     return results;
   }
 

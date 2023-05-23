@@ -38,6 +38,6 @@ public class InventoryGoal implements Goal {
 
   @Override
   public String toString() {
-    return "InventoryGoal{" + "mandatoryItems=" + mandatoryItems + '}';
+    return "Have " + mandatoryItems + " in inventory";
   }
 }

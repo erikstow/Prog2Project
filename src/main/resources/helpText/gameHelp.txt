@@ -5,5 +5,6 @@ Here you can choose options in response to
 the text on the screen.
 
 To skip the text animation, click the mouse button.
+If the text is too big for the text box, you can scroll to view the rest.
 
 Good luck!

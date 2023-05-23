@@ -24,7 +24,7 @@ import javafx.util.Builder;
  * The screen displays the character's goals and *
  * provides an interface for adding new goals and undoing the last goal.
  */
-public class CharacterGoalsScreenBuilder implements Builder<Region> {
+public class GoalsScreenBuilder implements Builder<Region> {
 
   private final CharacterScreenState state;
   private final Runnable addGoal;
@@ -37,9 +37,9 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
    * @param addGoal a Runnable to be executed when a goal is added
    * @param undoGoal a Runnable to be executed to undo the last goal
    */
-  public CharacterGoalsScreenBuilder(CharacterScreenState state,
-                                     Runnable addGoal,
-                                     Runnable undoGoal) {
+  public GoalsScreenBuilder(CharacterScreenState state,
+                            Runnable addGoal,
+                            Runnable undoGoal) {
     this.state = state;
     this.addGoal = addGoal;
     this.undoGoal = undoGoal;
@@ -54,11 +54,11 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
   @Override
   public Region build() {
     BorderPane results = new BorderPane();
-    Label goals = Widgets.createLabel("Define your goals", "define-goals-label");
+    Label goals = Widgets.createLabel("Achievable Gaols Only", "define-goals-label");
     results.setTop(goals);
     results.setCenter(createGoalsView());
     results.setLeft(createGoalAdderBox());
-    results.getStylesheets().add("goalscreen.css");
+    results.getStylesheets().add("/css/goalscreen.css");
     results.setAlignment(goals, Pos.CENTER);
     return results;
   }
@@ -74,7 +74,7 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     goalList.setItems(state.goals());
     goalList.getStyleClass().add("goals-list-view");
     results.getStyleClass().add("goals-view-box");
-    Button undoGoalButton = Widgets.createButton("Undo last Goal", undoGoal, "undo-goal-button");
+    Button undoGoalButton = Widgets.createButton("Undo", undoGoal, "undo-goal-button");
     undoGoalButton.disableProperty().setValue(true);
     goalList.getItems().addListener((InvalidationListener) change -> {
       undoGoalButton.disableProperty().setValue(goalList.getItems().isEmpty());
@@ -91,7 +91,7 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
    */
   private Node createGoalAdderBox() {
     VBox results = new VBox(
-        Widgets.createLabel("Choose goals to add", "goal-add-prompt")
+        Widgets.createLabel("Add goals", "goal-add-prompt")
     );
 
     ComboBox<String> goalType = createGoalTypeComboBox();
@@ -101,7 +101,7 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     TextField goalValue = createGoalValueField(goalType);
     results.getChildren().add(goalValue);
 
-    Button addGoalButton = Widgets.createButton("Add Goal", () -> {
+    Button addGoalButton = Widgets.createButton("Add", () -> {
       addGoal.run();
       goalValue.setText("");
     }, "add-goal-button");
@@ -133,10 +133,10 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
       if (newValue != null) {
         results.setText("");
         if (newValue.equals("Inventory")) {
-          results.setPromptText("Comma-separated list of items...");
+          results.setPromptText("An item...");
           results.setTextFormatter(null);
         } else {
-          results.setPromptText("An integer...");
+          results.setPromptText("A number...");
           results.setTextFormatter(getPositiveIntegerFormatter());
         }
       } else {

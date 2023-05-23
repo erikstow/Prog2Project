@@ -9,7 +9,7 @@
 .character-info-text-field {
   -fx-font-family: "Times New Roman";
   -fx-font-size: 20px;
-  -fx-background-color: #444; /* Dark background color */
+  -fx-background-color: rgba(0,0,0,0.6); /* Transparent background */
   -fx-text-fill: #FAF0E6; /* Light text color */
   -fx-prompt-text-fill: #808080; /* Light gray prompt text color */
   -fx-border-color: #FAF0E6; /* Border color same as text color */
@@ -61,14 +61,3 @@
 .sprite-box .sprite-image:pressed {
   -fx-effect: dropshadow(gaussian, #FF0000, 15, 0, 0, 0); /* Red drop shadow on click */
 }
-
-.sprite-box .sprite-image:last-clicked {
-  -fx-effect: dropshadow(gaussian, #00FF00, 15, 0, 0, 0); /* Green drop shadow for last clicked */
-  -fx-border-color: #00FF00; /* Green border color for last clicked */
-  -fx-border-width: 2px; /* Border width for last clicked */
-}
-
-
-
-
-

@@ -45,6 +45,9 @@ public class StartGamePressedAction implements ControllerAction {
     state.setCurrentScreen(ApplicationScreenType.GAME_SCREEN);
     controller.update(
         new DataUpdateEvent("gameStarted", null), SettingsController.class::isInstance);
+    controller.update(
+        new DataUpdateEvent(
+          "storyTitle", game.getStory().getTitle()), GameController.class::isInstance);
 
     controller.getMusicManager().stopAllTracks();
     controller.getMusicManager().playTrack("game");

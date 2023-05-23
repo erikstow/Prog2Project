@@ -2,12 +2,11 @@
 
 .define-goals-label {
   -fx-font-family: "Times New Roman";
-  -fx-font-size: 36px;
-  -fx-text-fill: #b22222; /* Firebrick red */
+  -fx-font-size: 30px;
+  -fx-text-fill: rgb(60, 60, 194);
   -fx-font-weight: bold;
   -fx-padding: 10px;
   -fx-alignment: center;
-  -fx-effect: dropshadow(three-pass-box, rgba(178,34,34,0.7), 10, 0.5, 0, 1); /* Red drop shadow */
 }
 
 .your-goals-label,
@@ -37,7 +36,7 @@
 .goals-list-view,
 .goal-value-text-field,
 .goal-type-combobox {
-  -fx-background-color: transparent; 
+  -fx-background-color: rgba(0,0,0,0.6);  /* Transparent black background */
   -fx-font-family: "Times New Roman";
   -fx-font-size: 24px;
   -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
@@ -46,6 +45,20 @@
   -fx-border-color: #FAF0E6;
   -fx-border-width: 2px;
 }
+
+.goal-value-text-field:hover {
+  -fx-border-color: #FFCC00; /* Yellow border color on hover */
+}
+
+.goal-value-text-field:focus {
+  -fx-border-color: #FF0000; /* Red border color when focused */
+}
+
+.goals-list-view:disabled,
+.goal-value-text-field:disabled {
+  -fx-opacity: 0.5; /* Reduce opacity for disabled text fields */
+}
+
 
 /* Styles for the cells within the list view */
 .goals-list-view .cell {

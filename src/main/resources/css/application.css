@@ -1,5 +1,5 @@
 .app-pane {
-  -fx-background-image: url('background-image.png');
+  -fx-background-image: url('/images/background-image.png');
   -fx-background-repeat: stretch; 
   -fx-background-size: cover;  
   -fx-background-position: center center;
@@ -34,19 +34,19 @@
 }
 
 .button-settings {
-  -fx-background-image: url('button-settings-image.png');
+  -fx-background-image: url('/images/button-settings-image.png');
 }
 
 .button-help {
-  -fx-background-image: url('button-help-image.png');
+  -fx-background-image: url('/images/button-help-image.png');
 }
 
 .button-music:selected {
-  -fx-background-image: url('button-music-off.png');
+  -fx-background-image: url('/images/button-music-off.png');
 }
 
 .button-music {
-  -fx-background-image: url('button-music-on.png');
+  -fx-background-image: url('/images/button-music-on.png');
 }
 
 .bottom-text {

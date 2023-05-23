@@ -52,8 +52,12 @@ public class GameController extends Controller implements ControllerObserver {
       } else if (due.getKey().equals("player") && due.getValue() instanceof Player player) {
         updatePlayer(player);
       } else if (due.getKey().equals("chosenSprite") && due.getValue() instanceof Image image) {
-        // model.setPlayerSprite(image);
+        state.setPlayerSprite(image);
+      } else if (due.getKey().equals("storyTitle") && due.getValue() instanceof String storyTitle) {
+        state.setStoryTitle(storyTitle);
       }
+    
+      
     }
   }
 
@@ -80,6 +84,7 @@ public class GameController extends Controller implements ControllerObserver {
     ObservableList<String> inventory = FXCollections.observableList(player.getInventory());
     state.setInventory(inventory);
     state.setScore(String.valueOf(player.getScore()));
+    state.setName(player.getName());
   }
 
   /**

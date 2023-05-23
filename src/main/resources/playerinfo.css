@@ -42,4 +42,33 @@
   -fx-padding: 15px 0; /* Increase vertical padding */
 }
 
+.sprite-box {
+  -fx-padding: 10px; /* Increase padding for sprite box */
+  -fx-alignment: center; /* Center align the content within the sprite box */
+}
+
+.sprite-box .sprite-image {
+  -fx-fit-width: 100px; /* Set the width of the image to 200px */
+  -fx-fit-height: 200px; /* Set the height of the image to 400px */
+  -fx-effect: dropshadow(gaussian, #FFCC00, 10, 0, 0, 0); /* Yellow drop shadow effect */
+  -fx-cursor: hand; /* Change cursor to hand on hover */
+}
+
+.sprite-box .sprite-image:hover {
+  -fx-effect: dropshadow(gaussian, #FFCC00, 15, 0, 0, 0); /* Increased drop shadow on hover */
+}
+
+.sprite-box .sprite-image:pressed {
+  -fx-effect: dropshadow(gaussian, #FF0000, 15, 0, 0, 0); /* Red drop shadow on click */
+}
+
+.sprite-box .sprite-image:last-clicked {
+  -fx-effect: dropshadow(gaussian, #00FF00, 15, 0, 0, 0); /* Green drop shadow for last clicked */
+  -fx-border-color: #00FF00; /* Green border color for last clicked */
+  -fx-border-width: 2px; /* Border width for last clicked */
+}
+
+
+
+
 

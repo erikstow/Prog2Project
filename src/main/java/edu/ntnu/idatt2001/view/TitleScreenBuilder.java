@@ -49,7 +49,7 @@ public class TitleScreenBuilder implements Builder<Region> {
     results.getStylesheets().add("title.css");
     results.getStyleClass().add("title-pane");
     Label title = Widgets.createLabel("Paths", "title-label");
-    Label subtitle = Widgets.createLabel("Last Light", "subtitle-label");
+    Label subtitle = Widgets.createLabel("Hawk & Dust", "subtitle-label");
     Node storySelect = createComboBox("Choose Story", storyTitles);
     storySelect.getStyleClass().add("story-select");
 

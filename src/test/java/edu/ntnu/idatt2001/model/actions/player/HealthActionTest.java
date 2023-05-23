@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.actions;
+package edu.ntnu.idatt2001.model.actions.player;
 
 import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.actions.player.HealthAction;

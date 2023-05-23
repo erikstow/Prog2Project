@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.goals;
+package edu.ntnu.idatt2001.model.goals;
 
 import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.goals.Goal;
@@ -14,6 +14,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@DisplayName("Tests for the InventoryGoal class")
 class InventoryGoalTest {
   Player player;
 
@@ -29,7 +30,7 @@ class InventoryGoalTest {
   @DisplayName("Inventory goal is fulfilled")
   @Nested
   class GoalFulfilled {
-    @DisplayName("Player has more items in inventory than necessary")
+    @DisplayName("isFulfilled should return true when the player has more items in inventory than necessary")
     @Test
     void inventoryGoalFulfilledWithGreaterInventory() {
       List<String> inventory = new ArrayList<>();
@@ -45,6 +46,7 @@ class InventoryGoalTest {
     }
 
     @Test
+    @DisplayName("isFulfilled should return true when the player has exactly the required items in inventory")
     void inventoryGoalFulfilledWithExactInventory() {
       List<String> inventory = new ArrayList<>();
       player.addToInventory("Tent");
@@ -61,8 +63,10 @@ class InventoryGoalTest {
   }
 
   @Nested
+  @DisplayName("Inventory goal is not fulfilled")
   class GoalNotFulfilled {
     @Test
+    @DisplayName("isFulfilled should return false when the player does not have the required items in inventory")
     void inventoryGoalNotFulfilled() {
       List<String> inventory = new ArrayList<>();
       player.addToInventory("Tent");

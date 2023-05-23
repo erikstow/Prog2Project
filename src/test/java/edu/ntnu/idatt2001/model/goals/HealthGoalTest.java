@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.goals;
+package edu.ntnu.idatt2001.model.goals;
 
 import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.goals.Goal;
@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Tests for the HealthGoal class")
 class HealthGoalTest {
 
   Player player;

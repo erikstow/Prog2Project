@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.actions;
+package edu.ntnu.idatt2001.model.actions.player;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
  * Tests for the InventoryAction class.
  * Player is used as a test double.
  */
-@DisplayName("InventoryAction")
+@DisplayName("Test for InventoryAction")
 public class InventoryActionTest {
 
   Player player;

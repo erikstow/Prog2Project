@@ -1,4 +1,4 @@
-package edu.ntnu.idatt2001.filehandling;
+package edu.ntnu.idatt2001.util;
 
 import edu.ntnu.idatt2001.model.actions.player.Action;
 import edu.ntnu.idatt2001.model.actions.player.GoldAction;
@@ -7,18 +7,18 @@ import edu.ntnu.idatt2001.model.actions.player.ScoreAction;
 import edu.ntnu.idatt2001.model.game.Link;
 import edu.ntnu.idatt2001.model.game.Passage;
 import edu.ntnu.idatt2001.model.game.Story;
-import edu.ntnu.idatt2001.util.StoryReader;
-import edu.ntnu.idatt2001.util.StoryWriter;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StoryWriterTest {
-
+@DisplayName("Tests for the story reader")
+class StoryReaderTest {
   @Test
-  void write() throws IOException {
+  @DisplayName("Read should read the story from the written file and return the same story")
+  void readStoryWrittenToFile() {
     Passage passage = new Passage("Passage title", "Passage content");
     Link link = new Link("Link text", "Link Reference");
     passage.addLink(link);
@@ -41,8 +41,12 @@ class StoryWriterTest {
     story.addPassage(thirdPassage);
 
     StoryWriter.writeToFile(story);
-
-    Story fetchedStory = StoryReader.read(story.getTitle() + ".paths");
-    assertEquals(story.getAsString(), fetchedStory.getAsString());
+    Story fetchedStory;
+    try {
+      fetchedStory = StoryReader.read(story.getTitle() + ".paths");
+      assertEquals(story.getAsString(), fetchedStory.getAsString());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

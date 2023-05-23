@@ -36,6 +36,6 @@ public class HealthGoal implements Goal {
 
   @Override
   public String toString() {
-    return "HealthGoal{" + "minimumHealth=" + minimumHealth + '}';
+    return "At least " + minimumHealth + " Health";
   }
 }

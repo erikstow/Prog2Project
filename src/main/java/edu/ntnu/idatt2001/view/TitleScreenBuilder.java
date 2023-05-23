@@ -46,7 +46,7 @@ public class TitleScreenBuilder implements Builder<Region> {
   @Override
   public Region build() {
     VBox results = new VBox();
-    results.getStylesheets().add("title.css");
+    results.getStylesheets().add("/css/title.css");
     results.getStyleClass().add("title-pane");
     Label title = Widgets.createLabel("Paths", "title-label");
     Label subtitle = Widgets.createLabel("Hawk & Dust", "subtitle-label");

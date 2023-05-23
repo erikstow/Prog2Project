@@ -24,7 +24,6 @@ import javafx.scene.image.Image;
  */
 public class CharacterScreenState {
   private final StringProperty name = new SimpleStringProperty();
-  private final StringProperty appearence = new SimpleStringProperty();
   private final ListProperty<Goal> goals =
       new SimpleListProperty<>(FXCollections.observableArrayList());
   private final IntegerProperty difficulty = new SimpleIntegerProperty();
@@ -46,7 +45,6 @@ public class CharacterScreenState {
    */
   public void reset() {
     setName("");
-    setAppearence("");
     setDifficulty(0);
     goals().set(FXCollections.observableList(new ArrayList<>()));
     goalType().set(null);
@@ -58,10 +56,6 @@ public class CharacterScreenState {
 
   public String getName() {
     return name.get();
-  }
-
-  public StringProperty appearence() {
-    return appearence;
   }
 
   public ListProperty<Goal> goals() {
@@ -138,14 +132,6 @@ public class CharacterScreenState {
   
   public CharacterScreenType getCurrentScreen() {
     return this.currentScreen.get();
-  }
-  
-  public String getAppearence() {
-    return appearence.get();
-  }
-  
-  public void setAppearence(String appearence) {
-    this.appearence.set(appearence);
   }
   
   public StringProperty goalType() {

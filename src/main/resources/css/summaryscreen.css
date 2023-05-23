@@ -21,7 +21,7 @@
 
 .info-label {
   -fx-font-family: "Times New Roman";
-  -fx-font-size: 32px; /* Larger font size */
+  -fx-font-size: 40px; /* Larger font size */
   -fx-text-fill: linen; /* Ominous yellow text color */
 }
 
@@ -43,10 +43,12 @@
 
 .goals-list-view {
   -fx-background-color: transparent;
+  -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
+  -fx-font-size: 24px "Times New Roman";
 }
 
 .goals-list-view .list-cell {
   -fx-background-color: transparent;
   -fx-text-fill: #FAF0E6; /* Linen color for high contrast */
-  -fx-text-font: 24px "Times New Roman";
+  -fx-font-size: 24px "Times New Roman";
 }

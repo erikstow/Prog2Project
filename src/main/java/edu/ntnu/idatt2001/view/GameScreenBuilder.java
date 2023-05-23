@@ -3,10 +3,11 @@ package edu.ntnu.idatt2001.view;
 import edu.ntnu.idatt2001.model.game.Link;
 import edu.ntnu.idatt2001.model.state.GameState;
 import edu.ntnu.idatt2001.util.Widgets;
+import java.io.File;
+import java.util.function.Consumer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -14,34 +15,50 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Builder;
 import javafx.util.Duration;
 
-import java.util.function.Consumer;
-
+/**
+ * The GameScreenBuilder class is responsible for constructing
+ * the game screen UI based on the provided GameState model.
+ * It uses JavaFX components and styles to create various *
+ * elements such as labels, scroll panes, hyperlinks, and more.
+ * The resulting UI is built within a BorderPane container.
+ */
 public class GameScreenBuilder implements Builder<Region> {
   private final GameState model;
   private final Consumer<Link> linkClickAction;
 
+  /**
+   * Constructs a new GameScreenBuilder with the given GameState model and linkClickAction consumer.
+   *
+   * @param model           The GameState model.
+   * @param linkClickAction The consumer to handle link click actions.
+   */
   public GameScreenBuilder(GameState model, Consumer<Link> linkClickAction) {
     this.model = model;
     this.linkClickAction = linkClickAction;
   }
 
+  /**
+   * Builds the main application screen as a Region.
+   * Sets up the layout and binds the current screen to the model's current screen.
+   *
+   * @return a Region containing the application screen
+   */
   @Override
   public Region build() {
     BorderPane results = new BorderPane();
-    model.storyTitleProperty().addListener((observable, oldValue, newValue) -> {
-      results.setTop(Widgets.createLabelWithBinding(model.storyTitleProperty(), "story-title-label"));
-    });
+    model.storyTitleProperty().addListener((observable, oldValue, newValue) ->
+        results.setTop(
+            Widgets.createLabelWithBinding(model.storyTitleProperty(), "story-title-label")));
     
     VBox mainContentBox = new VBox();
     mainContentBox.getChildren().addAll(createPlayerSprite(), createPassageBox(results));
@@ -52,6 +69,12 @@ public class GameScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates the passage box node within the game screen UI.
+   *
+   * @param view The BorderPane view.
+   * @return The created passage box node.
+   */
   private Node createPassageBox(BorderPane view) {
     ScrollPane results = new ScrollPane();
     results.setFitToWidth(true);
@@ -67,6 +90,11 @@ public class GameScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates the player sprite node within the game screen UI.
+   *
+   * @return The created player sprite node.
+   */
   private Node createPlayerSprite() {
     VBox results = new VBox();
     results.setAlignment(Pos.CENTER);
@@ -79,12 +107,16 @@ public class GameScreenBuilder implements Builder<Region> {
       playerSprite.setPreserveRatio(true);
       playerSprite.setFitHeight(400);
       playerSprite.getStyleClass().add("player-sprite");
-      results.getChildren().addAll(createHealthScoreBox(),playerSprite, name);
+      results.getChildren().addAll(createHealthScoreBox(), playerSprite, name);
     });
     return results;
   }
 
-
+  /**
+   * Creates the health score box node within the player sprite node.
+   *
+   * @return The created health score box node.
+   */
   private Node createHealthScoreBox() {
     HBox results = new HBox();
     results.setAlignment(Pos.CENTER);
@@ -98,6 +130,11 @@ public class GameScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates the inventory links column node within the game screen UI.
+   *
+   * @return The created inventory links column node.
+   */
   private Node createInventoryLinksColoumn() {
     VBox results = new VBox();
     results.setAlignment(Pos.BOTTOM_RIGHT);
@@ -106,6 +143,11 @@ public class GameScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates the inventory gold box node within the inventory links column node.
+   *
+   * @return The created inventory gold box node.
+   */
   private Node createInventoryGoldBox() {
     VBox results = new VBox();
     results.getStyleClass().add("inventory-gold-box");
@@ -133,19 +175,33 @@ public class GameScreenBuilder implements Builder<Region> {
     return results;
   }
 
-  private Node createLabel(StringProperty property) {
-    Label results = new Label();
-    results.textProperty().bind(property);
-    return results;
-  }
-
+  /**
+   * Creates a hyperlink node for the given link.
+   *
+   * @param link The Link object for the hyperlink.
+   * @return The created hyperlink node.
+   */
   private Node createHyperLink(Link link) {
     Hyperlink results = new Hyperlink(link.getText());
     results.getStyleClass().add("link");
-    results.setOnAction(event -> linkClickAction.accept(link));
+    results.setOnAction(event -> {
+      String clickFile = new File("src/main/resources/sound/cork-85200.mp3").toURI().toString();
+      Media clickSound = new Media(clickFile);
+      MediaPlayer mediaPlayer = new MediaPlayer(clickSound);
+      mediaPlayer.seek(Duration.ZERO);
+      mediaPlayer.play();
+      linkClickAction.accept(link);
+    });
     return results;
   }
 
+
+  /**
+   * Creates the content label node within the passage box node.
+   *
+   * @param view The BorderPane view.
+   * @return The created content label node.
+   */
   private Label createContentLabel(BorderPane view) {
     Label results = new Label();
     results.getStyleClass().add("content");
@@ -170,6 +226,13 @@ public class GameScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates a timeline for animating the content label with the provided content.
+   *
+   * @param label   The content label node.
+   * @param content The content string to animate.
+   * @return The created timeline.
+   */
   private Timeline createContentTimeline(Label label, String content) {
     final int[] index = new int[1];
     Timeline timeline = new Timeline();

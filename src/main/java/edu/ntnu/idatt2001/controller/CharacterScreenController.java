@@ -7,11 +7,11 @@ import edu.ntnu.idatt2001.model.goals.Goal;
 import edu.ntnu.idatt2001.model.goals.GoalFactory;
 import edu.ntnu.idatt2001.model.screentype.CharacterScreenType;
 import edu.ntnu.idatt2001.model.state.CharacterScreenState;
-import edu.ntnu.idatt2001.view.characterScreen.CharacterDifficultyScreenBuilder;
-import edu.ntnu.idatt2001.view.characterScreen.CharacterGoalsScreenBuilder;
-import edu.ntnu.idatt2001.view.characterScreen.CharacterInfoScreenBuilder;
+import edu.ntnu.idatt2001.view.characterScreen.DifficultyScreenBuilder;
+import edu.ntnu.idatt2001.view.characterScreen.GoalsScreenBuilder;
+import edu.ntnu.idatt2001.view.characterScreen.InfoScreenBuilder;
 import edu.ntnu.idatt2001.view.characterScreen.CharacterScreenBuilder;
-import edu.ntnu.idatt2001.view.characterScreen.CharacterSummaryScreenBuilder;
+import edu.ntnu.idatt2001.view.characterScreen.SummaryScreenBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -38,10 +38,10 @@ public class CharacterScreenController extends Controller {
     state.setCurrentScreen(CharacterScreenType.INFO_SCREEN);
 
     view = new CharacterScreenBuilder(state, this::back, this::next,
-        new CharacterInfoScreenBuilder(state).build(),
-        new CharacterDifficultyScreenBuilder(state).build(),
-        new CharacterGoalsScreenBuilder(state, this::addGoal, this::undoGoal).build(),
-        new CharacterSummaryScreenBuilder(state).build()
+        new InfoScreenBuilder(state).build(),
+        new DifficultyScreenBuilder(state).build(),
+        new GoalsScreenBuilder(state, this::addGoal, this::undoGoal).build(),
+        new SummaryScreenBuilder(state).build()
     ).build();
 
     state.difficulty().addListener((observable, oldValue, newValue) -> {

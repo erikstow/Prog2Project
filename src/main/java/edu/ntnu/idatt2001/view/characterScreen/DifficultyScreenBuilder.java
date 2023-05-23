@@ -20,7 +20,7 @@ import javafx.util.Builder;
  * related to difficulty selection and character stats,
  * as well as the utility for creating difficulty selection buttons.
  */
-public class CharacterDifficultyScreenBuilder implements Builder<Region> {
+public class DifficultyScreenBuilder implements Builder<Region> {
   private final CharacterScreenState state;
 
   /**
@@ -28,7 +28,7 @@ public class CharacterDifficultyScreenBuilder implements Builder<Region> {
    *
    * @param state the current state of the character screen.
    */
-  public CharacterDifficultyScreenBuilder(CharacterScreenState state) {
+  public DifficultyScreenBuilder(CharacterScreenState state) {
     this.state = state;
   }
 

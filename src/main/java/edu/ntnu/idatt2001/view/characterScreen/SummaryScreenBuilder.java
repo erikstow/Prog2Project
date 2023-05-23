@@ -15,7 +15,7 @@ import javafx.util.Builder;
  * This class provides a builder for the character summary screen in the game.
  * The screen provides an overview of the character's current stats, goals, and other attributes.
  */
-public class CharacterSummaryScreenBuilder implements Builder<Region> {
+public class SummaryScreenBuilder implements Builder<Region> {
   private final CharacterScreenState state;
 
   /**
@@ -23,7 +23,7 @@ public class CharacterSummaryScreenBuilder implements Builder<Region> {
    *
    * @param state the CharacterScreenState model containing the current character state
    */
-  public CharacterSummaryScreenBuilder(CharacterScreenState state) {
+  public SummaryScreenBuilder(CharacterScreenState state) {
     this.state = state;
   }
 

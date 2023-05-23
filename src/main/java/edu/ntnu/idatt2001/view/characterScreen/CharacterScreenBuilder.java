@@ -38,8 +38,8 @@ public class CharacterScreenBuilder implements Builder<Region> {
    * @param summaryView the view for displaying a summary of the character's current state
    */
   public CharacterScreenBuilder(
-    CharacterScreenState state, Runnable backAction, Runnable nextAction, Region infoView,
-    Region difficultyView, Region goalsView, Region summaryView) {
+      CharacterScreenState state, Runnable backAction, Runnable nextAction, Region infoView,
+      Region difficultyView, Region goalsView, Region summaryView) {
     this.difficultyView = difficultyView;
     this.summaryView = summaryView;
     this.infoView = infoView;

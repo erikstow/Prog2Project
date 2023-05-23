@@ -4,7 +4,7 @@
 
 .label-title {
   -fx-font-family: "Times New Roman";
-  -fx-font-size: 72px;
+  -fx-font-size: 50px;
   -fx-font-weight: bold;
   -fx-text-fill: #FFFF00; /* Ominous yellow color */
   -fx-padding: 10px;

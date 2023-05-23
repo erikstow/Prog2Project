@@ -36,6 +36,6 @@ public class GoldGoal implements Goal {
 
   @Override
   public String toString() {
-    return "GoldGoal{" + "minimumGold=" + minimumGold + '}';
+    return  "At least " + minimumGold + " Gold";
   }
 }

@@ -7,6 +7,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -40,23 +42,32 @@ public class CharacterDifficultyScreenBuilder implements Builder<Region> {
    */
   @Override
   public Region build() {
-    VBox results = new VBox(createDifficultySection(), createStatsBox());
+    VBox results = new VBox(
+        Widgets.createLabel("Choose your Difficulty*", "choose-difficulty-label"), 
+        createDifficultySection(), createStatsBox());
     results.setAlignment(Pos.CENTER);
-    results.getStylesheets().add("difficultysection.css");
+    results.getStylesheets().add("/css/difficultysection.css");
     return results;
   }
 
-  /**
+    /**
    * Creates and returns a Node representing the difficulty selection section of the screen.
    *
    * @return the Node representing the difficulty selection section.
    */
   private Node createDifficultySection() {
-    return new HBox(
-        Widgets.createLabel("Choose difficulty:", "choose-difficulty-label"),
-        createDifficultyButton("Easy", 1, state, "difficulty-button-easy"),
-        createDifficultyButton("Medium", 2, state, "difficulty-button-medium"),
-        createDifficultyButton("Hard", 3, state, "difficulty-button-hard"));
+    ToggleButton easyButton = createDifficultyButton("Easy", 1, state, "difficulty-button-easy");
+    ToggleButton mediumButton = createDifficultyButton("Medium", 2, state, "difficulty-button-medium");
+    ToggleButton hardButton = createDifficultyButton("Hard", 3, state, "difficulty-button-hard");
+
+    ToggleGroup difficultyGroup = new ToggleGroup();
+    easyButton.setToggleGroup(difficultyGroup);
+    mediumButton.setToggleGroup(difficultyGroup);
+    hardButton.setToggleGroup(difficultyGroup);
+
+    HBox results = new HBox(easyButton, mediumButton, hardButton);
+    results.setAlignment(Pos.CENTER);
+    return results;
   }
 
   /**
@@ -67,7 +78,10 @@ public class CharacterDifficultyScreenBuilder implements Builder<Region> {
   private Node createStatsBox() {
     HBox stats = new HBox(createStatsLabelBox("Health", "Gold", "Score", "Inventory"),
         createStatsValueLabelBox(state.health(), state.gold(), state.score(), state.inventory()));
-    return new VBox(Widgets.createLabel("Your stats", "your-stats-label"), stats);
+    stats.setAlignment(Pos.CENTER);
+    VBox results = new VBox(Widgets.createLabel("Your stats", "your-stats-label"), stats);
+    results.setAlignment(Pos.CENTER);
+    return results;
   }
 
 
@@ -102,19 +116,22 @@ public class CharacterDifficultyScreenBuilder implements Builder<Region> {
     return results;
   }
 
-  /**
-   * Creates and returns a Button for setting the difficulty level.
+    /**
+   * Creates and returns a ToggleButton for setting the difficulty level.
    *
    * @param label The text of the button.
    * @param difficulty The difficulty level associated with the button.
-   * @param model The CharacterScreenState to be updated when the button is clicked.
+   * @param model The CharacterScreenState to be updated when the button is selected.
    * @param styleClass The style class to apply to the Button.
-   * @return the created Button.
+   * @return the created ToggleButton.
    */
-  public static Button createDifficultyButton(String label,
-                                              int difficulty,
-                                              CharacterScreenState model,
-                                              String styleClass) {
-    return Widgets.createButton(label, () -> model.setDifficulty(difficulty), styleClass);
+  private ToggleButton createDifficultyButton(String label,
+                                                    int difficulty,
+                                                    CharacterScreenState model,
+                                                    String styleClass) {
+    ToggleButton toggleButton = new ToggleButton(label);
+    toggleButton.setOnAction(actionEvent -> model.setDifficulty(difficulty));
+    toggleButton.getStyleClass().add(styleClass);
+    return toggleButton;
   }
 }

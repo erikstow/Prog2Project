@@ -57,7 +57,7 @@ public class SettingsScreenBuilder implements Builder<Region> {
         Widgets.createButton("Exit game", action("exitGame"), ""),
         restartButton
     );
-    results.getStylesheets().add("settings.css");
+    results.getStylesheets().add("/css/settings.css");
     results.getStyleClass().add("settings-box");
     return results;
   }

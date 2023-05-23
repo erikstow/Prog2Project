@@ -37,6 +37,6 @@ public class ScoreGoal implements Goal {
 
   @Override
   public String toString() {
-    return "ScoreGoal{" + "minimumPoints=" + minimumPoints + '}';
+    return "At least a score of " + minimumPoints;
   }
 }

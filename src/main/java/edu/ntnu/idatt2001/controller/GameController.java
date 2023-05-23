@@ -56,8 +56,6 @@ public class GameController extends Controller implements ControllerObserver {
       } else if (due.getKey().equals("storyTitle") && due.getValue() instanceof String storyTitle) {
         state.setStoryTitle(storyTitle);
       }
-    
-      
     }
   }
 

@@ -13,7 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.util.Builder;
 
 /**
- * This class provides a builder for the character information screen in the game.
+ * This class provides a builder for the character information screen in the
+ * game.
  * The screen displays the character's name and appearance, *
  * and provides an interface for changing these attributes.
  */
@@ -24,7 +25,8 @@ public class CharacterInfoScreenBuilder implements Builder<Region> {
   /**
    * Constructor for CharacterInfoScreenBuilder.
    *
-   * @param state the CharacterScreenState model containing the current character state
+   * @param state the CharacterScreenState model containing the current character
+   *              state
    */
   public CharacterInfoScreenBuilder(CharacterScreenState state) {
     this.state = state;
@@ -40,12 +42,11 @@ public class CharacterInfoScreenBuilder implements Builder<Region> {
   public Region build() {
     VBox results = new VBox();
     results.getStyleClass().add("vbox");
-    results.getStylesheets().add("playerinfo.css");
+    results.getStylesheets().add("/css/playerinfo.css");
 
-    Label name = Widgets.createLabel("Who are you?", "character-info-label");
-    TextField nameField =
-        Widgets.createTextField("Name..", state.name(), "character-info-text-field");
-    Label appearance = Widgets.createLabel("What do you look like?", "character-info-label");
+    Label name = Widgets.createLabel("What is your name?*", "character-info-label");
+    TextField nameField = Widgets.createTextField("Name...", state.name(), "character-info-text-field");
+    Label appearance = Widgets.createLabel("What do you look like?*", "character-info-label");
     Node appearanceField = createSpritePicker();
 
     name.getStyleClass().add("character-info-label");
@@ -61,20 +62,38 @@ public class CharacterInfoScreenBuilder implements Builder<Region> {
   /**
    * Creates an HBox for choosing the character's sprite image.
    * The HBox is populated with ImageViews for each available sprite,
-   * and clicking on an ImageView sets the corresponding image as the character's chosen sprite.
+   * and clicking on an ImageView sets the corresponding image as the character's
+   * chosen sprite.
    *
    * @return a Node representing the HBox
    */
   private Node createSpritePicker() {
     HBox results = new HBox();
+    results.getStyleClass().add("sprite-box");
     state.playerImagesProperty().addListener((observable, oldValue, newValue) -> {
       for (Image image : state.getPlayerImages()) {
         ImageView view = new ImageView(image);
-        view.setOnMouseClicked(event -> state.setChosenPlayerImage(image));
+        view.getStyleClass().add("sprite-image");
+        view.setPreserveRatio(true);
+        view.setFitHeight(250);
+        view.setOnMouseClicked(event -> {
+          clearLastClicked(results);
+          view.setStyle(
+              "-fx-effect: dropshadow(gaussian, #00FF00, 15, 0, 0, 0); -fx-border-color: #00FF00; -fx-border-width: 2px;");
+          state.setChosenPlayerImage(image);
+        });
         results.getChildren().add(view);
       }
     });
 
     return results;
+  }
+
+  private void clearLastClicked(HBox hbox) {
+    for (Node node : hbox.getChildren()) {
+      if (node instanceof ImageView) {
+        node.setStyle("");
+      }
+    }
   }
 }

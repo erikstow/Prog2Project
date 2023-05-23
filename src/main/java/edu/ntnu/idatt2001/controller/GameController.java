@@ -33,7 +33,11 @@ public class GameController extends Controller implements ControllerObserver {
         updatePlayer(player);
       } else if (due.getKey().equals("chosenSprite") && due.getValue() instanceof Image image) {
         model.setPlayerSprite(image);
+      } else if (due.getKey().equals("storyTitle") && due.getValue() instanceof String storyTitle) {
+        model.setStoryTitle(storyTitle);
       }
+    
+      
     }
   }
 
@@ -50,6 +54,7 @@ public class GameController extends Controller implements ControllerObserver {
     ObservableList<String> inventory = FXCollections.observableList(player.getInventory());
     model.setInventory(inventory);
     model.setScore(String.valueOf(player.getScore()));
+    model.setName(player.getName());
   }
 
   public Region getView() {

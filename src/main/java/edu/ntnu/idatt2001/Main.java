@@ -20,7 +20,15 @@ public class Main extends Application {
 
   @Override
   public void start(Stage primaryStage) {
+  @Override
+  public void start(Stage primaryStage) {
 
+    TitleScreenController titleScreenController = new TitleScreenController();
+    GameController gameController = new GameController();
+    CharacterScreenController characterScreenController = new CharacterScreenController();
+    SettingsController settingsController = new SettingsController();
+    MenubarController menubarController = new MenubarController();
+    ApplicationController applicationController = new ApplicationController(
     TitleScreenController titleScreenController = new TitleScreenController();
     GameController gameController = new GameController();
     CharacterScreenController characterScreenController = new CharacterScreenController();

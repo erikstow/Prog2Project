@@ -35,6 +35,7 @@ public class ClickHelpAction implements ControllerAction {
 
   private void createAlert(String header, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.getDialogPane().getStylesheets().add("alert.css");
     alert.setTitle("Help");
     alert.setHeaderText(header);
     alert.setContentText(message);

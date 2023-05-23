@@ -1,0 +1,154 @@
+.story-title-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 40px; /* Slightly bigger font size for the story title */
+  -fx-font-weight: bold;
+  -fx-text-fill: #FFCC00; /* Adventurous yellow */
+  -fx-padding: 10px; /* Padding around the title */
+  -fx-underline: true; /* Underline for the title */
+  -fx-effect: dropshadow(gaussian, #FF0000, 10, 0, 0, 0); /* Red glow effect */
+}
+
+
+.passage-box {
+  -fx-background-color: rgba(0, 0, 0, 0.4); /* Dark opaque background */
+  -fx-padding: 10px; /* Padding around the passage box */
+  -fx-border-color: #000000; /* Black border color */
+  -fx-border-width: 2px; /* Border width */
+  -fx-border-radius: 5px; /* Border radius */
+}
+
+.player-name-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 30px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FFCC00; /* Adventurous yellow */
+}
+
+.sprite-box {
+ -fx-background-color: transaprent; /* Transparent background */
+
+}
+
+.player-sprite {
+  -fx-background-color: transparent; /* Transparent background */
+  -fx-cursor: hand; /* Change cursor to hand on hover */
+}
+
+.hp-prompt {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 30px;
+  -fx-text-fill: red; /* Red text color */
+}
+
+.hp-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 30px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FAF0E6; /* Light text color */
+}
+
+.score-prompt {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 30px;
+  -fx-text-fill: #FFCC00; /* Adventurous yellow */
+}
+
+.score-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 30px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FAF0E6; /* Light text color */
+}
+
+.inventory-gold-box {
+  -fx-background-color: #603000; /* Darker brown background color */
+  -fx-padding: 10px; /* Padding around the inventory and gold box */
+  -fx-spacing: 30px; /* Spacing between the inventory and gold box */
+  -fx-border-color: #000000; /* Black border color */
+  -fx-border-width: 2px; /* Border width */
+  -fx-border-radius: 10px; /* Border radius for rounded edges */
+}
+
+.inventory-prompt {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 30px;
+  -fx-text-fill: #FAF0E6; /* Light text color */
+}
+
+.gold-prompt {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 30px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FAF0E6; /* Light text color */
+}
+
+.gold-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 30px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FAF0E6; /* Light text color */
+}
+
+.links-box {
+  -fx-background-color: rgba(0, 0, 0, 0.8); /* Dark opaque background */
+  -fx-padding: 10px; /* Padding around the links box */
+  -fx-border-color: #000000; /* Black border color */
+  -fx-border-width: 2px; /* Border width */
+  -fx-border-radius: 5px; /* Border radius */
+  -fx-alignment: bottom-right; /* Align the box to the bottom right corner */
+}
+
+.link {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px; /* Increase font size for links */
+  -fx-text-fill: #FFCC00; /* Adventurous yellow */
+}
+
+.link:hover {
+  -fx-text-fill: #FFFF00; /* Brighter yellow on hover */
+}
+
+.link:visited {
+  -fx-text-fill: #FFD700; /* Yellow for visited links */
+}
+
+.passage-title-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 20px;
+  -fx-font-weight: bold;
+  -fx-text-fill: #FAF0E6; /* Light text color */
+  -fx-padding: 10px 0; /* Vertical padding */
+  -fx-underline: true; /* Underline for the title */
+}
+
+.content {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 25px; /* Increase font size for passage content */
+  -fx-text-fill: #FAF0E6; /* Light text color */
+  -fx-wrap-text: true; /* Wrap text within the label */ 
+}
+
+.list-view {
+  -fx-control-inner-background: #8B4513; /* Brown background color for the list view */
+  -fx-background-color: #8B4513; /* Brown background color for the list view */
+}
+
+.passage-scroll-pane {
+  -fx-background-color: transparent; /* Transparent background */
+  -fx-background: transparent; /* Transparent background */
+  -fx-padding: 0; /* No padding */
+  -fx-border-color: transparent; /* Transparent border color */
+}
+
+.passage-scroll-pane .scroll-bar {
+  -fx-opacity: 0; /* This hides the scrollbar */
+}
+
+.passage-scroll-pane .scroll-bar:horizontal .increment-button,
+.passage-scroll-pane .scroll-bar:horizontal .decrement-button,
+.passage-scroll-pane .scroll-bar:vertical .increment-button,
+.passage-scroll-pane .scroll-bar:vertical .decrement-button {
+  -fx-padding: 0;
+  -fx-min-width: 0;
+  -fx-min-height: 0;
+}

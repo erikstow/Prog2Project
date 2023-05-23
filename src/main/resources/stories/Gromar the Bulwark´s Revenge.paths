@@ -1,0 +1,73 @@
+Gromar the Bulwark´s Revenge
+
+::Path: Last Light
+In the heart of an ancient, dark forest, your adventure begins. A narrow path stretches out in front of you, vanishing into the shadowy depths of the woodland.
+[Step forward into the darkness](Path into the Forest)
+[Search the nearby area first](Searching the Area)
+!ScoreAction:10
+
+::Path into the Forest
+The path winds through the forest, leading you deeper into the shadowy foliage. You come across an ancient well, a faint glow emanating from its depths.
+[Look into the well](The Well)
+!ScoreAction:20
+
+::Searching the Area
+You decide to inspect your immediate surroundings first. Amid the shrubs, you find a sharp rock.
+[Pick up the rock and move on](Path into the Forest)
+!InventoryAction:Sharp Rock
+!ScoreAction:10
+
+::The Well
+As you peer into the well, you notice a shimmering gold coin at the bottom. You reach in and retrieve it. The gold coin gleams in the dim light.
+[Take the coin and continue](Ghost Encounter)
+!GoldAction:50
+
+::Ghost Encounter
+A ghost materializes before you. He seems more curious than threatening and asks for the gold coin in exchange for a mysterious, magical amulet.
+[Give him the coin](Amulet Acquisition)
+[Keep the coin and move on](Enchanted Clearing)
+!GoldAction:-50
+
+::Amulet Acquisition
+With the amulet in hand and the ghost's grateful smile in mind, you continue deeper into the forest.
+[Move on](Enchanted Clearing)
+!ScoreAction:30
+!InventoryAction:Amulet
+
+::Enchanted Clearing
+In a moonlit clearing, a magical tree glistening with golden apples catches your eye. As you reach out to pluck an apple, you feel your strength increasing.
+[Eat the apple and continue](Ravine)
+!HealthAction:50
+!ScoreAction:40
+
+::Ravine
+You encounter a deep ravine. The only way forward seems to be a rickety old bridge that sways ominously in the wind.
+[Cross the bridge](Cavern Entrance)
+[Search for a safer path](The Long Route)
+!HealthAction:-20
+
+::The Long Route
+You decide to take a longer, safer route around the ravine, adding time to your journey but avoiding the dangerous bridge.
+[Continue on the path](Cavern Entrance)
+!ScoreAction:20
+
+::Cavern Entrance
+The path leads you to a cavern. The amulet you received from the ghost begins to glow, reacting to something within the cavern.
+[Enter the cavern](Troll Encounter)
+!ScoreAction:30
+
+::Troll Encounter
+A large, fearsome troll blocks your path. He doesn't seem pleased with your intrusion. Armed with your courage and the magic amulet, you prepare for battle.
+[Engage the troll](Battle with Troll)
+!ScoreAction:50
+!HealthAction:-30
+
+::Battle with Troll
+Using the power of the amulet, you engage the troll in a fierce battle. The fight is tough, but you finally manage to defeat the troll, freeing the forest from his terror.
+[Victory!](End)
+!ScoreAction:100
+!HealthAction:-20
+!InventoryAction:Troll's Tooth
+
+::End
+Emerging victorious from the cavern, you hold the troll's tooth high in triumph. As the first rays of dawn break through the trees, you exit the forest, marking the end of your adventure in "Path: Last Light". Well done!

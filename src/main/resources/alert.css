@@ -1,0 +1,39 @@
+.root {
+  -fx-font-family: "Times New Roman"; /* Times New Roman font */
+}
+
+.dialog-pane {
+  -fx-background-color: #5D432C; /* Dark, dirty brown color to simulate old, dirty parchment */
+  -fx-border-color: #654321; /* Dark brown border to simulate aged edges */
+  -fx-border-width: 2px; /* Border width */
+  -fx-border-radius: 15; /* Round corners */
+  -fx-effect: innershadow(gaussian, rgba(0,0,0,0.7), 10, 0.1, 0, 2); /* Inner shadow for depth */
+}
+
+.dialog-pane .content.label {
+  -fx-font-size: 18px; /* Content text size */
+  -fx-text-fill: #E6B800; /* Themed yellow color for the text */
+}
+
+.dialog-pane .header-panel .label {
+  -fx-font-size: 24px; /* Header text size */
+  -fx-font-weight: bold; /* Bold header text */
+  -fx-text-fill: #E6B800; /* Themed yellow color for the header text */
+}
+
+.header-panel {
+  -fx-background-color: #654321; /* Dark brown color for the header */
+  -fx-background-radius: 15 15 0 0; /* Rounded corners for the top */
+  -fx-padding: 0.166667em; /* 2px padding */
+  -fx-border-width: 0 0 2px 0; /* Add a border to the bottom only */
+  -fx-border-color: black; /* Match the color of the border */
+}
+
+.button {
+  -fx-background-color: rgb(100, 50, 0); /* Dark brown color */
+  -fx-text-fill: #E6B800; /* Themed yellow text */
+  -fx-border-radius: 5px; /* Slight rounding */
+  -fx-border-color: black; /* Black border */
+  -fx-padding: 10px 20px; /* Padding around the text */
+  -fx-font-size: 18px; /* Larger font size */
+}

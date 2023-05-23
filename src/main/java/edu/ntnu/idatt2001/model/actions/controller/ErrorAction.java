@@ -13,6 +13,7 @@ public class ErrorAction implements ControllerAction {
     Exception e = (Exception) event.getValue();
 
     Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.getDialogPane().getStylesheets().add("error.css");
     alert.setTitle("Error");
     alert.setHeaderText("Error of type " + e.getClass().getSimpleName());
     alert.setContentText(e.getMessage());

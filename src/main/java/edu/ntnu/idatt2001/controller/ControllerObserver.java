@@ -13,6 +13,5 @@ public interface ControllerObserver {
    *
    * @param event the event that has occurred
    */
-
   void onUpdate(ControllerEvent event);
 }

@@ -89,6 +89,11 @@ public class InfoScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Clears the last clicked ImageView's styling within the given HBox.
+   *
+   * @param hbox the HBox containing the ImageViews
+   */
   private void clearLastClicked(HBox hbox) {
     for (Node node : hbox.getChildren()) {
       if (node instanceof ImageView) {

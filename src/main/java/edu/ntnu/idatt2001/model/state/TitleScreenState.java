@@ -12,6 +12,11 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Represents the state of the title screen at any given time.
+ * This includes properties such as the name of the story, if a start is allowed,
+ * broken links, and the file path.
+ */
 public class TitleScreenState {
   private final StringProperty storyName = new SimpleStringProperty("");
   private final BooleanProperty startAllowed = new SimpleBooleanProperty(false);

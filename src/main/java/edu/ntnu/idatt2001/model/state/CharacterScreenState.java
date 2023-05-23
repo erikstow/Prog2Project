@@ -1,10 +1,9 @@
 package edu.ntnu.idatt2001.model.state;
 
 import edu.ntnu.idatt2001.model.goals.Goal;
+import edu.ntnu.idatt2001.model.screentype.CharacterScreenType;
 import java.util.ArrayList;
 import java.util.List;
-
-import edu.ntnu.idatt2001.model.screentype.CharacterScreenType;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -18,8 +17,12 @@ import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.scene.image.Image;
 
+/**
+ * Represents the state of the character creation. This state includes properties
+ * like the character's name, appearance, goals, health, inventory, and more.
+ * It also contains a boolean property that represents whether the next action is allowed or not.
+ */
 public class CharacterScreenState {
-  
   private final StringProperty name = new SimpleStringProperty();
   private final StringProperty appearence = new SimpleStringProperty();
   private final ListProperty<Goal> goals =
@@ -34,9 +37,13 @@ public class CharacterScreenState {
   private final StringProperty goalValue = new SimpleStringProperty();
   private final ObjectProperty<CharacterScreenType> currentScreen = new SimpleObjectProperty<>();
   private final BooleanProperty nextAllowed = new SimpleBooleanProperty(true);
-  private final ListProperty<Image> playerImages = new SimpleListProperty<>(FXCollections.observableArrayList());
+  private final ListProperty<Image> playerImages =
+      new SimpleListProperty<>(FXCollections.observableArrayList());
   private Image chosenPlayerImage;
 
+  /**
+   * Resets the character's state properties to their default values.
+   */
   public void reset() {
     setName("");
     setAppearence("");

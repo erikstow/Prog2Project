@@ -32,6 +32,11 @@ public class HealthAction implements Action {
     player.addHealth(this.health);
   }
 
+  /**
+   * Returns a string representation of the HealthAction.
+   *
+   * @return a string representation of the HealthAction.
+   */
   public String getAsString() {
     return "!HealthAction:" + this.health + "\n";
   }

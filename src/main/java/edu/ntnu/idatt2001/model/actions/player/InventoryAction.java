@@ -39,6 +39,11 @@ public class InventoryAction implements Action {
     player.addToInventory(this.item);
   }
 
+  /**
+   * Returns a string representation of the InventoryAction.
+   *
+   * @return a string representation of the InventoryAction.
+   */
   public String getAsString() {
     return "!InventoryAction:" + this.item + "\n";
   }

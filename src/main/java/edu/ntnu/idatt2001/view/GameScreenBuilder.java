@@ -5,6 +5,7 @@ import edu.ntnu.idatt2001.model.state.GameState;
 import edu.ntnu.idatt2001.util.Widgets;
 import java.io.File;
 import java.util.function.Consumer;
+import java.util.function.Consumer;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -24,6 +25,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Builder;
 import javafx.util.Duration;
+
 
 /**
  * The GameScreenBuilder class is responsible for constructing
@@ -56,16 +58,16 @@ public class GameScreenBuilder implements Builder<Region> {
   @Override
   public Region build() {
     BorderPane results = new BorderPane();
-    model.storyTitleProperty().addListener((observable, oldValue, newValue) ->
-        results.setTop(
-            Widgets.createLabelWithBinding(model.storyTitleProperty(), "story-title-label")));
-    
+    model.storyTitleProperty().addListener((observable, oldValue, newValue) -> {
+      results.setTop(Widgets.createLabel(newValue, "story-title-label"));
+    });
+
     VBox mainContentBox = new VBox();
     mainContentBox.getChildren().addAll(createPlayerSprite(), createPassageBox(results));
-    
+    mainContentBox.setAlignment(Pos.BOTTOM_CENTER);
     results.setCenter(mainContentBox);
     results.setRight(createInventoryLinksColoumn());
-    results.getStylesheets().add("game.css");
+    results.getStylesheets().add("/css/game.css");
     return results;
   }
 
@@ -80,7 +82,7 @@ public class GameScreenBuilder implements Builder<Region> {
     results.setFitToWidth(true);
     results.setMinHeight(200);
     results.getStyleClass().add("passage-scroll-pane");
-    VBox vbox  = new VBox();
+    VBox vbox = new VBox();
     vbox.setMinHeight(200);
     vbox.getStyleClass().add("passage-box");
     Label title = Widgets.createLabelWithBinding(model.titleProperty(), "passage-title-label");
@@ -137,7 +139,6 @@ public class GameScreenBuilder implements Builder<Region> {
    */
   private Node createInventoryLinksColoumn() {
     VBox results = new VBox();
-    results.setAlignment(Pos.BOTTOM_RIGHT);
     results.setSpacing(20);
     results.getChildren().addAll(createInventoryGoldBox(), createLinksBox());
     return results;
@@ -163,7 +164,6 @@ public class GameScreenBuilder implements Builder<Region> {
 
   private Node createLinksBox() {
     VBox results = new VBox();
-    results.setAlignment(Pos.CENTER_LEFT);
     results.setMinHeight(200);
     results.getStyleClass().add("links-box");
     model.linksProperty().addListener((observable, oldValue, newValue) -> {
@@ -172,6 +172,7 @@ public class GameScreenBuilder implements Builder<Region> {
         results.getChildren().add(createHyperLink(link));
       }
     });
+    results.setAlignment(Pos.CENTER_LEFT);
     return results;
   }
 

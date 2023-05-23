@@ -54,7 +54,7 @@ public class ApplicationScreenBuilder implements Builder<Region> {
   public Region build() {
     BorderPane results = new BorderPane();
 
-    results.getStylesheets().add("application.css");
+    results.getStylesheets().add("/css/application.css");
     results.getStyleClass().add("app-pane");
     results.setTop(menubarView);
 

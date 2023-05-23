@@ -4,10 +4,10 @@ You can access the help screen by pressing <F1>
 
 Here you have a few options:
 
-Resume game - Simply return to where you were.
+Resume - Simply return to where you were.
 
-Exit game - Exits the game
+Title screen - Loose all progress and return to title screen
 
-Return to title screen - Loose all progress and return to title screen
+Exit - Exits the game
 
-Restart game - Loose all progress and start over with the same character.
+Restart - Loose all progress and start over with the same character.

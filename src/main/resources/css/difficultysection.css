@@ -1,0 +1,72 @@
+/* Difficulty Section */
+.choose-difficulty-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 32px;
+  -fx-text-fill: #FAF0E6; /* Light-colored text */
+}
+
+/* Stats Section */
+.your-stats-label {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 32px;
+  -fx-text-fill: #FAF0E6; /* Light-colored text */
+}
+
+.stats-label,
+.stats-value {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 28px;
+  -fx-text-fill: #FAF0E6; /* Light-colored text */
+  -fx-background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+
+/* Easy Difficulty Button */
+.difficulty-button-easy {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 28px;
+  -fx-text-fill: #FAF0E6; /* Light-colored text */
+  -fx-background-color: rgba(0, 128, 0, 0.5); /* Semi-transparent green background */
+  -fx-border-color: #FAF0E6; /* Light-colored border */
+  -fx-border-width: 2px;
+}
+
+.difficulty-button-easy:selected {
+  -fx-font-weight: bold;
+  -fx-text-fill: #008000; /* Green text */
+  -fx-effect: innershadow(three-pass-box, #008000, 6, 0, 0, 0); /* Green inner shadow effect */
+}
+
+/* Medium Difficulty Button */
+.difficulty-button-medium {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 28px;
+  -fx-text-fill: #FAF0E6; /* Light-colored text */
+  -fx-background-color: rgba(255, 215, 0, 0.5); /* Semi-transparent gold background */
+  -fx-border-color: #FAF0E6; /* Light-colored border */
+  -fx-border-width: 2px;
+}
+
+.difficulty-button-medium:selected {
+  -fx-font-weight: bold;
+  -fx-text-fill: #FFD700; /* Gold text */
+  -fx-effect: innershadow(three-pass-box, #FFD700, 6, 0, 0, 0); /* Gold inner shadow effect */
+}
+
+/* Hard Difficulty Button */
+.difficulty-button-hard {
+  -fx-font-family: "Times New Roman";
+  -fx-font-size: 28px;
+  -fx-text-fill: #FAF0E6; /* Light-colored text */
+  -fx-background-color: rgba(255, 0, 0, 0.5); /* Semi-transparent red background */
+  -fx-border-color: #FAF0E6; /* Light-colored border */
+  -fx-border-width: 2px;
+}
+
+.difficulty-button-hard:selected {
+  -fx-font-weight: bold;
+  -fx-text-fill: #FF0000; /* Red text */
+  -fx-effect: innershadow(three-pass-box, #FF0000, 6, 0, 0, 0); /* Red inner shadow effect */
+}
+
+

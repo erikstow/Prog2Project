@@ -29,13 +29,17 @@ public class CharacterScreenBuilder implements Builder<Region> {
   /**
    * Constructor for CharacterScreenBuilder.
    *
-   * @param state the CharacterScreenState model containing the current character state
-   * @param backAction a Runnable to be executed when going back to the previous screen
-   * @param nextAction a Runnable to be executed when advancing to the next screen
-   * @param infoView the view for setting character info
+   * @param state          the CharacterScreenState model containing the current
+   *                       character state
+   * @param backAction     a Runnable to be executed when going back to the
+   *                       previous screen
+   * @param nextAction     a Runnable to be executed when advancing to the next
+   *                       screen
+   * @param infoView       the view for setting character info
    * @param difficultyView the view for setting game difficulty
-   * @param goalsView the view for setting character goals
-   * @param summaryView the view for displaying a summary of the character's current state
+   * @param goalsView      the view for setting character goals
+   * @param summaryView    the view for displaying a summary of the character's
+   *                       current state
    */
   public CharacterScreenBuilder(
       CharacterScreenState state, Runnable backAction, Runnable nextAction, Region infoView,
@@ -60,18 +64,18 @@ public class CharacterScreenBuilder implements Builder<Region> {
   public Region build() {
     BorderPane results = new BorderPane();
 
-    Label title = Widgets.createLabel("Welcome to Paths", "label-title");
+    Label title = Widgets.createLabel("Choose your Destiny", "label-title");
     results.setTop(title);
 
     Node buttonBarNode = createNextBackButtonBar();
     results.setBottom(buttonBarNode);
 
-    state.currentScreen().addListener((observable, oldValue, newValue) ->
-        results.setCenter(getScreen(newValue)));
+    state.currentScreen().addListener(
+        (observable, oldValue, newValue) -> results.setCenter(getScreen(newValue)));
 
     results.setCenter(getScreen(state.getCurrentScreen()));
 
-    results.getStylesheets().add("characterscreen.css"); // Add this line to link the CSS file
+    results.getStylesheets().add("/css/characterscreen.css");
     results.setAlignment(title, Pos.CENTER);
     results.setAlignment(buttonBarNode, Pos.CENTER);
     results.setAlignment(getScreen(state.getCurrentScreen()), Pos.CENTER);
@@ -81,7 +85,8 @@ public class CharacterScreenBuilder implements Builder<Region> {
 
   /**
    * Creates a bar with back and next buttons.
-   * The buttons are bound to the backAction and nextAction Runnables respectively,
+   * The buttons are bound to the backAction and nextAction Runnables
+   * respectively,
    * and their text changes depending on the current screen.
    *
    * @return a Node representing the button bar

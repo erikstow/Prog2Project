@@ -38,7 +38,7 @@ public class SummaryScreenBuilder implements Builder<Region> {
     VBox results = new VBox();
     HBox hbox = new HBox();
     hbox.getStyleClass().add("hbox");
-    results.getStylesheets().add("summaryscreen.css");
+    results.getStylesheets().add("/css/summaryscreen.css");
     hbox.getChildren().addAll(
         createDifficultyBox(),
         createGoalsBox()
@@ -60,9 +60,7 @@ public class SummaryScreenBuilder implements Builder<Region> {
     results.getStyleClass().add("hbox");
     Label name = Widgets.createLabel("Name", "info-label");
     name.textProperty().bindBidirectional(state.name());
-    Label appearance = Widgets.createLabel("Appearance", "info-label");
-    appearance.textProperty().bindBidirectional(state.appearence());
-    results.getChildren().addAll(appearance, name);
+    results.getChildren().addAll(name);
     return results;
   }
 

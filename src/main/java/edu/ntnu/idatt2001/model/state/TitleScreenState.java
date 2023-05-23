@@ -24,6 +24,13 @@ public class TitleScreenState {
       new SimpleListProperty<>(FXCollections.observableList(new ArrayList<>()));
   private final StringProperty filePath = new SimpleStringProperty("");
 
+  public void reset() {
+    storyNameProperty().set(null);
+    setBrokenLinks(FXCollections.observableList(new ArrayList<>()));
+    setFilePath("");
+    setStartAllowed(false);
+  }
+
   public String getStoryName() {
     return storyName.get();
   }

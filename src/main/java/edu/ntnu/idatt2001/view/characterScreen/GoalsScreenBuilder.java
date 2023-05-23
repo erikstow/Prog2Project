@@ -24,7 +24,7 @@ import javafx.util.Builder;
  * The screen displays the character's goals and *
  * provides an interface for adding new goals and undoing the last goal.
  */
-public class CharacterGoalsScreenBuilder implements Builder<Region> {
+public class GoalsScreenBuilder implements Builder<Region> {
 
   private final CharacterScreenState state;
   private final Runnable addGoal;
@@ -37,9 +37,9 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
    * @param addGoal a Runnable to be executed when a goal is added
    * @param undoGoal a Runnable to be executed to undo the last goal
    */
-  public CharacterGoalsScreenBuilder(CharacterScreenState state,
-                                     Runnable addGoal,
-                                     Runnable undoGoal) {
+  public GoalsScreenBuilder(CharacterScreenState state,
+                            Runnable addGoal,
+                            Runnable undoGoal) {
     this.state = state;
     this.addGoal = addGoal;
     this.undoGoal = undoGoal;

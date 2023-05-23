@@ -18,7 +18,7 @@ import javafx.util.Builder;
  * The screen displays the character's name and appearance, *
  * and provides an interface for changing these attributes.
  */
-public class CharacterInfoScreenBuilder implements Builder<Region> {
+public class InfoScreenBuilder implements Builder<Region> {
 
   private final CharacterScreenState state;
 
@@ -28,7 +28,7 @@ public class CharacterInfoScreenBuilder implements Builder<Region> {
    * @param state the CharacterScreenState model containing the current character
    *              state
    */
-  public CharacterInfoScreenBuilder(CharacterScreenState state) {
+  public InfoScreenBuilder(CharacterScreenState state) {
     this.state = state;
   }
 

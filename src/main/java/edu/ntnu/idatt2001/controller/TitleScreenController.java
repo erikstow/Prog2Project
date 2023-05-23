@@ -109,10 +109,7 @@ public class TitleScreenController
   @Override
   public void onUpdate(ControllerEvent event) {
     if (event.getKey().equals("reset")) {
-      state.storyNameProperty().set(null);
-      state.setBrokenLinks(FXCollections.observableList(new ArrayList<>()));
-      state.setFilePath("");
-      state.setStartAllowed(false);
+      state.reset();
     }
   }
 

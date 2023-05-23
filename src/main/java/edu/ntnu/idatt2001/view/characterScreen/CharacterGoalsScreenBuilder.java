@@ -19,20 +19,38 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Builder;
 
+/**
+ * This class provides a builder for the character goals screen in the game.
+ * The screen displays the character's goals and *
+ * provides an interface for adding new goals and undoing the last goal.
+ */
 public class CharacterGoalsScreenBuilder implements Builder<Region> {
 
-  private final CharacterScreenState model;
+  private final CharacterScreenState state;
   private final Runnable addGoal;
   private final Runnable undoGoal;
 
-  public CharacterGoalsScreenBuilder(CharacterScreenState model,
+  /**
+   * Constructor for CharacterGoalsScreenBuilder.
+   *
+   * @param state the CharacterScreenState model containing the current character state
+   * @param addGoal a Runnable to be executed when a goal is added
+   * @param undoGoal a Runnable to be executed to undo the last goal
+   */
+  public CharacterGoalsScreenBuilder(CharacterScreenState state,
                                      Runnable addGoal,
                                      Runnable undoGoal) {
-    this.model = model;
+    this.state = state;
     this.addGoal = addGoal;
     this.undoGoal = undoGoal;
   }
 
+  /**
+   * Builds the character goals screen as a Region.
+   * Sets up the layout and bindings for all UI elements on the screen.
+   *
+   * @return a Region containing the character goals screen
+   */
   @Override
   public Region build() {
     BorderPane results = new BorderPane();
@@ -45,10 +63,15 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates a view with a list of the character's goals and an undo button.
+   *
+   * @return a Node representing the view
+   */
   private Node createGoalsView() {
     VBox results = new VBox();
     ListView<Goal> goalList = new ListView<>();
-    goalList.setItems(model.goals());
+    goalList.setItems(state.goals());
     goalList.getStyleClass().add("goals-list-view");
     results.getStyleClass().add("goals-view-box");
     Button undoGoalButton = Widgets.createButton("Undo last Goal", undoGoal, "undo-goal-button");
@@ -60,6 +83,12 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates a box for adding new goals.
+   * Includes a dropdown for goal type, a text field for goal value, and an add button.
+   *
+   * @return a Node representing the box
+   */
   private Node createGoalAdderBox() {
     VBox results = new VBox(
         Widgets.createLabel("Choose goals to add", "goal-add-prompt")
@@ -87,9 +116,17 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates a text field for inputting the value of the goal to be added.
+   * The field is bound to the model's goalValue *
+   * property and is disabled if no goal type is selected.
+   *
+   * @param goalType the ComboBox to choose the goal type
+   * @return a TextField for inputting the goal value
+   */
   private TextField createGoalValueField(ComboBox<String> goalType) {
     TextField results = new TextField();
-    results.textProperty().bindBidirectional(model.goalValue());
+    results.textProperty().bindBidirectional(state.goalValue());
     results.disableProperty().bind(goalType.valueProperty().isNull());
     results.getStyleClass().add("goal-value-text-field");
     goalType.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -117,16 +154,28 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates a combo box for selecting the type of the goal to be added.
+   * The selected goal type is bound bidirectionally to the model's goalType property.
+   *
+   * @return a ComboBox for selecting the goal type
+   */
   private ComboBox<String> createGoalTypeComboBox() {
     ComboBox<String> results = new ComboBox<>();
 
     results.setPromptText("Choose goal type");
     results.getItems().addAll("Health", "Gold", "Score", "Inventory");
-    results.valueProperty().bindBidirectional(model.goalType());
+    results.valueProperty().bindBidirectional(state.goalType());
 
     return results;
   }
 
+  /**
+   * Creates a text formatter for ensuring that only *
+   * positive integers are allowed in the text field.
+   *
+   * @return a TextFormatter that filters out non-integer inputs
+   */
   private TextFormatter<String> getPositiveIntegerFormatter() {
     UnaryOperator<TextFormatter.Change> filter = change -> {
       String newText = change.getControlNewText();
@@ -138,6 +187,13 @@ public class CharacterGoalsScreenBuilder implements Builder<Region> {
     return new TextFormatter<>(filter);
   }
 
+  /**
+   * Checks whether the input string can be converted to an integer without causing an overflow.
+   *
+   * @param value the string to check
+   * @return true if the string would cause an integer overflow, false otherwise
+   * @throws NumberFormatException if the string cannot be parsed to an integer
+   */
   private boolean checkIntegerOverflow(String value) throws NumberFormatException {
     try {
       Integer.parseInt(value);

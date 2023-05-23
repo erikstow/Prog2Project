@@ -13,14 +13,30 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Builder;
 import javafx.util.Duration;
 
-
+/**
+ * This class builds a menu bar screen with specific controls for the application.
+ * These controls include buttons for settings, help, and toggling music.
+ */
 public class MenubarScreenBuilder implements Builder<Region> {
   private final Consumer<String> buttonAction;
 
+  /**
+   * Constructor for MenubarScreenBuilder.
+   *
+   * @param buttonAction a Consumer accepting a String
+   *                     representing the action to be performed on button press
+   */
   public MenubarScreenBuilder(Consumer<String> buttonAction) {
     this.buttonAction = buttonAction;
   }
 
+  /**
+   * Builds and returns a Region representing the menu bar screen.
+   * The screen includes a settings button, help button, and a music toggle button.
+   * It also handles key press events for quick access to settings (ESC key) and help (F1 key).
+   *
+   * @return a Region containing the built menu bar screen
+   */
   public Region build() {
     HBox results = new HBox(
         Widgets.createButton("", () -> buttonAction.accept("settings"), "button-settings"),
@@ -39,6 +55,15 @@ public class MenubarScreenBuilder implements Builder<Region> {
     return results;
   }
 
+  /**
+   * Creates and returns a ToggleButton with specific text, action, and style.
+   * When the button is clicked, it plays a click sound and runs the provided action.
+   *
+   * @param text the text to display on the button
+   * @param action the action to perform when the button is clicked
+   * @param styleClass the style class to apply to the button
+   * @return a Node representing the created ToggleButton
+   */
   private Node createToggleButton(String text, Runnable action, String styleClass) {
     ToggleButton button = new ToggleButton(text);
     button.getStyleClass().add(styleClass);

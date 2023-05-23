@@ -7,6 +7,11 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 
+/**
+ * Represents the state of the game at any given time. This includes properties
+ * like the game's title, content, associated links, player health, score, gold,
+ * and inventory contents.
+ */
 public class GameState {
   private final StringProperty title = new SimpleStringProperty();
   private final StringProperty content = new SimpleStringProperty();

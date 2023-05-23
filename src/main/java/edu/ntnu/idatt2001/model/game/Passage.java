@@ -83,11 +83,12 @@ public class Passage {
     return !links.isEmpty();
   }
 
-  @Override
-  public String toString() {
-    return "Passage [title=" + title + ", content=" + content + ", links=" + links + "]";
-  }
-
+  /**
+   * Generates a string representation of the passage, including its title, content,
+   * and the string representations of its links.
+   *
+   * @return The string representation of the passage.
+   */
   public String getAsString() {
     StringBuilder sb = new StringBuilder();
     sb.append("::").append(this.getTitle()).append('\n');
@@ -97,6 +98,11 @@ public class Passage {
     }
 
     return sb.toString();
+  }
+
+  @Override
+  public String toString() {
+    return "Passage [title=" + title + ", content=" + content + ", links=" + links + "]";
   }
 
   @Override

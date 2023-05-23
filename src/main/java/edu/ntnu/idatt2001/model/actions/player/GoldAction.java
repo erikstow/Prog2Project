@@ -8,7 +8,7 @@ import java.util.Objects;
  * The class GoldAction.
  * An action that adds gold to the player.
  * The amount of gold to add is specified in the constructor.
- */ 
+ */
 public class GoldAction implements Action {
   private final int gold;
 
@@ -32,6 +32,11 @@ public class GoldAction implements Action {
     player.addGold(this.gold);
   }
 
+  /**
+   * Returns a string representation of the GoldAction.
+   *
+   * @return a string representation of the GoldAction.
+   */
   public String getAsString() {
     return "!GoldAction:" + this.gold + "\n";
   }

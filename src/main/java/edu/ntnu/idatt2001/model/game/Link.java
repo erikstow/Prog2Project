@@ -69,6 +69,14 @@ public class Link {
     this.actions.add(action);
   }
 
+  /**
+   * This method generates a String representation of this Link object in a specific format.
+   * Each link is represented by its text and reference
+   * enclosed in brackets and parentheses respectively,
+   * followed by a newline and then all the actions (also in String format) in the actions list.
+   *
+   * @return a String representation of this Link.
+   */
   public String getAsString() {
     StringBuilder sb = new StringBuilder();
     sb.append("[")

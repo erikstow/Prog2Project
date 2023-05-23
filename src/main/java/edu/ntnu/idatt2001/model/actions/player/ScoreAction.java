@@ -32,6 +32,11 @@ public class ScoreAction implements Action {
     player.addScore(points);
   }
 
+  /**
+   * Returns a string representation of the ScoreAction.
+   *
+   * @return a string representation of the ScoreAction.
+   */
   public String getAsString() {
     return "!ScoreAction:" + this.points + "\n";
   }

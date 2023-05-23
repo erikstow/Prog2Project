@@ -4,14 +4,18 @@ import edu.ntnu.idatt2001.model.game.Game;
 import edu.ntnu.idatt2001.model.game.Player;
 import edu.ntnu.idatt2001.model.game.Story;
 import edu.ntnu.idatt2001.model.goals.Goal;
-import java.util.List;
-
 import edu.ntnu.idatt2001.model.screentype.ApplicationScreenType;
+import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
+/**
+ * Represents the state of the application including current game, screen type,
+ * story, player, and game goals. It also contains a boolean property that
+ * represents whether the music is on or off.
+ */
 public class ApplicationState {
   private Game game;
   private final ObjectProperty<ApplicationScreenType> currentScreen =
